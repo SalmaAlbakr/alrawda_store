@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "684219953464",
+    "project_id": "alrawda-store",
+    "storage_bucket": "alrawda-store.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:684219953464:android:e859563768823e0b2d51cd",
+        "android_client_info": {
+          "package_name": "com.alrawda_store.alrawda_store"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "684219953464-16kfhqru09bef95kep2iu2uv1af451ut.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnwpkWgBK9uyfnKLeta7E58HvHhZxG4Es"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "684219953464-16kfhqru09bef95kep2iu2uv1af451ut.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
