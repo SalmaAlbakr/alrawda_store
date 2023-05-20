@@ -1,7 +1,9 @@
-
-import 'package:alrawda_store/controller/add_items.dart';
+import 'package:alrawda_store/controller/add_items_function.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
+
 
 
 class AddNewItem extends StatefulWidget {
@@ -18,11 +20,16 @@ class AddNewItem extends StatefulWidget {
   String? price2;
 
 
+
+
+
+
   @override
   State<AddNewItem> createState() => _AddNewItemState();
 }
 
 class _AddNewItemState extends State<AddNewItem> {
+
   final messageController = TextEditingController();
 
   final priceController = TextEditingController();
@@ -33,9 +40,24 @@ class _AddNewItemState extends State<AddNewItem> {
 
   final _fireStore = FirebaseFirestore.instance;
 
+  File? image;
+  final imagePicker = ImagePicker();
+
+  uploadImage() async {
+    var piced = await imagePicker.pickImage(source: ImageSource.camera);
+    setState(()  {
+
+        if (piced != null) {
+      image = File(piced.path);
+        }
+    });
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: SafeArea(
         child: Column(
           children: [
@@ -151,6 +173,13 @@ class _AddNewItemState extends State<AddNewItem> {
                 ),
               ],
             ),
+            ElevatedButton(onPressed: uploadImage, child: Text("")),
+          Container(
+            child:
+            image == null ? Text("data") :
+            Image.file(image!),
+          )
+
           ],
         ),
       ),

@@ -1,4 +1,4 @@
-import 'package:alrawda_store/controller/add_items.dart';
+import 'package:alrawda_store/controller/add_items_function.dart';
 import 'package:alrawda_store/my_color.dart';
 import 'package:alrawda_store/screens/add_new_item.dart';
 import 'package:alrawda_store/screens/start_screen.dart';
@@ -38,7 +38,7 @@ class _ListOfProductsState extends State<ListOfProducts> {
       child: Scaffold(
 
         floatingActionButton:
-        signedInUser.email! == "salmahalbakr@gmail.com"?
+        signedInUser.email! == "salma@email.com"?
         FloatingActionButton(onPressed: (){
 
           Navigator.of(context).push(MaterialPageRoute(builder: (context) => AddNewItem(typeName: typeName, price: price, price1: price1, price2: price2)));

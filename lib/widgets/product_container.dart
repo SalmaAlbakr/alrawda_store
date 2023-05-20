@@ -21,32 +21,29 @@ class MessageW extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Column(
-        children: [
-          Container(
-            decoration: BoxDecoration(border: Border.all()),
-            child: Column(
-              children: [
-                Text(
-                  mText
-                  ,maxLines: 10 ,style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.blue[800]),),
-                Text(mPrice,style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color: Colors.grey[800])),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(mPrice1,style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color: Colors.grey[800])),
-                    SizedBox(width: 15,),
-                    Text(mPrice2,style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color: Colors.grey[800])),
-                  ],
-                ),
-              ],
-            ),
+    return Column(
+      children: [
+        Container(
+          decoration: BoxDecoration(border: Border.all()),
+          child: Column(
+            children: [
+              Text(
+                mText
+                ,maxLines: 10 ,style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.blue[800]),),
+              Text(mPrice,style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color: Colors.grey[800])),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text(mPrice1,style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color: Colors.grey[800])),
+                  SizedBox(width: 15,),
+                  Text(mPrice2,style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color: Colors.grey[800])),
+                ],
+              ),
+            ],
           ),
-          SizedBox(height: 10,)
-        ],
-      ),
-
+        ),
+        SizedBox(height: 10,)
+      ],
     );
   }
 }
