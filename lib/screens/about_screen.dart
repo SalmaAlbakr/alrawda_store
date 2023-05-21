@@ -1,3 +1,4 @@
+import 'package:alrawda_store/controller/url_functions.dart';
 import 'package:alrawda_store/my_color.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -39,12 +40,12 @@ class AboutScreen extends StatelessWidget {
                   height: 50,
                   width: 350,
                   child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {facebookURL() ;},
                       child: Row(
                         children: [
                           Icon(Icons.facebook_rounded),
                           SizedBox(width: 7),
-                          Text("elrawdaStore.jkdfhjhfjhd"),
+                          Text("elrawdaStore.facebook"),
                         ],
                       )),
                 ),
@@ -52,13 +53,14 @@ class AboutScreen extends StatelessWidget {
                   height: 50,
                   width: 350,
                   child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {whatsUrl();},
                       child: Row(
+                        // add phone row and do locarion button
                         children: [
                           // add phone row and do locarion button
                           Icon(Icons.whatsapp),
                           SizedBox(width: 7),
-                          Text("01002095050 / 01110955595"),
+                          Text("رقم الموبايل  : 01002095050 / 01110955595"),
                         ],
                       )),
                 ),
@@ -87,7 +89,7 @@ class AboutScreen extends StatelessWidget {
                   height: 50,
                   width: 350,
                   child: ElevatedButton(
-                      onPressed: () {_launchURL();},
+                      onPressed: () {locationUrl();},
                       child: Row(
                         children: [
                           Icon(Icons.location_on_outlined),
@@ -104,10 +106,4 @@ class AboutScreen extends StatelessWidget {
     );
   }
 }
-_launchURL() async {
-  final Uri url = Uri.parse('https://flutter.dev');
-  if (!await launchUrl(url)) {
-    var _url;
-    throw Exception('Could not launch $_url');
-  }
-}
+//facebook function
