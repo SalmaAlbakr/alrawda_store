@@ -41,6 +41,7 @@ dependencies:
   cloud_firestore: ^4.6.0
   modal_progress_hud_nsn: ^0.3.0
   image_picker: ^0.8.7+5
+  google_fonts: ^4.0.4
 
 
 

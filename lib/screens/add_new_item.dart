@@ -3,15 +3,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
-
-
+import 'package:alrawda_store/my_color.dart';
 
 class AddNewItem extends StatefulWidget {
-  AddNewItem({Key? key ,
-    required this.typeName,
-    required this.price,
-    required this.price1,
-    required this.price2})
+  AddNewItem(
+      {Key? key,
+      required this.typeName,
+      required this.price,
+      required this.price1,
+      required this.price2})
       : super(key: key);
 
   String? typeName;
@@ -19,17 +19,11 @@ class AddNewItem extends StatefulWidget {
   String? price1;
   String? price2;
 
-
-
-
-
-
   @override
   State<AddNewItem> createState() => _AddNewItemState();
 }
 
 class _AddNewItemState extends State<AddNewItem> {
-
   final messageController = TextEditingController();
 
   final priceController = TextEditingController();
@@ -43,144 +37,173 @@ class _AddNewItemState extends State<AddNewItem> {
   File? image;
   final imagePicker = ImagePicker();
 
-  uploadImage() async {
-    var piced = await imagePicker.pickImage(source: ImageSource.camera);
-    setState(()  {
-
-        if (piced != null) {
-      image = File(piced.path);
-        }
+  takePhoto() async {
+    var camPhoto = await imagePicker.pickImage(source: ImageSource.camera);
+    setState(() {
+      if (camPhoto != null) {
+        image = File(camPhoto.path);
+      }
     });
+  }
 
+  choosePhoto() async {
+    var galleryPhoto = await imagePicker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      if (galleryPhoto != null) {
+        image = File(galleryPhoto.path);
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: SafeArea(
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Container(
-                  width: 300,
-                  decoration: BoxDecoration(
-                    border: Border.all(),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: TextField(
-                      controller: messageController,
-                      onChanged: (value) {
-                        widget.typeName = "أسم الصنف :" + value;
-                      },
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        labelText: "أسم الصنف :",
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: MyColors.mainColor,
+          title: Text("إضافة صنف جديد"),
+        ),
+        body: SafeArea(
+          child: Column(
+            children: [
+              SizedBox(height: 20,),
+              Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: TextField(
+                  controller: messageController,
+                  onChanged: (value) {
+                    widget.typeName = "أسم الصنف :" + value;
+                  },
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: MyColors.mainColor,
                       ),
                     ),
+                    labelText: "أسم الصنف :",
                   ),
                 ),
-                TextButton(
-                  onPressed: () {
-                    messageController.clear();
-                    priceController.clear();
-                    price1Controller.clear();
-                    price2Controller.clear();
-                    _fireStore.collection("product").add({
-                      "text": widget.typeName,
-                      "sender": signedInUser.email,
-                      "time": FieldValue.serverTimestamp(),
-                      "price": widget.price,
-                      "price1" : widget.price1,
-                      "price2" : widget.price2,
-
-                    });
-                  },
-                  child: Text(
-                    "حفظ",style: TextStyle(fontWeight: FontWeight.bold,fontSize:20),
-                  ),
-                )
-              ],
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: Container(
-
-                    decoration: BoxDecoration(
-                      border: Border.all(),
-                    ),
+              ),
+              SizedBox(height: 20,),
+              Row(
+                children: [
+                  Expanded(
                     child: Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: TextField(
-                        keyboardType:TextInputType.number ,
+                        keyboardType: TextInputType.number,
                         controller: priceController,
                         onChanged: (value) {
-                          widget.price= "سعر القطاعي : "+ value;
+                          widget.price = "سعر القطاعي : " + value;
                         },
                         decoration: InputDecoration(
-                          border: InputBorder.none,
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: MyColors.mainColor,
+                            ),
+                          ),
                           labelText: "سعر القطاعي",
                         ),
                       ),
                     ),
                   ),
-                ),
-                Expanded(
-                  child: Container(
-
-                    decoration: BoxDecoration(
-                      border: Border.all(),
-                    ),
+                  Expanded(
                     child: Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: TextField(
-                        keyboardType:TextInputType.number ,
+                        keyboardType: TextInputType.number,
                         controller: price1Controller,
                         onChanged: (value) {
-                          widget.price1= "سعر الجمله1  : "+ value;
+                          widget.price1 = "سعر الجمله1  : " + value;
                         },
                         decoration: InputDecoration(
-                          border: InputBorder.none,
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: MyColors.mainColor,
+                            ),
+                          ),
                           labelText: "سعر الجمله1",
                         ),
                       ),
                     ),
                   ),
-                ),
-                Expanded(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(),
-                    ),
+                  Expanded(
                     child: Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: TextField(
-                        keyboardType:TextInputType.number ,
+                        keyboardType: TextInputType.number,
                         controller: price2Controller,
                         onChanged: (value) {
-                          widget.price2= "سعر الجمله2  : "+ value;
+                          widget.price2 = "سعر الجمله2  : " + value;
                         },
                         decoration: InputDecoration(
-                          border: InputBorder.none,
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: MyColors.mainColor,
+                            ),
+                          ),
                           labelText: "سعر الجمله2",
                         ),
                       ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            ElevatedButton(onPressed: uploadImage, child: Text("")),
-          Container(
-            child:
-            image == null ? Text("data") :
-            Image.file(image!),
-          )
+                ],
+              ),
+              SizedBox(height: 20,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  ElevatedButton(
+                    onPressed: takePhoto,
+                    child: Icon(
+                      Icons.camera_enhance,
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: choosePhoto,
+                    child: Icon(
+                      Icons.filter,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 20,),
+              Expanded(
+                child: image == null ? SizedBox() : Image.file(image!),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  child: ElevatedButton(
 
-          ],
+                    onPressed: () {
+                      messageController.clear();
+                      priceController.clear();
+                      price1Controller.clear();
+                      price2Controller.clear();
+                      _fireStore.collection("product").add({
+                        "text": widget.typeName,
+                        "sender": signedInUser.email,
+                        "time": FieldValue.serverTimestamp(),
+                        "price": widget.price,
+                        "price1": widget.price1,
+                        "price2": widget.price2,
+                      });
+                    },
+                    child: Text(
+                      "حفظ",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

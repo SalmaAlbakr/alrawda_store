@@ -30,20 +30,28 @@ class _ListOfProductsState extends State<ListOfProducts> {
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-
-        floatingActionButton:
-        signedInUser.email! == "salma@email.com"?
-        FloatingActionButton(onPressed: (){
-
-          Navigator.of(context).push(MaterialPageRoute(builder: (context) => AddNewItem(typeName: typeName, price: price, price1: price1, price2: price2)));
-
-        }) : null ,
+        floatingActionButton: signedInUser.email! == "salma@email.com"
+            ? FloatingActionButton(
+                backgroundColor: MyColors.mainColor,
+                child: Icon(Icons.add),
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => AddNewItem(
+                        typeName: typeName,
+                        price: price,
+                        price1: price1,
+                        price2: price2,
+                      ),
+                    ),
+                  );
+                })
+            : null,
         appBar: AppBar(
           automaticallyImplyLeading: false,
           backgroundColor: Colors.white,
@@ -53,14 +61,25 @@ class _ListOfProductsState extends State<ListOfProducts> {
               SizedBox(width: 10),
               Text(
                 "الروضه ",
-                style: TextStyle(color: MyColors.mainColor,fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  color: MyColors.mainColor,
+                  fontWeight: FontWeight.bold,
+                  decoration: TextDecoration.underline,
+                ),
               ),
               SizedBox(width: 25),
               Expanded(
                 child: TextFormField(
-                  decoration:InputDecoration(
-                      hintText: "بحث",
-                      prefixIcon: Icon(Icons.search)
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: MyColors.mainColor,
+                      ),
+                    ),
+                    hintText: "بحث",
+                    prefixIcon: Icon(
+                      Icons.search,
+                    ),
                   ),
                   onChanged: (value) {
                     setState(() {});
@@ -68,9 +87,7 @@ class _ListOfProductsState extends State<ListOfProducts> {
                   controller: searchController,
                 ),
               ),
-
-              SizedBox(width: 10),
-              TextButton(
+              IconButton(
                 onPressed: () async {
                   await _auth.signOut();
                   Navigator.of(context).push(
@@ -79,7 +96,10 @@ class _ListOfProductsState extends State<ListOfProducts> {
                     ),
                   );
                 },
-                child: Text(" تسجيل خروج "),
+                icon: Icon(
+                  Icons.menu,
+                  color: MyColors.mainColor,
+                ),
               ),
             ],
           ),
@@ -90,18 +110,19 @@ class _ListOfProductsState extends State<ListOfProducts> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               StreamBuilder<QuerySnapshot>(
-                stream:
-                _fireStore.collection("product").orderBy("time").snapshots(),
+                stream: _fireStore
+                    .collection("product")
+                    .orderBy("time")
+                    .snapshots(),
                 builder: (context, snapshot) {
                   List<MessageW> messageWidgets = [];
                   if (!snapshot.hasData) {
-
                     return Center(
-                      child: Icon(Icons.ac_unit_sharp),
+                      child: Icon(
+                        Icons.ac_unit_sharp,
+                      ),
                     );
                   }
-                  /// TODO : عايزه اول منتج يظههر يكون احدث واحد ولا اقدم واحد دخلناه
-                  /// لو عايزه اجدد واحد يظهر الاول نحط reversed لو العكس نشيلها
                   final theMessages = snapshot.data!.docs.reversed;
                   for (var message in theMessages) {
                     final mText = message.get("text");
@@ -114,28 +135,27 @@ class _ListOfProductsState extends State<ListOfProducts> {
                     final singleMessage = MessageW(
                       mText: mText,
                       mSender: mSender,
-                      isMe: currentUser == mSender, mPrice: mPrice,mPrice1:mPrice1 ,mPrice2:mPrice2 ,
+                      isMe: currentUser == mSender,
+                      mPrice: mPrice,
+                      mPrice1: mPrice1,
+                      mPrice2: mPrice2,
                     );
                     messageWidgets.add(singleMessage);
-
                   }
-                  List<MessageW> filterNames =
-                  messageWidgets.where((element) => element.mText.contains(searchController.text)).toList();
+                  List<MessageW> filterNames = messageWidgets
+                      .where(
+                        (element) =>
+                            element.mText.contains(searchController.text),
+                      )
+                      .toList();
                   return Expanded(
-
                     child: ListView(
-                        children: searchController.text == "" ?  messageWidgets : filterNames),
+                        children: searchController.text == ""
+                            ? messageWidgets
+                            : filterNames),
                   );
                 },
               ),
-              SizedBox(
-                height: 10,
-              ),
-
-              //  signedInUser.email! == "salma@email.com"
-              //      ? AddNewItem(typeName: typeName, price: price, price1: price1, price2: price2)
-              //      :
-              // SizedBox(),
             ],
           ),
         ),
