@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 
-
 class MessageW extends StatelessWidget {
-  const MessageW({
-    Key? key,
-    required this.mText,
-    required this.mSender,
-    required this.isMe,
-    required this.mPrice,
-    this.mPrice1,
-    this.mPrice2,
-    this.imageURL
-  }) : super(key: key);
+  const MessageW(
+      {Key? key,
+      required this.mText,
+      required this.mSender,
+      required this.isMe,
+      required this.mPrice,
+      this.mPrice1,
+      this.mPrice2,
+      this.imageURL})
+      : super(key: key);
 
   final mText;
   final mSender;
@@ -26,25 +25,57 @@ class MessageW extends StatelessWidget {
     return Column(
       children: [
         Container(
-          decoration: BoxDecoration(border: Border.all()),
+          decoration: BoxDecoration(
+            border: Border.all(),
+          ),
           child: Row(
             children: [
               Container(
-                  height: 100,
-                  width:100,
-                  child: Image.network(imageURL)),
+                height: 100,
+                width: 100,
+                child: Image.network(imageURL),
+              ),
               Column(
                 children: [
                   Text(
-                    mText
-                    ,maxLines: 10 ,style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.blue[800]),),
-                  Text(mPrice,style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color: Colors.grey[800])),
+                    mText,
+                    maxLines: 10,
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blue[800],
+                    ),
+                  ),
+                  Text(
+                    mPrice,
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.grey[800],
+                    ),
+                  ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Text(mPrice1,style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color: Colors.grey[800])),
-                      SizedBox(width: 15,),
-                      Text(mPrice2,style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color: Colors.grey[800])),
+                      Text(
+                        mPrice1,
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey[800],
+                        ),
+                      ),
+                      SizedBox(
+                        width: 15,
+                      ),
+                      Text(
+                        mPrice2,
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey[800],
+                        ),
+                      ),
                     ],
                   ),
                 ],
@@ -52,11 +83,10 @@ class MessageW extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(height: 10,)
+        SizedBox(
+          height: 10,
+        )
       ],
     );
   }
 }
-
-
-
