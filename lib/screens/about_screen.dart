@@ -40,12 +40,12 @@ class AboutScreen extends StatelessWidget {
                   height: 50,
                   width: 350,
                   child: ElevatedButton(
-                      onPressed: () {facebookURL() ;},
+                      onPressed: () {facebookURL();},
                       child: Row(
                         children: [
                           Icon(Icons.facebook_rounded),
                           SizedBox(width: 7),
-                          Text("elrawdaStore.facebook"),
+                          Text("elrawdaStore.jkdfhjhfjhd"),
                         ],
                       )),
                 ),
@@ -55,12 +55,11 @@ class AboutScreen extends StatelessWidget {
                   child: ElevatedButton(
                       onPressed: () {whatsUrl();},
                       child: Row(
-                        // add phone row and do locarion button
                         children: [
                           // add phone row and do locarion button
                           Icon(Icons.whatsapp),
                           SizedBox(width: 7),
-                          Text("رقم الموبايل  : 01002095050 / 01110955595"),
+                          Text("01002095050 / 01110955595"),
                         ],
                       )),
                 ),
@@ -106,4 +105,3 @@ class AboutScreen extends StatelessWidget {
     );
   }
 }
-//facebook function
