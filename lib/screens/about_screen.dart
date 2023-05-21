@@ -95,7 +95,7 @@ class AboutScreen extends StatelessWidget {
                           SizedBox(width: 7),
                           Text("elrawdaStore.jkdfhjhfjhd"),
                         ],
-                      )),
+                      ),),
                 ),
               ],
             ),

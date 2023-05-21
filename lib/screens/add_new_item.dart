@@ -1,9 +1,11 @@
 import 'package:alrawda_store/controller/add_items_function.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:alrawda_store/my_color.dart';
+import 'package:path/path.dart';
 
 class AddNewItem extends StatefulWidget {
   AddNewItem(
@@ -11,13 +13,17 @@ class AddNewItem extends StatefulWidget {
       required this.typeName,
       required this.price,
       required this.price1,
-      required this.price2})
+      required this.price2,
+      required this.imageURL
+
+      })
       : super(key: key);
 
   String? typeName;
   String? price;
   String? price1;
   String? price2;
+  String? imageURL;
 
   @override
   State<AddNewItem> createState() => _AddNewItemState();
@@ -37,22 +43,56 @@ class _AddNewItemState extends State<AddNewItem> {
   File? image;
   final imagePicker = ImagePicker();
 
+
+
   takePhoto() async {
     var camPhoto = await imagePicker.pickImage(source: ImageSource.camera);
-    setState(() {
+
       if (camPhoto != null) {
-        image = File(camPhoto.path);
+        setState(() {
+          image = File(camPhoto.path);
+        });
+        var nameImage = basename(camPhoto.path);
+
+        var refStorage = FirebaseStorage.instance.ref("$nameImage");
+
+
+        var myfer =   refStorage.putFile(image!);
+
+        await myfer.whenComplete(() async {
+          var url = await refStorage.getDownloadURL();
+
+
+            widget.imageURL = url;
+        });
+
       }
-    });
+
   }
 
   choosePhoto() async {
     var galleryPhoto = await imagePicker.pickImage(source: ImageSource.gallery);
-    setState(() {
+
       if (galleryPhoto != null) {
-        image = File(galleryPhoto.path);
+        setState(() {
+          image = File(galleryPhoto.path);
+        });
+
+        var nameImage = basename(galleryPhoto.path);
+
+        var refStorage = FirebaseStorage.instance.ref("$nameImage");
+
+       var myfer =   refStorage.putFile(image!);
+
+        await myfer.whenComplete(() async {
+          var url = await refStorage.getDownloadURL();
+
+            widget.imageURL = url;
+        });
+
+
       }
-    });
+
   }
 
   @override
@@ -170,7 +210,7 @@ class _AddNewItemState extends State<AddNewItem> {
               ),
               SizedBox(height: 20,),
               Expanded(
-                child: image == null ? SizedBox() : Image.file(image!),
+               child: image == null ? SizedBox() : Image.file(image!),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -178,19 +218,23 @@ class _AddNewItemState extends State<AddNewItem> {
                   width: MediaQuery.of(context).size.width,
                   child: ElevatedButton(
 
-                    onPressed: () {
+                    onPressed: () async {
                       messageController.clear();
                       priceController.clear();
                       price1Controller.clear();
                       price2Controller.clear();
-                      _fireStore.collection("product").add({
+                    await  _fireStore.collection("product").add({
                         "text": widget.typeName,
                         "sender": signedInUser.email,
                         "time": FieldValue.serverTimestamp(),
                         "price": widget.price,
                         "price1": widget.price1,
                         "price2": widget.price2,
+                        "image" :  widget.imageURL
                       });
+
+                    Navigator.of(context).pop();
+
                     },
                     child: Text(
                       "حفظ",

@@ -23,6 +23,7 @@ class _ListOfProductsState extends State<ListOfProducts> {
   String? price;
   String? price1;
   String? price2;
+  String? imageURL;
 
   @override
   void initState() {
@@ -47,6 +48,7 @@ class _ListOfProductsState extends State<ListOfProducts> {
                         price: price,
                         price1: price1,
                         price2: price2,
+                        imageURL: imageURL,
                       ),
                     ),
                   );
@@ -130,6 +132,7 @@ class _ListOfProductsState extends State<ListOfProducts> {
                     final mPrice = message.get("price");
                     final mPrice1 = message.get("price1");
                     final mPrice2 = message.get("price2");
+                    final mURL = message.get("image");
 
                     final currentUser = signedInUser.email;
                     final singleMessage = MessageW(
@@ -139,6 +142,7 @@ class _ListOfProductsState extends State<ListOfProducts> {
                       mPrice: mPrice,
                       mPrice1: mPrice1,
                       mPrice2: mPrice2,
+                      imageURL: mURL,
                     );
                     messageWidgets.add(singleMessage);
                   }

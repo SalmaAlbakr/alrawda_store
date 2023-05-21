@@ -9,7 +9,8 @@ class MessageW extends StatelessWidget {
     required this.isMe,
     required this.mPrice,
     this.mPrice1,
-    this.mPrice2
+    this.mPrice2,
+    this.imageURL
   }) : super(key: key);
 
   final mText;
@@ -18,6 +19,7 @@ class MessageW extends StatelessWidget {
   final mPrice;
   final mPrice1;
   final mPrice2;
+  final imageURL;
 
   @override
   Widget build(BuildContext context) {
@@ -25,18 +27,26 @@ class MessageW extends StatelessWidget {
       children: [
         Container(
           decoration: BoxDecoration(border: Border.all()),
-          child: Column(
+          child: Row(
             children: [
-              Text(
-                mText
-                ,maxLines: 10 ,style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.blue[800]),),
-              Text(mPrice,style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color: Colors.grey[800])),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
+              Container(
+                  height: 100,
+                  width:100,
+                  child: Image.network(imageURL)),
+              Column(
                 children: [
-                  Text(mPrice1,style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color: Colors.grey[800])),
-                  SizedBox(width: 15,),
-                  Text(mPrice2,style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color: Colors.grey[800])),
+                  Text(
+                    mText
+                    ,maxLines: 10 ,style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.blue[800]),),
+                  Text(mPrice,style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color: Colors.grey[800])),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(mPrice1,style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color: Colors.grey[800])),
+                      SizedBox(width: 15,),
+                      Text(mPrice2,style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color: Colors.grey[800])),
+                    ],
+                  ),
                 ],
               ),
             ],
