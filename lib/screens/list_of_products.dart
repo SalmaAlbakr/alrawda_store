@@ -38,54 +38,48 @@ class _ListOfProductsState extends State<ListOfProducts> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        drawer: Drawer(
+        endDrawer: Drawer(
           child: ListView(
-
             children: [
               DrawerHeader(
-
-                decoration: BoxDecoration(
-                  color: MyColors.mainColor
-                ),
-                child:
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("شركة الروضه",
-                    style: GoogleFonts.alexandria(
-                        color: Colors.white,
-                        fontSize: 40
-                    ),),
-                ],
-              ),),
-
-              TextButton(
-
-
-                  onPressed: (){
-
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => AboutScreen()));
-              }, child: Text("تواصل معنا" , style: TextStyle(
-                color: MyColors.mainColor
-              ),),),
-
-              TextButton(
-                onPressed: () async {
-                  await _auth.signOut();
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => StartScreen(),
+                decoration: BoxDecoration(color: MyColors.mainColor),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "شركة الروضه",
+                      style: GoogleFonts.alexandria(
+                          color: Colors.white, fontSize: 40),
                     ),
-                  );
-                },
-                child: Text("تسجيل الخروج" , style: TextStyle(
-                    color: MyColors.mainColor
-                ),)
+                  ],
+                ),
               ),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => AboutScreen()));
+                },
+                child: Text(
+                  "تواصل معنا",
+                  style: TextStyle(color: MyColors.mainColor),
+                ),
+              ),
+              TextButton(
+                  onPressed: () async {
+                    await _auth.signOut();
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => StartScreen(),
+                      ),
+                    );
+                  },
+                  child: Text(
+                    "تسجيل الخروج",
+                    style: TextStyle(color: MyColors.mainColor),
+                  )),
             ],
           ),
         ),
-
         floatingActionButton: signedInUser.email! == "salma@email.com"
             ? FloatingActionButton(
                 backgroundColor: MyColors.mainColor,
@@ -105,6 +99,9 @@ class _ListOfProductsState extends State<ListOfProducts> {
                 })
             : null,
         appBar: AppBar(
+          iconTheme: IconThemeData(
+            color: Colors.black,
+          ),
           //automaticallyImplyLeading: false,
           backgroundColor: Colors.white,
           title: Row(
@@ -112,7 +109,7 @@ class _ListOfProductsState extends State<ListOfProducts> {
             children: [
               SizedBox(width: 10),
               Text(
-                "الروضه ",
+                " ",
                 style: TextStyle(
                   color: MyColors.mainColor,
                   fontWeight: FontWeight.bold,
@@ -139,7 +136,6 @@ class _ListOfProductsState extends State<ListOfProducts> {
                   controller: searchController,
                 ),
               ),
-
             ],
           ),
         ),
@@ -148,6 +144,7 @@ class _ListOfProductsState extends State<ListOfProducts> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              SizedBox(height: 10,),
               StreamBuilder<QuerySnapshot>(
                 stream: _fireStore
                     .collection("product")

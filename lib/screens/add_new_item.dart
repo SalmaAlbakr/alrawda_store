@@ -113,7 +113,7 @@ class _AddNewItemState extends State<AddNewItem> {
                 child: TextField(
                   controller: messageController,
                   onChanged: (value) {
-                    widget.typeName = "أسم الصنف :" + value;
+                    widget.typeName =  value;
                   },
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
@@ -223,7 +223,7 @@ class _AddNewItemState extends State<AddNewItem> {
                       priceController.clear();
                       price1Controller.clear();
                       price2Controller.clear();
-                    await  _fireStore.collection("product").add({
+                      _fireStore.collection("product").add({
                         "text": widget.typeName,
                         "sender": signedInUser.email,
                         "time": FieldValue.serverTimestamp(),
@@ -233,7 +233,7 @@ class _AddNewItemState extends State<AddNewItem> {
                         "image" :  widget.imageURL
                       });
 
-                    Navigator.of(context).pop();
+                     Navigator.of(context).pop();
 
                     },
                     child: Text(

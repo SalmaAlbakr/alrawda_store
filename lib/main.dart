@@ -1,6 +1,4 @@
 import 'package:alrawda_store/my_color.dart';
-import 'package:alrawda_store/screens/about_screen.dart';
-import 'package:alrawda_store/screens/add_new_item.dart';
 import 'package:alrawda_store/screens/list_of_products.dart';
 import 'package:alrawda_store/screens/start_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -29,7 +27,6 @@ class MyApp extends StatelessWidget {
         ),
       ),
       home: _auth.currentUser != null ? ListOfProducts() : StartScreen(),
-    //  home: AddNewItem(typeName: '', price: '', price1: '', price2: '',),
     );
   }
 }
