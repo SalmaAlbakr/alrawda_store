@@ -12,6 +12,7 @@ class AboutScreen extends StatelessWidget {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
+        appBar: AppBar(),
         body: SafeArea(
           child: Center(
             child: Column(
