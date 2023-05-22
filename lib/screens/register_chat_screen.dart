@@ -58,7 +58,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(5.0),
-                        child: TextField(
+                        child: TextFormField(
+                          validator: (String ? value ) {
+                            if (value! .isEmpty || !(value.contains("@ / .com")) ) {
+                              return " من فضلك أدخل الحساب و يجب ان يحتوي علي @ / com. ";
+                            }
+                          },
                           keyboardType: TextInputType.emailAddress,
                           onChanged: (value) {
                             email = value;
@@ -85,7 +90,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         child: Row(
                           children: [
                             Expanded(
-                              child: TextField(
+                              child: TextFormField(
+                                validator: (String ? value ) {
+                                  if (value! .isEmpty || !(value.contains("0123456789")) ) {
+                                    return "  كلمة المرور يجب ان تحتوي علي رقم ";
+                                  }
+                                },
                                 keyboardType: TextInputType.visiblePassword,
                                 obscureText: isObscure,
                                 onChanged: (value) {

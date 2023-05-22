@@ -57,7 +57,13 @@ class _SignInScreenState extends State<SignInScreen> {
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(5.0),
-                        child: TextField(
+                        child: TextFormField(
+                          validator: (String ? value ) {
+                            if (value! .isEmpty  ) {
+                              return " من فضلك أدخل أسم الحساب ";
+                            }
+                          },
+
                           keyboardType: TextInputType.emailAddress,
                           onChanged: (value) {
                             email = value;
@@ -84,7 +90,12 @@ class _SignInScreenState extends State<SignInScreen> {
                         child: Row(
                           children: [
                             Expanded(
-                              child: TextField(
+                              child: TextFormField(
+                                validator: (String ? value ) {
+                                  if (value! .isEmpty || !(value.contains("0123456789")) ) {
+                                    return " من فضلك أدخل كلمة المرور الصحيحه ";
+                                  }
+                                },
                                 keyboardType: TextInputType.visiblePassword,
                                 obscureText: isObscure,
                                 onChanged: (value) {
