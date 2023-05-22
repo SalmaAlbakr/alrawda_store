@@ -154,9 +154,7 @@ class _ListOfProductsState extends State<ListOfProducts> {
                   List<MessageW> messageWidgets = [];
                   if (!snapshot.hasData) {
                     return Center(
-                      child: Icon(
-                        Icons.ac_unit_sharp,
-                      ),
+                      child: CircleAvatar()
                     );
                   }
                   final theMessages = snapshot.data!.docs.reversed;

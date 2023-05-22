@@ -87,13 +87,14 @@ class _AddNewItemState extends State<AddNewItem> {
         await myfer.whenComplete(() async {
           var url = await refStorage.getDownloadURL();
 
-            widget.imageURL = url;
+          widget.imageURL = url;
         });
 
 
       }
 
   }
+  GlobalKey<FormState> formKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -105,148 +106,186 @@ class _AddNewItemState extends State<AddNewItem> {
           title: Text("إضافة صنف جديد"),
         ),
         body: SafeArea(
-          child: Column(
-            children: [
-              SizedBox(height: 20,),
-              Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: TextField(
-                  controller: messageController,
-                  onChanged: (value) {
-                    widget.typeName =  value;
-                  },
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: MyColors.mainColor,
-                      ),
-                    ),
-                    labelText: "أسم الصنف :",
-                  ),
-                ),
-              ),
-              SizedBox(height: 20,),
-              Row(
-                children: [
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: TextField(
-                        keyboardType: TextInputType.number,
-                        controller: priceController,
-                        onChanged: (value) {
-                          widget.price = "سعر القطاعي : " + value;
-                        },
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: MyColors.mainColor,
-                            ),
-                          ),
-                          labelText: "سعر القطاعي",
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: TextField(
-                        keyboardType: TextInputType.number,
-                        controller: price1Controller,
-                        onChanged: (value) {
-                          widget.price1 = "سعر الجمله1  : " + value;
-                        },
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: MyColors.mainColor,
-                            ),
-                          ),
-                          labelText: "سعر الجمله1",
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: TextField(
-                        keyboardType: TextInputType.number,
-                        controller: price2Controller,
-                        onChanged: (value) {
-                          widget.price2 = "سعر الجمله2  : " + value;
-                        },
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: MyColors.mainColor,
-                            ),
-                          ),
-                          labelText: "سعر الجمله2",
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 20,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  ElevatedButton(
-                    onPressed: takePhoto,
-                    child: Icon(
-                      Icons.camera_enhance,
-                    ),
-                  ),
-                  ElevatedButton(
-                    onPressed: choosePhoto,
-                    child: Icon(
-                      Icons.filter,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 20,),
-              Expanded(
-               child: image == null ? SizedBox() : Image.file(image!),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  child: ElevatedButton(
-
-                    onPressed: () async {
-                      messageController.clear();
-                      priceController.clear();
-                      price1Controller.clear();
-                      price2Controller.clear();
-                      _fireStore.collection("product").add({
-                        "text": widget.typeName,
-                        "sender": signedInUser.email,
-                        "time": FieldValue.serverTimestamp(),
-                        "price": widget.price,
-                        "price1": widget.price1,
-                        "price2": widget.price2,
-                        "image" :  widget.imageURL
-                      });
-
-                     Navigator.of(context).pop();
-
+          child: Form(
+            key: formKey,
+            child: Column(
+              children: [
+                SizedBox(height: 20,),
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: TextFormField(
+                    validator: (String? value) {
+                      if (value != null ) {
+                        return "يجب تسجيل اسم الصنف";
+                      }
+                      return null;
                     },
-                    child: Text(
-                      "حفظ",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
+                    controller: messageController,
+                    onChanged: (value) {
+                      widget.typeName =  value;
+                    },
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: MyColors.mainColor,
+                        ),
+                      ),
+                      labelText: "أسم الصنف :",
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20,),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: TextFormField(
+                          validator: (String? value) {
+                            if (value != null ) {
+                              return "يجب تسجيل سعر القطاعي";
+                            }
+                            return null;
+                          },
+                          keyboardType: TextInputType.number,
+                          controller: priceController,
+                          onChanged: (value) {
+                            widget.price = "سعر القطاعي : " + value;
+                          },
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: MyColors.mainColor,
+                              ),
+                            ),
+                            labelText: "سعر القطاعي",
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: TextFormField(
+                          validator: (String? value) {
+                            if (value != null ) {
+                              return "يجب تسجيل سعر الجمله 1";
+                            }
+                            return null;
+                          },
+                          keyboardType: TextInputType.number,
+                          controller: price1Controller,
+                          onChanged: (value) {
+                            widget.price1 = "سعر الجمله1  : " + value;
+                          },
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: MyColors.mainColor,
+                              ),
+                            ),
+                            labelText: "سعر الجمله1",
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: TextFormField(
+                          validator: (String? value) {
+                            if (value != null ) {
+                              return "يجب تسجيل سعر الجمله 2";
+                            }
+                            return null;
+                          },
+                          keyboardType: TextInputType.number,
+                          controller: price2Controller,
+                          onChanged: (value) {
+                            widget.price2 = "سعر الجمله2  : " + value;
+                          },
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: MyColors.mainColor,
+                              ),
+                            ),
+                            labelText: "سعر الجمله2",
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 20,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    ElevatedButton(
+                      onPressed: takePhoto,
+                      child: Icon(
+                        Icons.camera_enhance,
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: choosePhoto,
+                      child: Icon(
+                        Icons.filter,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 20,),
+                Expanded(
+                 child: image == null ? SizedBox() : Image.file(image!),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: ElevatedButton(
+
+                      onPressed: () async {
+
+                        if (formKey.currentState!.validate() && image != null && widget.imageURL != null ) {
+                          messageController.clear();
+                          priceController.clear();
+                          price1Controller.clear();
+                          price2Controller.clear();
+                          _fireStore.collection("product").add({
+                            "text": widget.typeName,
+                            "sender": signedInUser.email,
+                            "time": FieldValue.serverTimestamp(),
+                            "price": widget.price,
+                            "price1": widget.price1,
+                            "price2": widget.price2,
+                            "image" :  widget.imageURL
+                          });
+
+                          Navigator.of(context).pop();
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              backgroundColor: Colors.red,
+                              content: Text("يجب تسجيل الصنف"),
+                            ),
+                          );
+                        }
+
+
+                      },
+                      child: Text(
+                        "حفظ",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
