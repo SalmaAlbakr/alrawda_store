@@ -2,7 +2,6 @@ import 'package:alrawda_store/controller/url_functions.dart';
 import 'package:alrawda_store/my_color.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class AboutScreen extends StatelessWidget {
   const AboutScreen({Key? key}) : super(key: key);
@@ -12,7 +11,9 @@ class AboutScreen extends StatelessWidget {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          backgroundColor: MyColors.mainColor,
+        ),
         body: SafeArea(
           child: Center(
             child: Column(
@@ -41,26 +42,47 @@ class AboutScreen extends StatelessWidget {
                   height: 50,
                   width: 350,
                   child: ElevatedButton(
-                      onPressed: () {facebookURL();},
-                      child: Row(
-                        children: [
-                          Icon(Icons.facebook_rounded),
-                          SizedBox(width: 7),
-                          Text("elrawdaStore.jkdfhjhfjhd"),
-                        ],
-                      )),
+                    onPressed: () {
+                      facebookURL();
+                    },
+                    child: Row(
+                      children: [
+                        Icon(Icons.facebook_rounded),
+                        SizedBox(width: 7),
+                        Text("شركة الروضه للأدوات الكهربيه"),
+                      ],
+                    ),
+                  ),
                 ),
                 Container(
                   height: 50,
                   width: 350,
                   child: ElevatedButton(
-                      onPressed: () {whatsUrl();},
+                    onPressed: () {
+                      locationUrl();
+                    },
+                    child: Row(
+                      children: [
+                        Icon(Icons.location_on_outlined),
+                        SizedBox(width: 7),
+                        Text(" عنوان شركة الروضه (البدرشين-الجيزه)"),
+                      ],
+                    ),
+                  ),
+                ),
+                Container(
+                  height: 50,
+                  width: 350,
+                  child: ElevatedButton(
+                      onPressed: () {
+                        whatsUrl();
+                      },
                       child: Row(
                         children: [
                           // add phone row and do locarion button
                           Icon(Icons.whatsapp),
                           SizedBox(width: 7),
-                          Text("01002095050 / 01110955595"),
+                          Text(" 01157891602 /01110955595"),
                         ],
                       )),
                 ),
@@ -73,30 +95,17 @@ class AboutScreen extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Icon(
-                          Icons.location_city_outlined,
+                          Icons.phone,
                           color: Colors.white,
                         ),
                       ),
                       SizedBox(width: 7),
                       Text(
-                        "Address : elrawdaStore.jkdfhjhfjhd",
+                        "01142323655 / 01004740444",
                         style: TextStyle(color: Colors.white, fontSize: 15),
                       ),
                     ],
                   ),
-                ),
-                Container(
-                  height: 50,
-                  width: 350,
-                  child: ElevatedButton(
-                      onPressed: () {locationUrl();},
-                      child: Row(
-                        children: [
-                          Icon(Icons.location_on_outlined),
-                          SizedBox(width: 7),
-                          Text("elrawdaStore.jkdfhjhfjhd"),
-                        ],
-                      ),),
                 ),
               ],
             ),
