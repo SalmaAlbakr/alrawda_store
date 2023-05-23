@@ -11,7 +11,7 @@ facebookURL() async {
 
 //whatsapp function
 whatsUrl() async {
-  final Uri url = Uri.parse('whatsapp://send?phone=+0201156922122&text=hello');
+  final Uri url = Uri.parse('whatsapp://send?phone=+0201002095050&text=hello');
   if (!await launchUrl(url)) {
     var _url;
     throw Exception('Could not launch $_url');
@@ -26,3 +26,8 @@ locationUrl() async {
     throw Exception('Could not launch $_url');
   }
 }
+
+/// TODO: location
+/// TODO: phone number
+/// TODO: icon of app
+/// TODO: icon of

@@ -19,17 +19,10 @@ class AboutScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Image.asset(""),
+                Image.asset("image/logo.PNG"),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      "الروضه",
-                      style: GoogleFonts.alexandria(
-                          decoration: TextDecoration.underline,
-                          color: Colors.blue[800],
-                          fontSize: 50),
-                    ),
                   ],
                 ),
                 Text(

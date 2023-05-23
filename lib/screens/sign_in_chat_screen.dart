@@ -1,6 +1,7 @@
 
 import 'package:alrawda_store/my_color.dart';
 import 'package:alrawda_store/screens/list_of_products.dart';
+import 'package:alrawda_store/screens/register_chat_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -144,7 +145,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               try {
                                 await _auth.signInWithEmailAndPassword(
                                     email: email, password: password);
-                                  Navigator.of(context).push(
+                                  Navigator.of(context).pushReplacement(
                                     MaterialPageRoute(
                                       builder: (context) => ListOfProducts(),
                                     ),
@@ -159,7 +160,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   backgroundColor: Colors.red,
-                                  content: Text("يجب تسجيل الصنف"),
+                                  content: Text("يجب ملء البيانات"),
                                 ),
                               );
                             }
@@ -169,6 +170,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               fontSize:25),),
                         ),
                       ),
+                      TextButton(onPressed: (){Navigator.of(context).push(MaterialPageRoute(builder: (context) => RegisterScreen(),),);}, child: Text("تسجيل حساب جديد"))
                     ],
                   ),
                 ),

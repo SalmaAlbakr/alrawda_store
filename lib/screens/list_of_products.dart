@@ -60,7 +60,7 @@ class _ListOfProductsState extends State<ListOfProducts> {
                       MaterialPageRoute(builder: (context) => AboutScreen()));
                 },
                 child: Text(
-                  "تواصل معنا",
+                  "للتواصل معنا",
                   style: TextStyle(color: MyColors.mainColor),
                 ),
               ),

@@ -1,4 +1,5 @@
 import 'package:alrawda_store/my_color.dart';
+import 'package:alrawda_store/screens/list_of_products.dart';
 import 'package:alrawda_store/screens/sign_in_chat_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -62,7 +63,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           child: TextFormField(
                             validator: (String? value) {
                               if (value!.isEmpty ||
-                                  !(value.contains("@ / .com"))) {
+                                  (value.contains("@ / .com"))) {
                                 return " من فضلك أدخل الحساب و يجب ان يحتوي علي @ / com. ";
                               }
                               return null;
@@ -94,7 +95,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 child: TextFormField(
                                   validator: (String? value) {
                                     if (value!.isEmpty ||
-                                        !(value.contains("0123456789"))) {
+                                        (value.contains("0123456789"))) {
                                       return "  كلمة المرور يجب ان تحتوي علي رقم ولا تقل عن 6 حروف ";
                                     }
                                     return null;
@@ -157,9 +158,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 final newUser =
                                     await _auth.createUserWithEmailAndPassword(
                                         email: email, password: password);
-                                Navigator.of(context).push(
+                                Navigator.of(context).pushReplacement(
                                   MaterialPageRoute(
-                                    builder: (context) => SignInScreen(),
+                                    builder: (context) => ListOfProducts(),
                                   ),
                                 );
                                 setState(() {
@@ -172,7 +173,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   backgroundColor: Colors.red,
-                                  content: Text("يجب تسجيل الصنف"),
+                                  content: Text("يجب ملء البيانات"),
                                 ),
                               );
                             }
@@ -185,6 +186,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                         ),
                       ),
+                      TextButton(onPressed: (){Navigator.of(context).push(MaterialPageRoute(builder: (context) => RegisterScreen(),),);}, child: Text("لديك حساب بالفعل"))
                     ],
                   ),
                 ),
