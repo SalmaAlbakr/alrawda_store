@@ -1,6 +1,7 @@
 import 'package:alrawda_store/my_color.dart';
 import 'package:alrawda_store/screens/list_of_products.dart';
 import 'package:alrawda_store/screens/sign_in_chat_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,6 +15,7 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+
   final _auth = FirebaseAuth.instance;
   bool _saving = false;
   late String email;
@@ -24,15 +26,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: TextDirection.rtl,
-      child: Form(
-        key: formKey,
-        child: Scaffold(
-          body: SafeArea(
-            child: ModalProgressHUD(
-              inAsyncCall: _saving,
-              child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+      child: Scaffold(
+        body: SafeArea(
+          child: ModalProgressHUD(
+            inAsyncCall: _saving,
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Form(
+                  key: formKey,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -52,7 +54,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       SizedBox(
                         height: 20,
                       ),
-                      //TextStyle(fontSize: 30,fontWeight: FontWeight.bold,color: Colors.blue[800]),),
                       Container(
                         width: 350,
                         decoration: BoxDecoration(
@@ -62,8 +63,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           padding: const EdgeInsets.all(5.0),
                           child: TextFormField(
                             validator: (String? value) {
-                              if (value!.isEmpty ||
-                                  (value.contains("@ / .com"))) {
+                              if (value!.isEmpty || !value.contains("@ / .com")) {
                                 return " من فضلك أدخل الحساب و يجب ان يحتوي علي @ / com. ";
                               }
                               return null;
@@ -94,8 +94,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               Expanded(
                                 child: TextFormField(
                                   validator: (String? value) {
-                                    if (value!.isEmpty ||
-                                        (value.contains("0123456789"))) {
+                                    if (value!.isEmpty || !value.contains("0123456789"))
+                                         {
                                       return "  كلمة المرور يجب ان تحتوي علي رقم ولا تقل عن 6 حروف ";
                                     }
                                     return null;
@@ -186,7 +186,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                         ),
                       ),
-                      TextButton(onPressed: (){Navigator.of(context).push(MaterialPageRoute(builder: (context) => RegisterScreen(),),);}, child: Text("لديك حساب بالفعل"))
+                      TextButton(onPressed: (){Navigator.of(context).push(MaterialPageRoute(builder: (context) => SignInScreen(),),);}, child: Text("لديك حساب بالفعل"))
                     ],
                   ),
                 ),

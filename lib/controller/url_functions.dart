@@ -29,5 +29,3 @@ locationUrl() async {
 
 /// TODO: location
 /// TODO: phone number
-/// TODO: icon of app
-/// TODO: icon of

@@ -27,14 +27,14 @@ class _SignInScreenState extends State<SignInScreen> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        body: Form(
-          key: formKey,
-          child: SafeArea(
-            child: ModalProgressHUD(
-              inAsyncCall: _saving,
-              child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+        body: SafeArea(
+          child: ModalProgressHUD(
+            inAsyncCall: _saving,
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Form(
+                  key: formKey,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -61,7 +61,13 @@ class _SignInScreenState extends State<SignInScreen> {
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(5.0),
-                          child: TextField(
+                          child: TextFormField(
+                            validator: (String? value){
+                              if (value!.isEmpty || !value.contains("@ / .com")){
+                                return "ادخل الحساب";
+                              }
+                              return null;
+                            },
                             keyboardType: TextInputType.emailAddress,
                             onChanged: (value) {
                               email = value;
@@ -88,7 +94,13 @@ class _SignInScreenState extends State<SignInScreen> {
                           child: Row(
                             children: [
                               Expanded(
-                                child: TextField(
+                                child: TextFormField(
+                                  validator: (String? value){
+                                    if (value!.isEmpty || !value.contains("0123456789")){
+                                      return "ادخل كلمة المرور";
+                                    }
+                                    return null;
+                                  },
                                   keyboardType: TextInputType.visiblePassword,
                                   obscureText: isObscure,
                                   onChanged: (value) {
