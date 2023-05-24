@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:alrawda_store/my_color.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:path/path.dart';
 
 class AddNewItem extends StatefulWidget {
@@ -43,6 +44,8 @@ class _AddNewItemState extends State<AddNewItem> {
   File? image;
   final imagePicker = ImagePicker();
 
+  bool loadingImage = true;
+
 
 
   takePhoto() async {
@@ -62,8 +65,10 @@ class _AddNewItemState extends State<AddNewItem> {
         await myfer.whenComplete(() async {
           var url = await refStorage.getDownloadURL();
 
-
-            widget.imageURL = url;
+            setState(() {
+              widget.imageURL = url;
+              loadingImage = false ;
+            });
         });
 
       }
@@ -88,6 +93,7 @@ class _AddNewItemState extends State<AddNewItem> {
           var url = await refStorage.getDownloadURL();
 
           widget.imageURL = url;
+
         });
 
 
@@ -237,7 +243,10 @@ class _AddNewItemState extends State<AddNewItem> {
                 ),
                 SizedBox(height: 20,),
                 Expanded(
-                 child: image == null ? SizedBox() :  Image.file(image!),
+                 child: image == null ? SizedBox() :
+                 ModalProgressHUD(
+                     inAsyncCall:loadingImage,
+                 child: Image.file(image!)),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
