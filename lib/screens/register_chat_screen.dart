@@ -1,3 +1,4 @@
+import 'package:alrawda_store/controller/auth_user.dart';
 import 'package:alrawda_store/my_color.dart';
 import 'package:alrawda_store/screens/list_of_products.dart';
 import 'package:alrawda_store/screens/sign_in_chat_screen.dart';
@@ -15,6 +16,8 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+
+
 
   final _auth = FirebaseAuth.instance;
   bool _saving = false;
@@ -63,7 +66,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           padding: const EdgeInsets.all(5.0),
                           child: TextFormField(
                             validator: (String? value) {
-                              if (value!.isEmpty || !value.contains("@ / .com")) {
+                              if (value!.isEmpty ) {
                                 return " من فضلك أدخل الحساب و يجب ان يحتوي علي @ / com. ";
                               }
                               return null;
@@ -94,7 +97,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               Expanded(
                                 child: TextFormField(
                                   validator: (String? value) {
-                                    if (value!.isEmpty || !value.contains("0123456789"))
+                                    if (value!.isEmpty )
                                          {
                                       return "  كلمة المرور يجب ان تحتوي علي رقم ولا تقل عن 6 حروف ";
                                     }
@@ -150,6 +153,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             ),
                           ),
                           onPressed: () async {
+                            final isExistingUser = await checkUserExists(email);
+
+                            if (isExistingUser) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  backgroundColor: Colors.blueAccent,
+                                  content: Text("الحساب موجود بالفعل"),
+                                ),
+                              );
+                            } else {
+
                             if (formKey.currentState!.validate()) {
                               setState(() {
                                 _saving = true;
@@ -167,16 +181,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   _saving = false;
                                 });
                               } catch (e) {
-                                print("$e");
+                                print("the problem $e");
                               }
-                            } else {
+                            }
+
+                            else {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   backgroundColor: Colors.red,
                                   content: Text("يجب ملء البيانات"),
                                 ),
                               );
-                            }
+                            }}
                           },
                           child: Text(
                             "إنشاء حساب جديد",
@@ -197,4 +213,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ),
     );
   }
+  // Future<bool> checkUserExists(String email) async {
+  //   List<String> methods = await auth.fetchSignInMethodsForEmail(email);
+  //   return methods.isNotEmpty;
+  // }
 }

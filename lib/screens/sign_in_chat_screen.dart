@@ -1,4 +1,5 @@
 
+import 'package:alrawda_store/controller/auth_user.dart';
 import 'package:alrawda_store/my_color.dart';
 import 'package:alrawda_store/screens/list_of_products.dart';
 import 'package:alrawda_store/screens/register_chat_screen.dart';
@@ -63,7 +64,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           padding: const EdgeInsets.all(5.0),
                           child: TextFormField(
                             validator: (String? value){
-                              if (value!.isEmpty || !value.contains("@ / .com")){
+                              if (value!.isEmpty || value.contains("@ / .com") ){
                                 return "ادخل الحساب";
                               }
                               return null;
@@ -96,7 +97,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               Expanded(
                                 child: TextFormField(
                                   validator: (String? value){
-                                    if (value!.isEmpty || !value.contains("0123456789")){
+                                    if (value!.isEmpty || value.contains("0123456789")){
                                       return "ادخل كلمة المرور";
                                     }
                                     return null;
@@ -150,29 +151,42 @@ class _SignInScreenState extends State<SignInScreen> {
                             ),
                           ),
                           onPressed: () async {
-                            if (formKey.currentState!.validate()) {
-                              setState(() {
-                                _saving = true;
-                              });
-                              try {
-                                await _auth.signInWithEmailAndPassword(
-                                    email: email, password: password);
-                                  Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
-                                      builder: (context) => ListOfProducts(),
-                                    ),
-                                  );
+
+                            final isExistingUser = await checkUserExists(email);
+                            if (isExistingUser) {
+                              if (formKey.currentState!.validate()) {
                                 setState(() {
-                                  _saving = false;
+                                  _saving = true;
                                 });
-                              } catch (e) {
-                                print(e);
+                                try {
+                                  await _auth.signInWithEmailAndPassword(
+                                      email: email, password: password);
+                                    Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(
+                                        builder: (context) => ListOfProducts(),
+                                      ),
+                                    );
+                                  setState(() {
+                                    _saving = false;
+                                  });
+                                } catch (e) {
+                                  print(e);
+                                }
+                              }
+
+                              else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    backgroundColor: Colors.red,
+                                    content: Text("يجب ملء البيانات"),
+                                  ),
+                                );
                               }
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
-                                  backgroundColor: Colors.red,
-                                  content: Text("يجب ملء البيانات"),
+                                  backgroundColor: Colors.blueAccent,
+                                  content: Text("الحساب غير مسجل"),
                                 ),
                               );
                             }
@@ -194,3 +208,5 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
 }
+
+
