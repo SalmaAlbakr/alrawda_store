@@ -115,7 +115,7 @@ class _AddNewItemState extends State<AddNewItem> {
                   padding: const EdgeInsets.all(5.0),
                   child: TextFormField(
                     validator: (String? value) {
-                      if (value != null ) {
+                      if (value == null ) {
                         return "يجب تسجيل اسم الصنف";
                       }
                       return null;
@@ -142,7 +142,7 @@ class _AddNewItemState extends State<AddNewItem> {
                         padding: const EdgeInsets.all(5.0),
                         child: TextFormField(
                           validator: (String? value) {
-                            if (value != null ) {
+                            if (value == null ) {
                               return "يجب تسجيل سعر القطاعي";
                             }
                             return null;
@@ -168,7 +168,7 @@ class _AddNewItemState extends State<AddNewItem> {
                         padding: const EdgeInsets.all(5.0),
                         child: TextFormField(
                           validator: (String? value) {
-                            if (value != null ) {
+                            if (value == null ) {
                               return "يجب تسجيل سعر الجمله 1";
                             }
                             return null;
@@ -194,7 +194,7 @@ class _AddNewItemState extends State<AddNewItem> {
                         padding: const EdgeInsets.all(5.0),
                         child: TextFormField(
                           validator: (String? value) {
-                            if (value != null ) {
+                            if (value == null ) {
                               return "يجب تسجيل سعر الجمله 2";
                             }
                             return null;
@@ -237,7 +237,7 @@ class _AddNewItemState extends State<AddNewItem> {
                 ),
                 SizedBox(height: 20,),
                 Expanded(
-                 child: image == null ? SizedBox() : Image.file(image!),
+                 child: image == null ? SizedBox() :  Image.file(image!),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),

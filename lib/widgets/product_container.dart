@@ -30,55 +30,56 @@ class MessageW extends StatelessWidget {
           ),
           child: Row(
             children: [
-              Container(
-                height: 100,
-                width: 100,
+              Expanded(
                 child: Image.network(imageURL),
               ),
-              Column(
-                children: [
-                  Text(
-                    mText,
-                    maxLines: 10,
-                    style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.blue[800],
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    Text(
+                      mText,
+                      maxLines: 10,
+                      style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blue[800],
+                      ),
                     ),
-                  ),
-                  Text(
-                    mPrice,
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.grey[800],
+                    Text(
+                      mPrice,
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.grey[800],
+                      ),
                     ),
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Text(
-                        mPrice1,
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.grey[800],
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(
+                          mPrice1,
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey[800],
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        width: 15,
-                      ),
-                      Text(
-                        mPrice2,
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.grey[800],
+                        SizedBox(
+                          width: 15,
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                        Text(
+                          mPrice2,
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey[800],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
