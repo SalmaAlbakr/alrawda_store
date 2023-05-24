@@ -2,6 +2,7 @@ import 'package:alrawda_store/controller/url_functions.dart';
 import 'package:alrawda_store/my_color.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AboutScreen extends StatelessWidget {
   const AboutScreen({Key? key}) : super(key: key);
@@ -52,7 +53,7 @@ class AboutScreen extends StatelessWidget {
                   width: 350,
                   child: ElevatedButton(
                     onPressed: () {
-                      locationUrl();
+                      locationUrl(29.8 , 31.27) ;
                     },
                     child: Row(
                       children: [
@@ -93,9 +94,14 @@ class AboutScreen extends StatelessWidget {
                         ),
                       ),
                       SizedBox(width: 7),
-                      Text(
-                        "01142323655 / 01004740444",
-                        style: TextStyle(color: Colors.white, fontSize: 15),
+                      GestureDetector(
+                        onTap: (){
+                          PhoneUrl("01110955595");
+                        },
+                        child: Text(
+                          "01142323655 / 01004740444",
+                          style: TextStyle(color: Colors.white, fontSize: 15),
+                        ),
                       ),
                     ],
                   ),
@@ -108,3 +114,4 @@ class AboutScreen extends StatelessWidget {
     );
   }
 }
+
