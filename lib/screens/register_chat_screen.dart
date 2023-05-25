@@ -57,7 +57,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           padding: const EdgeInsets.all(5.0),
                           child: TextFormField(
                             validator: (String? value) {
-                              if (value == null || value.contains("@ / .com")) {
+                              if (value == "" || value!.contains("@ / .com")) {
                                 return " من فضلك أدخل الحساب و يجب ان يحتوي علي @ / com. ";
                               }
                               return null;
@@ -88,8 +88,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               Expanded(
                                 child: TextFormField(
                                   validator: (String? value) {
-                                    if (value == null ||
-                                        value.contains("0123456789") ||
+                                    if (value == "" ||
+                                        value!.contains("0123456789") ||
                                         value.length < 6) {
                                       return "  كلمة المرور يجب ان تحتوي علي رقم ولا تقل عن 6 حروف ";
                                     }
@@ -145,35 +145,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             ),
                           ),
                           onPressed: () async {
-                            final isExistingUser = await checkUserExists(email);
-
-                            if (isExistingUser) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  backgroundColor: Colors.blueAccent,
-                                  content: Text("الحساب موجود بالفعل"),
-                                ),
-                              );
-                            } else {
                               if (formKey.currentState!.validate()) {
-                                setState(() {
-                                  _saving = true;
-                                });
-                                try {
-                                  await _auth.createUserWithEmailAndPassword(
-                                      email: email, password: password);
-                                  Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
-                                      builder: (context) => ListOfProducts(),
-                                    ),
-                                  );
-                                  setState(() {
-                                    _saving = false;
-                                  });
-                                } catch (e) {
-                                  print("the problem $e");
-                                }
-                              } else {
+                                await validation_done(context);
+                              }
+                              else {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     backgroundColor: Colors.red,
@@ -181,7 +156,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   ),
                                 );
                               }
-                            }
                           },
                           child: Text(
                             "إنشاء حساب جديد",
@@ -210,5 +184,40 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> validation_done(BuildContext context) async {
+     final isExistingUser = await checkUserExists(email);
+    if (isExistingUser) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: Colors.blueAccent,
+          content: Text("الحساب موجود بالفعل"),
+        ),
+      );
+    }
+    else {
+    await add_new_user(context);
+    }
+  }
+
+  Future<void> add_new_user(BuildContext context) async {
+    setState(() {
+      _saving = true;
+    });
+    try {
+      await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => ListOfProducts(),
+        ),
+      );
+      setState(() {
+        _saving = false;
+      });
+    } catch (e) {
+      print("the problem $e");
+    }
   }
 }
