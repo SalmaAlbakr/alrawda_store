@@ -15,9 +15,7 @@ class AddNewItem extends StatefulWidget {
       required this.price,
       required this.price1,
       required this.price2,
-      required this.imageURL
-
-      })
+      required this.imageURL})
       : super(key: key);
 
   String? typeName;
@@ -46,60 +44,52 @@ class _AddNewItemState extends State<AddNewItem> {
 
   bool loadingImage = true;
 
-
-
   takePhoto() async {
     var camPhoto = await imagePicker.pickImage(source: ImageSource.camera);
 
-      if (camPhoto != null) {
+    if (camPhoto != null) {
+      setState(() {
+        image = File(camPhoto.path);
+      });
+      var nameImage = basename(camPhoto.path);
+
+      var refStorage = FirebaseStorage.instance.ref("$nameImage");
+
+      var myfer = refStorage.putFile(image!);
+
+      await myfer.whenComplete(() async {
+        var url = await refStorage.getDownloadURL();
+
         setState(() {
-          image = File(camPhoto.path);
+          widget.imageURL = url;
+          loadingImage = false;
         });
-        var nameImage = basename(camPhoto.path);
-
-        var refStorage = FirebaseStorage.instance.ref("$nameImage");
-
-
-        var myfer =   refStorage.putFile(image!);
-
-        await myfer.whenComplete(() async {
-          var url = await refStorage.getDownloadURL();
-
-            setState(() {
-              widget.imageURL = url;
-              loadingImage = false ;
-            });
-        });
-
-      }
-
+      });
+    }
   }
 
   choosePhoto() async {
     var galleryPhoto = await imagePicker.pickImage(source: ImageSource.gallery);
 
-      if (galleryPhoto != null) {
-        setState(() {
-          image = File(galleryPhoto.path);
-        });
+    if (galleryPhoto != null) {
+      setState(() {
+        image = File(galleryPhoto.path);
+      });
 
-        var nameImage = basename(galleryPhoto.path);
+      var nameImage = basename(galleryPhoto.path);
 
-        var refStorage = FirebaseStorage.instance.ref("$nameImage");
+      var refStorage = FirebaseStorage.instance.ref("$nameImage");
 
-       var myfer =   refStorage.putFile(image!);
+      var myfer = refStorage.putFile(image!);
 
-        await myfer.whenComplete(() async {
-          var url = await refStorage.getDownloadURL();
+      await myfer.whenComplete(() async {
+        var url = await refStorage.getDownloadURL();
 
-          widget.imageURL = url;
-
-        });
-
-
-      }
-
+        widget.imageURL = url;
+      });
+    }
   }
+
   GlobalKey<FormState> formKey = GlobalKey();
 
   @override
@@ -116,19 +106,21 @@ class _AddNewItemState extends State<AddNewItem> {
             key: formKey,
             child: Column(
               children: [
-                SizedBox(height: 20,),
+                SizedBox(
+                  height: 20,
+                ),
                 Padding(
                   padding: const EdgeInsets.all(5.0),
                   child: TextFormField(
                     validator: (String? value) {
-                      if (value == null ) {
+                      if (value == null) {
                         return "يجب تسجيل اسم الصنف";
                       }
                       return null;
                     },
                     controller: messageController,
                     onChanged: (value) {
-                      widget.typeName =  value;
+                      widget.typeName = value;
                     },
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
@@ -140,7 +132,9 @@ class _AddNewItemState extends State<AddNewItem> {
                     ),
                   ),
                 ),
-                SizedBox(height: 20,),
+                SizedBox(
+                  height: 20,
+                ),
                 Row(
                   children: [
                     Expanded(
@@ -148,7 +142,7 @@ class _AddNewItemState extends State<AddNewItem> {
                         padding: const EdgeInsets.all(5.0),
                         child: TextFormField(
                           validator: (String? value) {
-                            if (value == null ) {
+                            if (value == null) {
                               return "يجب تسجيل سعر القطاعي";
                             }
                             return null;
@@ -174,7 +168,7 @@ class _AddNewItemState extends State<AddNewItem> {
                         padding: const EdgeInsets.all(5.0),
                         child: TextFormField(
                           validator: (String? value) {
-                            if (value == null ) {
+                            if (value == null) {
                               return "يجب تسجيل سعر الجمله 1";
                             }
                             return null;
@@ -200,7 +194,7 @@ class _AddNewItemState extends State<AddNewItem> {
                         padding: const EdgeInsets.all(5.0),
                         child: TextFormField(
                           validator: (String? value) {
-                            if (value == null ) {
+                            if (value == null) {
                               return "يجب تسجيل سعر الجمله 2";
                             }
                             return null;
@@ -223,7 +217,9 @@ class _AddNewItemState extends State<AddNewItem> {
                     ),
                   ],
                 ),
-                SizedBox(height: 20,),
+                SizedBox(
+                  height: 20,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -241,22 +237,26 @@ class _AddNewItemState extends State<AddNewItem> {
                     ),
                   ],
                 ),
-                SizedBox(height: 20,),
+                SizedBox(
+                  height: 20,
+                ),
                 Expanded(
-                 child: image == null ? SizedBox() :
-                 ModalProgressHUD(
-                     inAsyncCall:loadingImage,
-                 child: Image.file(image!)),
+                  child: image == null
+                      ? SizedBox()
+                      : ModalProgressHUD(
+                          inAsyncCall: loadingImage,
+                          child: Image.file(image!),
+                        ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
                     width: MediaQuery.of(context).size.width,
                     child: ElevatedButton(
-
                       onPressed: () async {
-
-                        if (formKey.currentState!.validate() && image != null && widget.imageURL != null ) {
+                        if (formKey.currentState!.validate() &&
+                            image != null &&
+                            widget.imageURL != null) {
                           messageController.clear();
                           priceController.clear();
                           price1Controller.clear();
@@ -268,7 +268,7 @@ class _AddNewItemState extends State<AddNewItem> {
                             "price": widget.price,
                             "price1": widget.price1,
                             "price2": widget.price2,
-                            "image" :  widget.imageURL
+                            "image": widget.imageURL
                           });
 
                           Navigator.of(context).pop();
@@ -280,8 +280,6 @@ class _AddNewItemState extends State<AddNewItem> {
                             ),
                           );
                         }
-
-
                       },
                       child: Text(
                         "حفظ",

@@ -2,7 +2,6 @@ import 'package:alrawda_store/controller/auth_user.dart';
 import 'package:alrawda_store/my_color.dart';
 import 'package:alrawda_store/screens/list_of_products.dart';
 import 'package:alrawda_store/screens/sign_in_chat_screen.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -16,9 +15,6 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-
-
-
   final _auth = FirebaseAuth.instance;
   bool _saving = false;
   late String email;
@@ -41,11 +37,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      // Image.asset(
-                      //   "image/img_1.png",
-                      //   width: 200,
-                      //   height: 200,
-                      // ),
                       SizedBox(
                         height: 25,
                       ),
@@ -66,7 +57,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           padding: const EdgeInsets.all(5.0),
                           child: TextFormField(
                             validator: (String? value) {
-                              if (value == null || value.contains("@ / .com") ) {
+                              if (value == null || value.contains("@ / .com")) {
                                 return " من فضلك أدخل الحساب و يجب ان يحتوي علي @ / com. ";
                               }
                               return null;
@@ -97,8 +88,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               Expanded(
                                 child: TextFormField(
                                   validator: (String? value) {
-                                    if (value == null  || value.contains("0123456789"))
-                                         {
+                                    if (value == null ||
+                                        value.contains("0123456789") ||
+                                        value.length < 6) {
                                       return "  كلمة المرور يجب ان تحتوي علي رقم ولا تقل عن 6 حروف ";
                                     }
                                     return null;
@@ -163,36 +155,33 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 ),
                               );
                             } else {
-
-                            if (formKey.currentState!.validate()) {
-                              setState(() {
-                                _saving = true;
-                              });
-                              try {
-                                final newUser =
-                                    await _auth.createUserWithEmailAndPassword(
-                                        email: email, password: password);
-                                Navigator.of(context).pushReplacement(
-                                  MaterialPageRoute(
-                                    builder: (context) => ListOfProducts(),
+                              if (formKey.currentState!.validate()) {
+                                setState(() {
+                                  _saving = true;
+                                });
+                                try {
+                                  await _auth.createUserWithEmailAndPassword(
+                                      email: email, password: password);
+                                  Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                      builder: (context) => ListOfProducts(),
+                                    ),
+                                  );
+                                  setState(() {
+                                    _saving = false;
+                                  });
+                                } catch (e) {
+                                  print("the problem $e");
+                                }
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    backgroundColor: Colors.red,
+                                    content: Text("يجب ملء البيانات"),
                                   ),
                                 );
-                                setState(() {
-                                  _saving = false;
-                                });
-                              } catch (e) {
-                                print("the problem $e");
                               }
                             }
-
-                            else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  backgroundColor: Colors.red,
-                                  content: Text("يجب ملء البيانات"),
-                                ),
-                              );
-                            }}
                           },
                           child: Text(
                             "إنشاء حساب جديد",
@@ -202,7 +191,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                         ),
                       ),
-                      TextButton(onPressed: (){Navigator.of(context).push(MaterialPageRoute(builder: (context) => SignInScreen(),),);}, child: Text("لديك حساب بالفعل"))
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => SignInScreen(),
+                            ),
+                          );
+                        },
+                        child: Text("لديك حساب بالفعل"),
+                      )
                     ],
                   ),
                 ),
@@ -213,8 +211,4 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ),
     );
   }
-  // Future<bool> checkUserExists(String email) async {
-  //   List<String> methods = await auth.fetchSignInMethodsForEmail(email);
-  //   return methods.isNotEmpty;
-  // }
 }

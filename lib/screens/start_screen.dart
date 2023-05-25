@@ -16,17 +16,13 @@ class StartScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-
               SizedBox(
                 height: 25,
               ),
               Text(
                 "الروضه",
                 style: GoogleFonts.alexandria(
-                  decoration: TextDecoration.underline,
-                  fontSize: 50
-                ),
-
+                    decoration: TextDecoration.underline, fontSize: 50),
               ),
               SizedBox(
                 height: 25,
@@ -46,7 +42,13 @@ class StartScreen extends StatelessWidget {
                       ),
                     );
                   },
-                  child: Text("تسجيل دخول",style: TextStyle(fontSize:25,fontWeight: FontWeight.bold),),
+                  child: Text(
+                    "تسجيل دخول",
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
               ),
               SizedBox(
@@ -67,9 +69,10 @@ class StartScreen extends StatelessWidget {
                       ),
                     );
                   },
-                  child: Text("إنشاء حساب جديد",style: TextStyle(
-
-                      fontSize:25,fontWeight: FontWeight.bold),),
+                  child: Text(
+                    "إنشاء حساب جديد",
+                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                  ),
                 ),
               ),
             ],

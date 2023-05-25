@@ -57,7 +57,10 @@ class _ListOfProductsState extends State<ListOfProducts> {
               TextButton(
                 onPressed: () {
                   Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => AboutScreen()));
+                    MaterialPageRoute(
+                      builder: (context) => AboutScreen(),
+                    ),
+                  );
                 },
                 child: Text(
                   "للتواصل معنا",
@@ -65,18 +68,19 @@ class _ListOfProductsState extends State<ListOfProducts> {
                 ),
               ),
               TextButton(
-                  onPressed: () async {
-                    await _auth.signOut();
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => StartScreen(),
-                      ),
-                    );
-                  },
-                  child: Text(
-                    "تسجيل الخروج",
-                    style: TextStyle(color: MyColors.mainColor),
-                  )),
+                onPressed: () async {
+                  await _auth.signOut();
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => StartScreen(),
+                    ),
+                  );
+                },
+                child: Text(
+                  "تسجيل الخروج",
+                  style: TextStyle(color: MyColors.mainColor),
+                ),
+              ),
             ],
           ),
         ),
@@ -144,7 +148,9 @@ class _ListOfProductsState extends State<ListOfProducts> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SizedBox(height: 10,),
+              SizedBox(
+                height: 10,
+              ),
               StreamBuilder<QuerySnapshot>(
                 stream: _fireStore
                     .collection("product")
@@ -153,9 +159,7 @@ class _ListOfProductsState extends State<ListOfProducts> {
                 builder: (context, snapshot) {
                   List<MessageW> messageWidgets = [];
                   if (!snapshot.hasData) {
-                    return Center(
-                      child: CircleAvatar()
-                    );
+                    return Center(child: CircleAvatar());
                   }
                   final theMessages = snapshot.data!.docs.reversed;
                   for (var message in theMessages) {
@@ -186,9 +190,10 @@ class _ListOfProductsState extends State<ListOfProducts> {
                       .toList();
                   return Expanded(
                     child: ListView(
-                        children: searchController.text == ""
-                            ? messageWidgets
-                            : filterNames),
+                      children: searchController.text == ""
+                          ? messageWidgets
+                          : filterNames,
+                    ),
                   );
                 },
               ),

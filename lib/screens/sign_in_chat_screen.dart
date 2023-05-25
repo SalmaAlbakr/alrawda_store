@@ -1,4 +1,3 @@
-
 import 'package:alrawda_store/controller/auth_user.dart';
 import 'package:alrawda_store/my_color.dart';
 import 'package:alrawda_store/screens/list_of_products.dart';
@@ -39,32 +38,27 @@ class _SignInScreenState extends State<SignInScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      // Image.asset(
-                      //   "image/img_1.png",
-                      //   width: 200,
-                      //   height: 200,
-                      // ),
                       SizedBox(
                         height: 25,
                       ),
-                      Text("شركة الروضه",
+                      Text(
+                        "شركة الروضه",
                         style: GoogleFonts.alexandria(
-                            color: Colors.blue[800],
-                            fontSize: 40
-                        ),),
-                      SizedBox(height: 20,),
+                            color: Colors.blue[800], fontSize: 40),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
                       Container(
                         width: 350,
                         decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.blue
-                          ),
+                          border: Border.all(color: Colors.blue),
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(5.0),
                           child: TextFormField(
-                            validator: (String? value){
-                              if (value == null || value.contains("@ / .com") ){
+                            validator: (String? value) {
+                              if (value == null || value.contains("@ / .com")) {
                                 return "ادخل الحساب";
                               }
                               return null;
@@ -86,9 +80,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       Container(
                         width: 350,
                         decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.blue
-                          ),
+                          border: Border.all(color: Colors.blue),
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(5.0),
@@ -96,8 +88,8 @@ class _SignInScreenState extends State<SignInScreen> {
                             children: [
                               Expanded(
                                 child: TextFormField(
-                                  validator: (String? value){
-                                    if (value == null || value.contains("0123456789")){
+                                  validator: (String? value) {
+                                    if (value == null) {
                                       return "ادخل كلمة المرور الصحيحه";
                                     }
                                     return null;
@@ -121,7 +113,8 @@ class _SignInScreenState extends State<SignInScreen> {
                                         });
                                       },
                                       icon: Icon(
-                                        Icons.visibility_off_outlined,color: Colors.blue
+                                        Icons.visibility_off_outlined,
+                                        color: Colors.blue,
                                       ),
                                     )
                                   : IconButton(
@@ -131,7 +124,8 @@ class _SignInScreenState extends State<SignInScreen> {
                                         });
                                       },
                                       icon: Icon(
-                                        Icons.remove_red_eye,color: Colors.blue
+                                        Icons.remove_red_eye,
+                                        color: Colors.blue,
                                       ),
                                     ),
                             ],
@@ -139,8 +133,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         ),
                       ),
                       Expanded(
-                        child: SizedBox(
-                        ),
+                        child: SizedBox(),
                       ),
                       Container(
                         width: 300,
@@ -151,7 +144,6 @@ class _SignInScreenState extends State<SignInScreen> {
                             ),
                           ),
                           onPressed: () async {
-
                             final isExistingUser = await checkUserExists(email);
                             if (isExistingUser) {
                               if (formKey.currentState!.validate()) {
@@ -161,20 +153,18 @@ class _SignInScreenState extends State<SignInScreen> {
                                 try {
                                   await _auth.signInWithEmailAndPassword(
                                       email: email, password: password);
-                                    Navigator.of(context).pushReplacement(
-                                      MaterialPageRoute(
-                                        builder: (context) => ListOfProducts(),
-                                      ),
-                                    );
+                                  Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                      builder: (context) => ListOfProducts(),
+                                    ),
+                                  );
                                   setState(() {
                                     _saving = false;
                                   });
                                 } catch (e) {
                                   print(e);
                                 }
-                              }
-
-                              else {
+                              } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     backgroundColor: Colors.red,
@@ -191,12 +181,22 @@ class _SignInScreenState extends State<SignInScreen> {
                               );
                             }
                           },
-                          child: Text("تسجيل الدخول",style: TextStyle(
-
-                              fontSize:25),),
+                          child: Text(
+                            "تسجيل الدخول",
+                            style: TextStyle(fontSize: 25),
+                          ),
                         ),
                       ),
-                      TextButton(onPressed: (){Navigator.of(context).push(MaterialPageRoute(builder: (context) => RegisterScreen(),),);}, child: Text("تسجيل حساب جديد"))
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => RegisterScreen(),
+                            ),
+                          );
+                        },
+                        child: Text("تسجيل حساب جديد"),
+                      )
                     ],
                   ),
                 ),
@@ -208,5 +208,3 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
 }
-
-

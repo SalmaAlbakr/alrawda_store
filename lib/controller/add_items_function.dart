@@ -13,4 +13,3 @@ void getCurrentUser() {
     print(e);
   }
 }
-
