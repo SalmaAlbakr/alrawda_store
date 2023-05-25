@@ -64,7 +64,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           padding: const EdgeInsets.all(5.0),
                           child: TextFormField(
                             validator: (String? value){
-                              if (value!.isEmpty || value.contains("@ / .com") ){
+                              if (value == null || value.contains("@ / .com") ){
                                 return "ادخل الحساب";
                               }
                               return null;
@@ -97,8 +97,8 @@ class _SignInScreenState extends State<SignInScreen> {
                               Expanded(
                                 child: TextFormField(
                                   validator: (String? value){
-                                    if (value!.isEmpty || value.contains("0123456789")){
-                                      return "ادخل كلمة المرور";
+                                    if (value == null || value.contains("0123456789")){
+                                      return "ادخل كلمة المرور الصحيحه";
                                     }
                                     return null;
                                   },
