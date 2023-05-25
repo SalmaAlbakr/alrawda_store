@@ -1,3 +1,4 @@
+import 'package:geolocator/geolocator.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 //facebook function
@@ -36,4 +37,14 @@ PhoneUrl(String phoneNumber) async {
     var _url;
     throw Exception('Could not launch $_url');
   }
+}
+
+/*Position position  = await Geolocator.getCurrentPosition(
+desiredAccuracy: LocationAccuracy.high,
+);*/
+
+locationFunction () async {
+  final Position = Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+
+
 }

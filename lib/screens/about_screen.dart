@@ -2,6 +2,7 @@ import 'package:alrawda_store/controller/url_functions.dart';
 import 'package:alrawda_store/my_color.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:geolocator/geolocator.dart';
 
 class AboutScreen extends StatelessWidget {
   const AboutScreen({Key? key}) : super(key: key);
@@ -53,7 +54,9 @@ class AboutScreen extends StatelessWidget {
                     width: 350,
                     child: ElevatedButton(
                       onPressed: () {
-                        locationUrl("29°50'40.1\"", "31°16'36.8\"");
+                       // locationUrl("29°50'40.1\"", "31°16'36.8\"");
+                        locationFunction();
+                        //print('Latitude: ${Position.29°50'40.1}, Longitude: ${Position.longitude}');
                       },
                       child: Row(
                         children: [
@@ -141,5 +144,7 @@ class AboutScreen extends StatelessWidget {
         ),
       ),
     );
+
   }
 }
+
