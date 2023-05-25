@@ -86,13 +86,13 @@ class AboutScreen extends StatelessWidget {
                       Expanded(
                         child: ElevatedButton(
                           onPressed: () {
-                            whatsUrl("01002095050");
+                            whatsUrl("01157891602");
                           },
                           child: Row(
                             children: [
                               Icon(Icons.whatsapp),
                               SizedBox(width: 7),
-                              Text("01002095050"),
+                              Text("01157891602"),
                             ],
                           ),
                         ),
@@ -121,13 +121,13 @@ class AboutScreen extends StatelessWidget {
                       Expanded(
                         child: ElevatedButton(
                           onPressed: () {
-                            PhoneUrl("01110955595");
+                            PhoneUrl("01142323655");
                           },
                           child: Row(
                             children: [
                               Icon(Icons.phone),
                               SizedBox(width: 7),
-                              Text("01110955595"),
+                              Text("01142323655"),
                             ],
                           ),
                         ),

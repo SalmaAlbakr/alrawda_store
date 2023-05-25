@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.alrawda_store.alrawda_store">
    <application
-        android:label="alrawda_store"
+        android:label="الروضه"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
