@@ -58,7 +58,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           padding: const EdgeInsets.all(5.0),
                           child: TextFormField(
                             validator: (String? value) {
-                              if (value == null || value.contains("@ / .com")) {
+                              if (value == "" || value!.contains("@ / .com")) {
                                 return "ادخل الحساب";
                               }
                               return null;
@@ -89,7 +89,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               Expanded(
                                 child: TextFormField(
                                   validator: (String? value) {
-                                    if (value == null) {
+                                    if (value == "") {
                                       return "ادخل كلمة المرور الصحيحه";
                                     }
                                     return null;
@@ -144,27 +144,11 @@ class _SignInScreenState extends State<SignInScreen> {
                             ),
                           ),
                           onPressed: () async {
-                            final isExistingUser = await checkUserExists(email);
-                            if (isExistingUser) {
+
                               if (formKey.currentState!.validate()) {
-                                setState(() {
-                                  _saving = true;
-                                });
-                                try {
-                                  await _auth.signInWithEmailAndPassword(
-                                      email: email, password: password);
-                                  Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
-                                      builder: (context) => ListOfProducts(),
-                                    ),
-                                  );
-                                  setState(() {
-                                    _saving = false;
-                                  });
-                                } catch (e) {
-                                  print(e);
-                                }
-                              } else {
+                                await validation_done(context);
+                              }
+                              else {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     backgroundColor: Colors.red,
@@ -172,14 +156,6 @@ class _SignInScreenState extends State<SignInScreen> {
                                   ),
                                 );
                               }
-                            } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  backgroundColor: Colors.blueAccent,
-                                  content: Text("الحساب غير مسجل"),
-                                ),
-                              );
-                            }
                           },
                           child: Text(
                             "تسجيل الدخول",
@@ -206,5 +182,40 @@ class _SignInScreenState extends State<SignInScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> validation_done(BuildContext context) async {
+    final isExistingUser = await checkUserExists(email);
+    if (isExistingUser) {
+      await sign_in_user(context);
+    }
+    else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: Colors.blueAccent,
+          content: Text("الحساب غير مسجل"),
+        ),
+      );
+    }
+  }
+
+  Future<void> sign_in_user(BuildContext context) async {
+    setState(() {
+      _saving = true;
+    });
+    try {
+      await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => ListOfProducts(),
+        ),
+      );
+      setState(() {
+        _saving = false;
+      });
+    } catch (e) {
+      print(e);
+    }
   }
 }
