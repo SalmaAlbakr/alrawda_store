@@ -46,9 +46,8 @@ desiredAccuracy: LocationAccuracy.high,
 );*/
 
 locationFunction () async {
-  // LocationPermission permission;
-  // permission = await Geolocator.requestPermission();
-  // final Position = Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+  LocationPermission permission;
+  permission = await Geolocator.requestPermission();
 
   Position position = await Geolocator.getCurrentPosition(
     desiredAccuracy: LocationAccuracy.high,
