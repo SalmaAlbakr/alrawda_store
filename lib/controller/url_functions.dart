@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:geolocator/geolocator.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -21,7 +23,7 @@ whatsUrl(String whatsNumber) async {
 }
 
 //googleMaps function
-locationUrl(String latitude, String longitude) async {
+locationUrl(double latitude, double longitude) async {
   final Uri url = Uri.parse('https://www.google.com/maps/place/29%C2%B050'
       '36.8%22E/@29.8444797,31.2746954,17z/data=!3m1!4b1!4m4!3m3!8m2!3d29.8444797!4d31.2768841?hl=en$latitude,$longitude');
   if (!await launchUrl(url)) {
@@ -43,8 +45,11 @@ PhoneUrl(String phoneNumber) async {
 desiredAccuracy: LocationAccuracy.high,
 );*/
 
-locationFunction () async {
-  final Position = Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-
-
-}
+// locationFunction () async {
+//   LocationPermission permission;
+//   permission = await Geolocator.requestPermission();
+//   final Position = Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+//
+//
+//
+// }
