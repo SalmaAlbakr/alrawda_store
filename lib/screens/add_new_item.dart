@@ -85,7 +85,10 @@ class _AddNewItemState extends State<AddNewItem> {
       await myfer.whenComplete(() async {
         var url = await refStorage.getDownloadURL();
 
-        widget.imageURL = url;
+        setState(() {
+          widget.imageURL = url;
+          loadingImage = false;
+        });
       });
     }
   }
