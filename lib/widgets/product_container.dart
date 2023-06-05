@@ -1,3 +1,4 @@
+import 'package:alrawda_store/controller/add_items_function.dart';
 import 'package:flutter/material.dart';
 
 class MessageW extends StatelessWidget {
@@ -9,6 +10,7 @@ class MessageW extends StatelessWidget {
         required this.isMe,
      required this.mPrice1,
      required this.mPrice2,
+     required this.notValid,
      required this.imageURL, })
       : super(key: key);
 
@@ -19,6 +21,7 @@ class MessageW extends StatelessWidget {
   final imageURL;
   final mSender;
   final bool isMe;
+  final notValid;
 
   @override
   Widget build(BuildContext context) {
@@ -26,11 +29,14 @@ class MessageW extends StatelessWidget {
       children: [
         Container(
           decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
             border: Border.all(),
           ),
           child: Row(
             children: [
-              Expanded(
+              Container(
+                height: MediaQuery.of(context).size.height * 0.2,
+                width: MediaQuery.of(context).size.width * 0.3,
                 child: Image.network(imageURL),
               ),
               Padding(
@@ -46,6 +52,8 @@ class MessageW extends StatelessWidget {
                         color: Colors.blue[800],
                       ),
                     ),
+
+                   notValid == "0" ?
                     Text(
                       mPrice,
                       style: TextStyle(
@@ -53,8 +61,18 @@ class MessageW extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                         color: Colors.grey[800],
                       ),
-                    ),
-                    Row(
+                    ) :
+                   Text(
+                    "المنتج غير متاح",
+                     style: TextStyle(
+                       fontSize: 15,
+                       fontWeight: FontWeight.bold,
+                       color: Colors.grey[800],
+                     ),
+                   ),
+                    signedInUser.email! == "salma@email.com"?
+
+                    Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text(
@@ -77,7 +95,8 @@ class MessageW extends StatelessWidget {
                           ),
                         ),
                       ],
-                    ),
+                    ):
+                        Text("سعر خاص للجمله"),
                   ],
                 ),
               ),

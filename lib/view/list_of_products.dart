@@ -174,6 +174,7 @@ class _ListOfProductsState extends State<ListOfProducts> {
                           mPrice1: product.price1,
                           mPrice2: product.price2,
                           imageURL: product.image,
+                          notValid: product.valid,
                         );
                       }) :
                     ListView.builder(
@@ -188,7 +189,7 @@ class _ListOfProductsState extends State<ListOfProducts> {
                             isMe: currentUser == product.sender,
                             mPrice1: product.price1,
                             mPrice2: product.price2,
-                            imageURL: product.image,
+                            imageURL: product.image, notValid: product.valid,
                           );
                         });
 

@@ -275,6 +275,7 @@ class _AddNewItemState extends State<AddNewItem> {
                               "image": widget.imageURL,
                               "time": FieldValue.serverTimestamp(),
                               "sender": signedInUser.email,
+                              "notValid" : "0"
                             });
 
                             Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => ListOfProducts()));
