@@ -1,4 +1,5 @@
 import 'package:alrawda_store/controller/add_items_function.dart';
+import 'package:alrawda_store/view/list_of_products.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -155,7 +156,7 @@ class _AddNewItemState extends State<AddNewItem> {
                             keyboardType: TextInputType.number,
                             controller: priceController,
                             onChanged: (value) {
-                              widget.price = "سعر القطاعي : " + value;
+                              widget.price =  "سعر القطاعي : " + value;
                             },
                             decoration: InputDecoration(
                               border: OutlineInputBorder(
@@ -181,7 +182,7 @@ class _AddNewItemState extends State<AddNewItem> {
                             keyboardType: TextInputType.number,
                             controller: price1Controller,
                             onChanged: (value) {
-                              widget.price1 = "سعر الجمله1  : " + value;
+                              widget.price1 =  "سعر الجمله1  : " + value;
                             },
                             decoration: InputDecoration(
                               border: OutlineInputBorder(
@@ -268,15 +269,15 @@ class _AddNewItemState extends State<AddNewItem> {
                             price2Controller.clear();
                             _fireStore.collection("product").add({
                               "text": widget.typeName,
-                              "sender": signedInUser.email,
-                              "time": FieldValue.serverTimestamp(),
                               "price": widget.price,
                               "price1": widget.price1,
                               "price2": widget.price2,
-                              "image": widget.imageURL
+                              "image": widget.imageURL,
+                              "time": FieldValue.serverTimestamp(),
+                              "sender": signedInUser.email,
                             });
 
-                            Navigator.of(context).pop();
+                            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => ListOfProducts()));
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(

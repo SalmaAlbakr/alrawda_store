@@ -47,6 +47,7 @@ dependencies:
   path: ^1.8.2
   location: ^4.4.0
   geolocator: ^9.0.2
+  dio: ^5.1.2
 
 
 

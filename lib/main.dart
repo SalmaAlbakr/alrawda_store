@@ -1,6 +1,6 @@
 import 'package:alrawda_store/my_color.dart';
-import 'package:alrawda_store/screens/list_of_products.dart';
-import 'package:alrawda_store/screens/start_screen.dart';
+import 'package:alrawda_store/view/list_of_products.dart';
+import 'package:alrawda_store/view/start_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';

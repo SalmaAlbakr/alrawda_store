@@ -1,6 +1,6 @@
 import 'package:alrawda_store/my_color.dart';
-import 'package:alrawda_store/screens/register_chat_screen.dart';
-import 'package:alrawda_store/screens/sign_in_chat_screen.dart';
+import 'package:alrawda_store/view/register_chat_screen.dart';
+import 'package:alrawda_store/view/sign_in_chat_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

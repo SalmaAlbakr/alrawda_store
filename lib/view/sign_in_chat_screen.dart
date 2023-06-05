@@ -1,7 +1,7 @@
 import 'package:alrawda_store/controller/auth_user.dart';
 import 'package:alrawda_store/my_color.dart';
-import 'package:alrawda_store/screens/list_of_products.dart';
-import 'package:alrawda_store/screens/register_chat_screen.dart';
+import 'package:alrawda_store/view/list_of_products.dart';
+import 'package:alrawda_store/view/register_chat_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart';

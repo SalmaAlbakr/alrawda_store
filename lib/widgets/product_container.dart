@@ -4,21 +4,21 @@ class MessageW extends StatelessWidget {
   const MessageW(
       {Key? key,
       required this.mText,
-      required this.mSender,
-      required this.isMe,
       required this.mPrice,
-      this.mPrice1,
-      this.mPrice2,
-      this.imageURL})
+        required this.mSender,
+        required this.isMe,
+     required this.mPrice1,
+     required this.mPrice2,
+     required this.imageURL, })
       : super(key: key);
 
   final mText;
-  final mSender;
-  final bool isMe;
   final mPrice;
   final mPrice1;
   final mPrice2;
   final imageURL;
+  final mSender;
+  final bool isMe;
 
   @override
   Widget build(BuildContext context) {

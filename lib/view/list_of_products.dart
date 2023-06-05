@@ -1,8 +1,10 @@
 import 'package:alrawda_store/controller/add_items_function.dart';
+import 'package:alrawda_store/model/get_product_model/get_product_model.dart';
+import 'package:alrawda_store/model/get_product_model/get_product_repo.dart';
 import 'package:alrawda_store/my_color.dart';
-import 'package:alrawda_store/screens/about_screen.dart';
-import 'package:alrawda_store/screens/add_new_item.dart';
-import 'package:alrawda_store/screens/start_screen.dart';
+import 'package:alrawda_store/view/about_screen.dart';
+import 'package:alrawda_store/view/add_new_item.dart';
+import 'package:alrawda_store/view/start_screen.dart';
 import 'package:alrawda_store/widgets/product_container.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -19,7 +21,6 @@ class ListOfProducts extends StatefulWidget {
 class _ListOfProductsState extends State<ListOfProducts> {
   final searchController = TextEditingController();
 
-  final _fireStore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
   String? typeName;
   String? price;
@@ -145,62 +146,59 @@ class _ListOfProductsState extends State<ListOfProducts> {
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SizedBox(
-                height: 10,
-              ),
-              StreamBuilder<QuerySnapshot>(
-                stream: _fireStore
-                    .collection("product")
-                    .orderBy("time")
-                    .snapshots(),
-                builder: (context, snapshot) {
-                  List<MessageW> messageWidgets = [];
-                  if (!snapshot.hasData) {
-                    return Center(child: CircleAvatar());
-                  }
-                  final theMessages = snapshot.data!.docs.reversed;
-                  for (var message in theMessages) {
-                    final mText = message.get("text");
-                    final mSender = message.get("sender");
-                    final mPrice = message.get("price");
-                    final mPrice1 = message.get("price1");
-                    final mPrice2 = message.get("price2");
-                    final mURL = message.get("image");
-
-                    final currentUser = signedInUser.email;
-                    final singleMessage = MessageW(
-                      mText: mText,
-                      mSender: mSender,
-                      isMe: currentUser == mSender,
-                      mPrice: mPrice,
-                      mPrice1: mPrice1,
-                      mPrice2: mPrice2,
-                      imageURL: mURL,
-                    );
-                    messageWidgets.add(singleMessage);
-                  }
-                  List<MessageW> filterNames = messageWidgets
+          child: FutureBuilder(
+              future: ProductRepo().getAllProduct(),
+              builder:
+                  (context, AsyncSnapshot<List<ProductsModel>> snapshot) {
+                if (snapshot.hasData) {
+                  final List<ProductsModel> products = snapshot.data!;
+                  List<ProductsModel> filterNames = products
                       .where(
                         (element) =>
-                            element.mText.contains(searchController.text),
-                      )
+                        element.text.contains(searchController.text),
+                  )
                       .toList();
-                  return Expanded(
-                    child: ListView(
-                      children: searchController.text == ""
-                          ? messageWidgets
-                          : filterNames,
-                    ),
-                  );
-                },
-              ),
-            ],
-          ),
+                  return
+                    searchController.text == "" ?
+
+                    ListView.builder(
+                      itemCount: products.length,
+                      itemBuilder: (context, int i) {
+                        final ProductsModel product = products[i];
+                        final currentUser = signedInUser.email;
+                        return MessageW(
+                          mText: product.text,
+                          mPrice: product.price,
+                          mSender: product.sender,
+                          isMe: currentUser == product.sender,
+                          mPrice1: product.price1,
+                          mPrice2: product.price2,
+                          imageURL: product.image,
+                        );
+                      }) :
+                    ListView.builder(
+                        itemCount: filterNames.length,
+                        itemBuilder: (context, int i) {
+                          final ProductsModel product = filterNames[i];
+                          final currentUser = signedInUser.email;
+                          return MessageW(
+                            mText: product.text,
+                            mPrice: product.price,
+                            mSender: product.sender,
+                            isMe: currentUser == product.sender,
+                            mPrice1: product.price1,
+                            mPrice2: product.price2,
+                            imageURL: product.image,
+                          );
+                        });
+
+                } else {
+                  return CircularProgressIndicator();
+                }
+              }),
         ),
       ),
     );
   }
 }
+//[بيانات المنتج الاول[السعر - الثمن - الصوره] - بيانات المنتج التاني ]
