@@ -201,4 +201,3 @@ class _ListOfProductsState extends State<ListOfProducts> {
     );
   }
 }
-//[بيانات المنتج الاول[السعر - الثمن - الصوره] - بيانات المنتج التاني ]
