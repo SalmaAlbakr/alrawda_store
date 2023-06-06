@@ -3,6 +3,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:meta/meta.dart';
 import 'dart:io';
+
 import 'package:path/path.dart';
 part 'take_photo_by_camera_state.dart';
 
@@ -22,18 +23,19 @@ class TakePhotoByCameraCubit extends Cubit<TakePhotoByCameraState> {
 
 
     var camPhoto = await imagePicker.pickImage(source: ImageSource.camera);
+    print(" to test block  $camPhoto");
 
         image = File(camPhoto!.path);
-       emit(ChoosePhoto(image: image));
+emit(TakePhotoByCameraStart(image: image));
 
       var nameImage = basename(camPhoto.path);
-
+    print("to test block $nameImage");
       //sent to fireStore
       var refStorage = FirebaseStorage.instance.ref("$nameImage");
-
+    print("to test block $refStorage");
       //save pic in url
       var myfer = refStorage.putFile(image!);
-
+    print(" to test block $myfer");
       //get url to device
       await myfer.whenComplete(() async {
         var url = await refStorage.getDownloadURL();
@@ -41,8 +43,9 @@ class TakePhotoByCameraCubit extends Cubit<TakePhotoByCameraState> {
 
         loadingImage = false;
       });
+    print("to test block $imageUrl");
+      emit(TakePhotoByCamera(URL: imageUrl ));
 
-      emit(ImageURLDone(URL: imageUrl ));
 
   }
 
@@ -51,7 +54,7 @@ class TakePhotoByCameraCubit extends Cubit<TakePhotoByCameraState> {
 
         image = File(galleryPhoto!.path);
 
-        emit(ChoosePhoto(image: image));
+        emit(TakePhotoByCameraStart(image: image));
 
       var nameImage = basename(galleryPhoto.path);
 
@@ -65,7 +68,8 @@ class TakePhotoByCameraCubit extends Cubit<TakePhotoByCameraState> {
         loadingImage = false;
 
       });
-    emit(ImageURLDone(URL: imageUrl));
+    emit(ChosePhotoFromGallery(URL: imageUrl));
+
   }
 
 

@@ -6,6 +6,7 @@ import 'package:alrawda_store/view/about_screen.dart';
 import 'package:alrawda_store/view/add_new_item.dart';
 import 'package:alrawda_store/view/start_screen.dart';
 import 'package:alrawda_store/widgets/product_container.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -18,19 +19,42 @@ class ListOfProducts extends StatefulWidget {
 }
 
 class _ListOfProductsState extends State<ListOfProducts> {
+
   final searchController = TextEditingController();
 
   final _auth = FirebaseAuth.instance;
 
-
+  bool internet = true ;
   @override
   void initState() {
     getCurrentUser();
     super.initState();
+    final subscription = Connectivity()
+        .onConnectivityChanged
+        .listen((ConnectivityResult result) {
+      // Got a new connectivity status!
+      if (result == ConnectivityResult.none) {
+        setState(() {
+          internet = false;
+        });
+      } else {
+        setState(() {
+          internet = true;
+        });
+      }
+    });
+
   }
 
   @override
   Widget build(BuildContext context) {
+    if (internet == false) {
+      return Scaffold(
+          body: Center(
+              child: Container(
+                child: Text("no internet plz check"),
+              )));
+    }
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(

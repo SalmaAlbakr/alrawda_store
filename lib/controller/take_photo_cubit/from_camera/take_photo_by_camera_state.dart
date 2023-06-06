@@ -4,18 +4,24 @@ part of 'take_photo_by_camera_cubit.dart';
 abstract class TakePhotoByCameraState {}
 
 class TakePhotoByCameraInitial extends TakePhotoByCameraState {}
-class ChoosePhoto extends TakePhotoByCameraState {
-  final File? image;
+class TakePhotoByCameraStart extends TakePhotoByCameraState {
+  File? image;
 
-  ChoosePhoto({required this.image});
+  TakePhotoByCameraStart({required this.image});
 
 }
 
 
-class ImageURLDone extends TakePhotoByCameraState {
+class TakePhotoByCamera extends TakePhotoByCameraState {
   final String? URL;
 
-  ImageURLDone({required this.URL});
+  TakePhotoByCamera({required this.URL});
+
+}
+class ChosePhotoFromGallery extends TakePhotoByCameraState {
+  final String? URL;
+
+  ChosePhotoFromGallery({required this.URL});
 
 }
 
