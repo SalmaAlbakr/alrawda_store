@@ -47,12 +47,6 @@ class _AddNewItemState extends State<AddNewItem> {
     super.dispose();
   }
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   context.read<TakePhotoByCameraCubit>();
-  //   context.read<TakePhotoByCameraCubit>();
-  // }
 
 
   GlobalKey<FormState> formKey = GlobalKey();
