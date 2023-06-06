@@ -258,12 +258,16 @@ class _AddNewItemState extends State<AddNewItem> {
                       SizedBox(
                         height: 20,
                       ),
-                      if (state is TakePhotoByCameraStart) Image.file(state.image!),
+                      if (state is TakePhotoByCameraStart) Expanded(
+                        child: ModalProgressHUD(
+                            inAsyncCall: true,
+                            child: Image.file(state.image!)),
+                      ),
                       Expanded(
                         child: context.read<TakePhotoByCameraCubit>().image == null
                             ? SizedBox()
                             : ModalProgressHUD(
-                                inAsyncCall: context.read<TakePhotoByCameraCubit>().loadingImage,
+                                inAsyncCall: false,
                                 child: Image.file(context.read<TakePhotoByCameraCubit>().image!),
                               ),
                       ),
