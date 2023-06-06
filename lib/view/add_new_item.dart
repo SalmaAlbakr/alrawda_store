@@ -9,7 +9,6 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:alrawda_store/my_color.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import 'package:path/path.dart';
 
 class AddNewItem extends StatefulWidget {
   AddNewItem(
@@ -27,6 +26,10 @@ class AddNewItem extends StatefulWidget {
 }
 
 class _AddNewItemState extends State<AddNewItem> {
+
+
+
+
   final messageController = TextEditingController();
 
   final priceController = TextEditingController();
@@ -37,6 +40,13 @@ class _AddNewItemState extends State<AddNewItem> {
 
   final _fireStore = FirebaseFirestore.instance;
   bool loadingImage = true;
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<TakePhotoByCameraCubit>();
+    context.read<TakePhotoByCameraCubit>();
+  }
 
   // File? image;
   // final imagePicker = ImagePicker();
@@ -92,6 +102,7 @@ class _AddNewItemState extends State<AddNewItem> {
   //   }
   // }
 
+
   GlobalKey<FormState> formKey = GlobalKey();
 
   @override
@@ -108,7 +119,7 @@ class _AddNewItemState extends State<AddNewItem> {
             key: formKey,
             child: BlocBuilder<TakePhotoByCameraCubit , TakePhotoByCameraState>(
 
-              builder: (context, snapshot) {
+              builder: (context, state) {
                 return Container(
                   height: MediaQuery.of(context).size.height,
                   child: Column(
@@ -247,6 +258,7 @@ class _AddNewItemState extends State<AddNewItem> {
                       SizedBox(
                         height: 20,
                       ),
+                      if (state is TakePhotoByCameraStart) Image.file(state.image!),
                       Expanded(
                         child: context.read<TakePhotoByCameraCubit>().image == null
                             ? SizedBox()

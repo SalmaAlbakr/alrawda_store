@@ -26,6 +26,7 @@ class TakePhotoByCameraCubit extends Cubit<TakePhotoByCameraState> {
     print(" to test block  $camPhoto");
 
         image = File(camPhoto!.path);
+emit(TakePhotoByCameraStart(image: image));
 
       var nameImage = basename(camPhoto.path);
     print("to test block $nameImage");
@@ -53,6 +54,7 @@ class TakePhotoByCameraCubit extends Cubit<TakePhotoByCameraState> {
 
         image = File(galleryPhoto!.path);
 
+        emit(TakePhotoByCameraStart(image: image));
 
       var nameImage = basename(galleryPhoto.path);
 
