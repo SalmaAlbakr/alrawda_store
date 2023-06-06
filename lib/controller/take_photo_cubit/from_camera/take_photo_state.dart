@@ -1,4 +1,4 @@
-part of 'take_photo_by_camera_cubit.dart';
+part of 'take_photo_cubit.dart';
 
 @immutable
 abstract class TakePhotoByCameraState {}

@@ -5,7 +5,7 @@ import 'package:meta/meta.dart';
 import 'dart:io';
 
 import 'package:path/path.dart';
-part 'take_photo_by_camera_state.dart';
+part 'take_photo_state.dart';
 
 class TakePhotoByCameraCubit extends Cubit<TakePhotoByCameraState> {
   TakePhotoByCameraCubit() : super(TakePhotoByCameraInitial());
