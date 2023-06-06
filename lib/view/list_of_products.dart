@@ -8,7 +8,6 @@ import 'package:alrawda_store/view/start_screen.dart';
 import 'package:alrawda_store/widgets/product_container.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ListOfProducts extends StatefulWidget {
@@ -22,11 +21,7 @@ class _ListOfProductsState extends State<ListOfProducts> {
   final searchController = TextEditingController();
 
   final _auth = FirebaseAuth.instance;
-  String? typeName;
-  String? price;
-  String? price1;
-  String? price2;
-  String? imageURL;
+
 
   @override
   void initState() {
@@ -92,13 +87,7 @@ class _ListOfProductsState extends State<ListOfProducts> {
                 onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => AddNewItem(
-                        typeName: typeName,
-                        price: price,
-                        price1: price1,
-                        price2: price2,
-                        imageURL: imageURL,
-                      ),
+                      builder: (context) => AddNewItem(),
                     ),
                   );
                 })
@@ -189,12 +178,13 @@ class _ListOfProductsState extends State<ListOfProducts> {
                             isMe: currentUser == product.sender,
                             mPrice1: product.price1,
                             mPrice2: product.price2,
-                            imageURL: product.image, notValid: product.valid,
+                            imageURL: product.image,
+                            notValid: product.valid,
                           );
                         });
 
                 } else {
-                  return CircularProgressIndicator();
+                  return Center(child: CircularProgressIndicator());
                 }
               }),
         ),
