@@ -33,15 +33,27 @@ class _AddNewItemState extends State<AddNewItem> {
 
   final price2Controller = TextEditingController();
 
+
   final _fireStore = FirebaseFirestore.instance;
-  bool loadingImage = true;
+
 
   @override
-  void initState() {
-    super.initState();
-    context.read<TakePhotoByCameraCubit>();
-    context.read<TakePhotoByCameraCubit>();
+  void dispose() {
+    messageController.dispose() ;
+     priceController.dispose() ;
+     price1Controller.dispose();
+     price2Controller.dispose();
+
+    super.dispose();
   }
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   context.read<TakePhotoByCameraCubit>();
+  //   context.read<TakePhotoByCameraCubit>();
+  // }
+
 
   GlobalKey<FormState> formKey = GlobalKey();
 

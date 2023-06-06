@@ -8,7 +8,7 @@ import 'package:path/path.dart';
 part 'take_photo_state.dart';
 
 class TakePhotoByCameraCubit extends Cubit<TakePhotoByCameraState> {
-  TakePhotoByCameraCubit() : super(TakePhotoByCameraInitial());
+  TakePhotoByCameraCubit() : super(TakePhotoInitial());
 
 
 
@@ -23,28 +23,25 @@ class TakePhotoByCameraCubit extends Cubit<TakePhotoByCameraState> {
 
 
     var camPhoto = await imagePicker.pickImage(source: ImageSource.camera);
-    print(" to test block  $camPhoto");
+
 
         image = File(camPhoto!.path);
-emit(TakePhotoByCameraStart(image: image));
+emit(ChoosePhoto(image: image));
 
       var nameImage = basename(camPhoto.path);
-    print("to test block $nameImage");
-      //sent to fireStore
+
       var refStorage = FirebaseStorage.instance.ref("$nameImage");
-    print("to test block $refStorage");
-      //save pic in url
+
       var myfer = refStorage.putFile(image!);
-    print(" to test block $myfer");
-      //get url to device
+
       await myfer.whenComplete(() async {
         var url = await refStorage.getDownloadURL();
         imageUrl = url;
 
         loadingImage = false;
       });
-    print("to test block $imageUrl");
-      emit(TakePhotoByCamera(URL: imageUrl ));
+
+      emit(ImageURLDone(URL: imageUrl ));
 
 
   }
@@ -54,7 +51,7 @@ emit(TakePhotoByCameraStart(image: image));
 
         image = File(galleryPhoto!.path);
 
-        emit(TakePhotoByCameraStart(image: image));
+        emit(ChoosePhoto(image: image));
 
       var nameImage = basename(galleryPhoto.path);
 
@@ -68,7 +65,7 @@ emit(TakePhotoByCameraStart(image: image));
         loadingImage = false;
 
       });
-    emit(ChosePhotoFromGallery(URL: imageUrl));
+    emit(ImageURLDone(URL: imageUrl));
 
   }
 
