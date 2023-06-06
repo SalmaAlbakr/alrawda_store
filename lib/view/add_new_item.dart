@@ -2,11 +2,8 @@ import 'package:alrawda_store/controller/add_items_function.dart';
 import 'package:alrawda_store/controller/take_photo_cubit/from_camera/take_photo_by_camera_cubit.dart';
 import 'package:alrawda_store/view/list_of_products.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
-import 'dart:io';
 import 'package:alrawda_store/my_color.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
@@ -28,8 +25,6 @@ class AddNewItem extends StatefulWidget {
 class _AddNewItemState extends State<AddNewItem> {
 
 
-
-
   final messageController = TextEditingController();
 
   final priceController = TextEditingController();
@@ -47,61 +42,6 @@ class _AddNewItemState extends State<AddNewItem> {
     context.read<TakePhotoByCameraCubit>();
     context.read<TakePhotoByCameraCubit>();
   }
-
-  // File? image;
-  // final imagePicker = ImagePicker();
-  //
-  //
-  //
-  // takePhoto() async {
-  //   var camPhoto = await imagePicker.pickImage(source: ImageSource.camera);
-  //
-  //   if (camPhoto != null) {
-  //     setState(() {
-  //       image = File(camPhoto.path);
-  //     });
-  //     var nameImage = basename(camPhoto.path);
-  //   //sent to firestore
-  //     var refStorage = FirebaseStorage.instance.ref("$nameImage");
-  //    //save pic in url
-  //     var myfer = refStorage.putFile(image!);
-  //     //get url to device
-  //     await myfer.whenComplete(() async {
-  //       var url = await refStorage.getDownloadURL();
-  //
-  //       setState(() {
-  //         widget.imageURL = url;
-  //         loadingImage = false;
-  //       });
-  //     });
-  //   }
-  // }
-  //
-  // choosePhoto() async {
-  //   var galleryPhoto = await imagePicker.pickImage(source: ImageSource.gallery);
-  //
-  //   if (galleryPhoto != null) {
-  //     setState(() {
-  //       image = File(galleryPhoto.path);
-  //     });
-  //
-  //     var nameImage = basename(galleryPhoto.path);
-  //
-  //     var refStorage = FirebaseStorage.instance.ref("$nameImage");
-  //
-  //     var myfer = refStorage.putFile(image!);
-  //
-  //     await myfer.whenComplete(() async {
-  //       var url = await refStorage.getDownloadURL();
-  //
-  //       setState(() {
-  //         widget.imageURL = url;
-  //         loadingImage = false;
-  //       });
-  //     });
-  //   }
-  // }
-
 
   GlobalKey<FormState> formKey = GlobalKey();
 
@@ -258,19 +198,18 @@ class _AddNewItemState extends State<AddNewItem> {
                       SizedBox(
                         height: 20,
                       ),
-                      if (state is TakePhotoByCameraStart) Expanded(
+                      if (state is ChoosePhoto) Expanded(
                         child: ModalProgressHUD(
                             inAsyncCall: true,
-                            child: Image.file(state.image!)),
-                      ),
+                            child: Image.file(state.image!),),
+                      )else if (state is ImageURLDone)
                       Expanded(
-                        child: context.read<TakePhotoByCameraCubit>().image == null
-                            ? SizedBox()
-                            : ModalProgressHUD(
+                        child: ModalProgressHUD(
                                 inAsyncCall: false,
                                 child: Image.file(context.read<TakePhotoByCameraCubit>().image!),
                               ),
-                      ),
+                      )
+                      else Expanded(child: SizedBox()),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
