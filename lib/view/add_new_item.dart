@@ -1,5 +1,5 @@
 import 'package:alrawda_store/controller/add_items_function.dart';
-import 'package:alrawda_store/controller/take_photo_cubit/from_camera/take_photo_by_camera_cubit.dart';
+import 'package:alrawda_store/controller/take_photo_cubit/from_camera/take_photo_cubit.dart';
 import 'package:alrawda_store/view/list_of_products.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';

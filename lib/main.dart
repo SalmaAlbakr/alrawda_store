@@ -1,4 +1,4 @@
-import 'package:alrawda_store/controller/take_photo_cubit/from_camera/take_photo_by_camera_cubit.dart';
+import 'package:alrawda_store/controller/take_photo_cubit/from_camera/take_photo_cubit.dart';
 import 'package:alrawda_store/my_color.dart';
 import 'package:alrawda_store/view/list_of_products.dart';
 import 'package:alrawda_store/view/start_screen.dart';
