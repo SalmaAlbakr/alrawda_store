@@ -16,6 +16,7 @@ class TakePhotoByCameraCubit extends Cubit<TakePhotoByCameraState> {
   final imagePicker = ImagePicker();
 
   String? imageUrl ;
+  bool loadingImage = true;
 
 
  void takePhoto() async {
@@ -39,7 +40,7 @@ class TakePhotoByCameraCubit extends Cubit<TakePhotoByCameraState> {
         var url = await refStorage.getDownloadURL();
         imageUrl = url;
 
-
+        loadingImage = false;
       });
     print("to test block $imageUrl");
       emit(TakePhotoByCamera(URL: imageUrl ));
@@ -62,9 +63,11 @@ class TakePhotoByCameraCubit extends Cubit<TakePhotoByCameraState> {
       await myfer.whenComplete(() async {
         var url = await refStorage.getDownloadURL();
         imageUrl = url;
+        loadingImage = false;
 
       });
     emit(ChosePhotoFromGallery(URL: imageUrl));
+
   }
 
 

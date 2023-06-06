@@ -250,7 +250,10 @@ class _AddNewItemState extends State<AddNewItem> {
                       Expanded(
                         child: context.read<TakePhotoByCameraCubit>().image == null
                             ? SizedBox()
-                            : Image.file(context.read<TakePhotoByCameraCubit>().image!),
+                            : ModalProgressHUD(
+                                inAsyncCall: context.read<TakePhotoByCameraCubit>().loadingImage,
+                                child: Image.file(context.read<TakePhotoByCameraCubit>().image!),
+                              ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
