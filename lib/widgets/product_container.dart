@@ -25,88 +25,41 @@ class MessageW extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            border: Border.all(),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          border: Border.all(),
+        ),
+        child: ListTile(
+          leading: Image.network(imageURL),
+          title: Text(
+            mText,
+            maxLines: 10,
+            style: TextStyle(
+             // fontSize: 25,
+              fontWeight: FontWeight.bold,
+              color: Colors.blue[800],
+            ),
           ),
-          child: Row(
+          subtitle: Column(
             children: [
-              Container(
-                height: MediaQuery.of(context).size.height * 0.2,
-                width: MediaQuery.of(context).size.width * 0.3,
-                child: Image.network(imageURL),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    Text(
-                      mText,
-                      maxLines: 10,
-                      style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blue[800],
-                      ),
-                    ),
-                    notValid == "0"
-                        ? Text(
-                            mPrice,
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey[800],
-                            ),
-                          )
-                        : Text(
-                            "المنتج غير متاح",
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey[800],
-                            ),
-                          ),
-                    signedInUser.email! == "salma@email.com"
-                        ? Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Text(
-                                mPrice1,
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.grey[800],
-                                ),
-                              ),
-                              SizedBox(
-                                width: 15,
-                              ),
-                              Text(
-                                mPrice2,
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.grey[800],
-                                ),
-                              ),
-                            ],
-                          )
-                        : Text(
-                            "سعر خاص للجمله",
-                          ),
-                  ],
-                ),
-              ),
+              notValid == "0" ?
+              Text(mPrice) :
+                  Text("المنتج غير متاح"),
+
+              signedInUser.email! == "salma@email.com" ?
+              Column(
+                children: [
+                  Text(mPrice1),
+                  Text(mPrice2),
+                ],
+              ) : Text("سعر خاص للجمله"),
             ],
           ),
         ),
-        SizedBox(
-          height: 10,
-        )
-      ],
+      ),
     );
   }
 }
