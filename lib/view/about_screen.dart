@@ -1,13 +1,43 @@
 import 'package:alrawda_store/controller/url_functions.dart';
 import 'package:alrawda_store/my_color.dart';
+import 'package:alrawda_store/widgets/no_internet.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class AboutScreen extends StatelessWidget {
+class AboutScreen extends StatefulWidget {
   const AboutScreen({Key? key}) : super(key: key);
 
   @override
+  State<AboutScreen> createState() => _AboutScreenState();
+}
+
+class _AboutScreenState extends State<AboutScreen> {
+
+  bool internet = true;
+  @override
+  void initState() {
+    super.initState();
+    final subscription = Connectivity()
+        .onConnectivityChanged
+        .listen((ConnectivityResult result) {
+      // Got a new connectivity status!
+      if (result == ConnectivityResult.none) {
+        setState(() {
+          internet = false;
+        });
+      } else {
+        setState(() {
+          internet = true;
+        });
+      }
+    });
+  }
+  @override
   Widget build(BuildContext context) {
+    if (internet == false) {
+      return NoInternetScreen();
+    }
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(

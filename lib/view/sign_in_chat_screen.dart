@@ -2,6 +2,7 @@ import 'package:alrawda_store/controller/auth_user.dart';
 import 'package:alrawda_store/my_color.dart';
 import 'package:alrawda_store/view/list_of_products.dart';
 import 'package:alrawda_store/view/register_chat_screen.dart';
+import 'package:alrawda_store/widgets/no_internet.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -45,13 +46,7 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     if (internet == false) {
-      return Scaffold(
-        body: Center(
-          child: Container(
-            child: Text("no internet plz check"),
-          ),
-        ),
-      );
+      return NoInternetScreen();
     }
     return Directionality(
       textDirection: TextDirection.rtl,

@@ -1,6 +1,7 @@
 import 'package:alrawda_store/controller/add_items_function.dart';
 import 'package:alrawda_store/controller/take_photo_cubit/from_camera/take_photo_cubit.dart';
 import 'package:alrawda_store/view/list_of_products.dart';
+import 'package:alrawda_store/widgets/no_internet.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
@@ -68,13 +69,7 @@ class _AddNewItemState extends State<AddNewItem> {
   @override
   Widget build(BuildContext context) {
     if (internet == false) {
-      return Scaffold(
-        body: Center(
-          child: Container(
-            child: Text("no internet plz check"),
-          ),
-        ),
-      );
+      return NoInternetScreen();
     }
     return Directionality(
       textDirection: TextDirection.rtl,

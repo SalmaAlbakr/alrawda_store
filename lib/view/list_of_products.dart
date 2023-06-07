@@ -5,6 +5,7 @@ import 'package:alrawda_store/my_color.dart';
 import 'package:alrawda_store/view/about_screen.dart';
 import 'package:alrawda_store/view/add_new_item.dart';
 import 'package:alrawda_store/view/start_screen.dart';
+import 'package:alrawda_store/widgets/no_internet.dart';
 import 'package:alrawda_store/widgets/product_container.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
@@ -47,13 +48,7 @@ class _ListOfProductsState extends State<ListOfProducts> {
   @override
   Widget build(BuildContext context) {
     if (internet == false) {
-      return Scaffold(
-        body: Center(
-          child: Container(
-            child: Text("no internet plz check"),
-          ),
-        ),
-      );
+      return NoInternetScreen();
     }
     return Directionality(
       textDirection: TextDirection.rtl,
