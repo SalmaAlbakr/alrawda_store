@@ -16,7 +16,4 @@ class ProductsModel {
         price1 = data['price1']['stringValue'],
         price2 = data['price2']['stringValue'],
         valid = data['notValid']['stringValue'];
-
 }
-
-

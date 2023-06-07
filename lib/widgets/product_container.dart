@@ -2,17 +2,17 @@ import 'package:alrawda_store/controller/add_items_function.dart';
 import 'package:flutter/material.dart';
 
 class MessageW extends StatelessWidget {
-  const MessageW(
-      {Key? key,
-      required this.mText,
-      required this.mPrice,
-        required this.mSender,
-        required this.isMe,
-     required this.mPrice1,
-     required this.mPrice2,
-     required this.notValid,
-     required this.imageURL, })
-      : super(key: key);
+  const MessageW({
+    Key? key,
+    required this.mText,
+    required this.mPrice,
+    required this.mSender,
+    required this.isMe,
+    required this.mPrice1,
+    required this.mPrice2,
+    required this.notValid,
+    required this.imageURL,
+  }) : super(key: key);
 
   final mText;
   final mPrice;
@@ -52,51 +52,51 @@ class MessageW extends StatelessWidget {
                         color: Colors.blue[800],
                       ),
                     ),
-
-                   notValid == "0" ?
-                    Text(
-                      mPrice,
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey[800],
-                      ),
-                    ) :
-                   Text(
-                    "المنتج غير متاح",
-                     style: TextStyle(
-                       fontSize: 15,
-                       fontWeight: FontWeight.bold,
-                       color: Colors.grey[800],
-                     ),
-                   ),
-                    signedInUser.email! == "salma@email.com"?
-
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Text(
-                          mPrice1,
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey[800],
+                    notValid == "0"
+                        ? Text(
+                            mPrice,
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey[800],
+                            ),
+                          )
+                        : Text(
+                            "المنتج غير متاح",
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey[800],
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          width: 15,
-                        ),
-                        Text(
-                          mPrice2,
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey[800],
+                    signedInUser.email! == "salma@email.com"
+                        ? Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text(
+                                mPrice1,
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey[800],
+                                ),
+                              ),
+                              SizedBox(
+                                width: 15,
+                              ),
+                              Text(
+                                mPrice2,
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey[800],
+                                ),
+                              ),
+                            ],
+                          )
+                        : Text(
+                            "سعر خاص للجمله",
                           ),
-                        ),
-                      ],
-                    ):
-                        Text("سعر خاص للجمله"),
                   ],
                 ),
               ),

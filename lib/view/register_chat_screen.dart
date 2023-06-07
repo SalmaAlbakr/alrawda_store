@@ -23,7 +23,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   late String password;
   bool isObscure = true;
 
-  bool internet = true ;
+  bool internet = true;
   @override
   void initState() {
     getCurrentUser();
@@ -42,17 +42,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
         });
       }
     });
-
   }
+
   GlobalKey<FormState> formKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
     if (internet == false) {
       return Scaffold(
-          body: Center(
-              child: Container(
-                child: Text("no internet plz check"),
-              )));
+        body: Center(
+          child: Container(
+            child: Text("no internet plz check"),
+          ),
+        ),
+      );
     }
     return Directionality(
       textDirection: TextDirection.rtl,
@@ -176,17 +178,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             ),
                           ),
                           onPressed: () async {
-                              if (formKey.currentState!.validate()) {
-                                await validation_done(context);
-                              }
-                              else {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    backgroundColor: Colors.red,
-                                    content: Text("يجب ملء البيانات"),
-                                  ),
-                                );
-                              }
+                            if (formKey.currentState!.validate()) {
+                              await validation_done(context);
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  backgroundColor: Colors.red,
+                                  content: Text("يجب ملء البيانات"),
+                                ),
+                              );
+                            }
                           },
                           child: Text(
                             "إنشاء حساب جديد",
@@ -218,7 +219,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   Future<void> validation_done(BuildContext context) async {
-     final isExistingUser = await checkUserExists(email);
+    final isExistingUser = await checkUserExists(email);
     if (isExistingUser) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -226,9 +227,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
           content: Text("الحساب موجود بالفعل"),
         ),
       );
-    }
-    else {
-    await add_new_user(context);
+    } else {
+      await add_new_user(context);
     }
   }
 

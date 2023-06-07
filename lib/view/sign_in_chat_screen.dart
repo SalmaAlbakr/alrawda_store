@@ -22,7 +22,7 @@ class _SignInScreenState extends State<SignInScreen> {
   late String email;
   late String password;
   GlobalKey<FormState> formKey = GlobalKey();
-  bool internet = true ;
+  bool internet = true;
   @override
   void initState() {
     super.initState();
@@ -40,16 +40,18 @@ class _SignInScreenState extends State<SignInScreen> {
         });
       }
     });
-
   }
+
   @override
   Widget build(BuildContext context) {
     if (internet == false) {
       return Scaffold(
-          body: Center(
-              child: Container(
-                child: Text("no internet plz check"),
-              )));
+        body: Center(
+          child: Container(
+            child: Text("no internet plz check"),
+          ),
+        ),
+      );
     }
     return Directionality(
       textDirection: TextDirection.rtl,
@@ -171,18 +173,16 @@ class _SignInScreenState extends State<SignInScreen> {
                             ),
                           ),
                           onPressed: () async {
-
-                              if (formKey.currentState!.validate()) {
-                                await validation_done(context);
-                              }
-                              else {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    backgroundColor: Colors.red,
-                                    content: Text("يجب ملء البيانات"),
-                                  ),
-                                );
-                              }
+                            if (formKey.currentState!.validate()) {
+                              await validation_done(context);
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  backgroundColor: Colors.red,
+                                  content: Text("يجب ملء البيانات"),
+                                ),
+                              );
+                            }
                           },
                           child: Text(
                             "تسجيل الدخول",
@@ -215,8 +215,7 @@ class _SignInScreenState extends State<SignInScreen> {
     final isExistingUser = await checkUserExists(email);
     if (isExistingUser) {
       await sign_in_user(context);
-    }
-    else {
+    } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           backgroundColor: Colors.blueAccent,
@@ -231,8 +230,7 @@ class _SignInScreenState extends State<SignInScreen> {
       _saving = true;
     });
     try {
-      await _auth.signInWithEmailAndPassword(
-          email: email, password: password);
+      await _auth.signInWithEmailAndPassword(email: email, password: password);
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) => ListOfProducts(),

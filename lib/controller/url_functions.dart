@@ -45,7 +45,7 @@ PhoneUrl(String phoneNumber) async {
 desiredAccuracy: LocationAccuracy.high,
 );*/
 
-locationFunction () async {
+locationFunction() async {
   LocationPermission permission;
   permission = await Geolocator.requestPermission();
 
@@ -53,14 +53,14 @@ locationFunction () async {
     desiredAccuracy: LocationAccuracy.high,
   );
 
- //String mapsUrl = 'https://www.google.com/maps/dir/?api=1&destination=${position.latitude},${position.longitude}&travelmode=driving';
+  //String mapsUrl = 'https://www.google.com/maps/dir/?api=1&destination=${position.latitude},${position.longitude}&travelmode=driving';
 //  String mapsUrl = 'https://www.google.com/maps/dir/?api=1&destination=31.2768840, 29.8444790&travelmode=driving';
-  String mapsUrl = 'https://maps.app.goo.gl/KfAoMGGr5bDhE4UF7?fbclid=IwAR0-2VasUlFpsOUlWrwHwbSX96Y7zvDurIPiNWuHWHhpDHD7HjGgU8-UI_0&travelmode=driving';
+  String mapsUrl =
+      'https://maps.app.goo.gl/KfAoMGGr5bDhE4UF7?fbclid=IwAR0-2VasUlFpsOUlWrwHwbSX96Y7zvDurIPiNWuHWHhpDHD7HjGgU8-UI_0&travelmode=driving';
 
   if (await canLaunch(mapsUrl)) {
     await launch(mapsUrl);
   } else {
     throw 'Could not launch $mapsUrl';
   }
-
 }

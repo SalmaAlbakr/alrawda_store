@@ -5,7 +5,8 @@ class ProductRepo {
   final Dio dio = Dio();
 
   Future<List<ProductsModel>> getAllProduct() async {
-    final response = await dio.get("https://firestore.googleapis.com/v1/projects/alrawda-store/databases/(default)/documents/product");
+    final response = await dio.get(
+        "https://firestore.googleapis.com/v1/projects/alrawda-store/databases/(default)/documents/product");
 
     final List<dynamic> documents = response.data['documents'];
 
@@ -13,6 +14,5 @@ class ProductRepo {
       final Map<String, dynamic> fields = document['fields'];
       return ProductsModel(data: fields);
     }).toList();
-
   }
 }

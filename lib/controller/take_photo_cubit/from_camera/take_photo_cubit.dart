@@ -10,62 +10,50 @@ part 'take_photo_state.dart';
 class TakePhotoByCameraCubit extends Cubit<TakePhotoByCameraState> {
   TakePhotoByCameraCubit() : super(TakePhotoInitial());
 
-
-
   File? image;
   final imagePicker = ImagePicker();
-  String? imageUrl ;
+  String? imageUrl;
 
- void takePhoto() async {
-
-
+  void takePhoto() async {
     var camPhoto = await imagePicker.pickImage(source: ImageSource.camera);
 
+    image = File(camPhoto!.path);
 
-        image = File(camPhoto!.path);
+    emit(ChoosePhoto(image: image));
 
-         emit(ChoosePhoto(image: image));
+    var nameImage = basename(camPhoto.path);
 
-      var nameImage = basename(camPhoto.path);
+    var refStorage = FirebaseStorage.instance.ref("$nameImage");
 
-      var refStorage = FirebaseStorage.instance.ref("$nameImage");
+    var myfer = refStorage.putFile(image!);
 
-      var myfer = refStorage.putFile(image!);
+    await myfer.whenComplete(() async {
+      var url = await refStorage.getDownloadURL();
+      imageUrl = url;
+    });
 
-      await myfer.whenComplete(() async {
-        var url = await refStorage.getDownloadURL();
-        imageUrl = url;
-
-      });
-
-      emit(ImageURLDone(URL: imageUrl ));
-
-
+    emit(ImageURLDone(URL: imageUrl));
   }
 
- void choosePhoto() async {
+  void choosePhoto() async {
     var galleryPhoto = await imagePicker.pickImage(source: ImageSource.gallery);
 
-        image = File(galleryPhoto!.path);
+    image = File(galleryPhoto!.path);
 
-        emit(ChoosePhoto(image: image));
+    emit(ChoosePhoto(image: image));
 
-      var nameImage = basename(galleryPhoto.path);
+    var nameImage = basename(galleryPhoto.path);
 
-      var refStorage = FirebaseStorage.instance.ref("$nameImage");
+    var refStorage = FirebaseStorage.instance.ref("$nameImage");
 
-      var myfer = refStorage.putFile(image!);
+    var myfer = refStorage.putFile(image!);
 
-      await myfer.whenComplete(() async {
-        var url = await refStorage.getDownloadURL();
-        imageUrl = url;
-
-      });
+    await myfer.whenComplete(() async {
+      var url = await refStorage.getDownloadURL();
+      imageUrl = url;
+    });
     emit(ImageURLDone(URL: imageUrl));
-
   }
 
   void reset() => emit(TakePhotoInitial());
-
-
 }

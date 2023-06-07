@@ -19,12 +19,11 @@ class ListOfProducts extends StatefulWidget {
 }
 
 class _ListOfProductsState extends State<ListOfProducts> {
-
   final searchController = TextEditingController();
 
   final _auth = FirebaseAuth.instance;
 
-  bool internet = true ;
+  bool internet = true;
   @override
   void initState() {
     getCurrentUser();
@@ -43,17 +42,18 @@ class _ListOfProductsState extends State<ListOfProducts> {
         });
       }
     });
-
   }
 
   @override
   Widget build(BuildContext context) {
     if (internet == false) {
       return Scaffold(
-          body: Center(
-              child: Container(
-                child: Text("no internet plz check"),
-              )));
+        body: Center(
+          child: Container(
+            child: Text("no internet plz check"),
+          ),
+        ),
+      );
     }
     return Directionality(
       textDirection: TextDirection.rtl,
@@ -161,52 +161,48 @@ class _ListOfProductsState extends State<ListOfProducts> {
           padding: const EdgeInsets.all(8.0),
           child: FutureBuilder(
               future: ProductRepo().getAllProduct(),
-              builder:
-                  (context, AsyncSnapshot<List<ProductsModel>> snapshot) {
+              builder: (context, AsyncSnapshot<List<ProductsModel>> snapshot) {
                 if (snapshot.hasData) {
                   final List<ProductsModel> products = snapshot.data!;
                   List<ProductsModel> filterNames = products
                       .where(
                         (element) =>
-                        element.text.contains(searchController.text),
-                  )
+                            element.text.contains(searchController.text),
+                      )
                       .toList();
-                  return
-                    searchController.text == "" ?
-
-                    ListView.builder(
-                      itemCount: products.length,
-                      itemBuilder: (context, int i) {
-                        final ProductsModel product = products[i];
-                        final currentUser = signedInUser.email;
-                        return MessageW(
-                          mText: product.text,
-                          mPrice: product.price,
-                          mSender: product.sender,
-                          isMe: currentUser == product.sender,
-                          mPrice1: product.price1,
-                          mPrice2: product.price2,
-                          imageURL: product.image,
-                          notValid: product.valid,
-                        );
-                      }) :
-                    ListView.builder(
-                        itemCount: filterNames.length,
-                        itemBuilder: (context, int i) {
-                          final ProductsModel product = filterNames[i];
-                          final currentUser = signedInUser.email;
-                          return MessageW(
-                            mText: product.text,
-                            mPrice: product.price,
-                            mSender: product.sender,
-                            isMe: currentUser == product.sender,
-                            mPrice1: product.price1,
-                            mPrice2: product.price2,
-                            imageURL: product.image,
-                            notValid: product.valid,
-                          );
-                        });
-
+                  return searchController.text == ""
+                      ? ListView.builder(
+                          itemCount: products.length,
+                          itemBuilder: (context, int i) {
+                            final ProductsModel product = products[i];
+                            final currentUser = signedInUser.email;
+                            return MessageW(
+                              mText: product.text,
+                              mPrice: product.price,
+                              mSender: product.sender,
+                              isMe: currentUser == product.sender,
+                              mPrice1: product.price1,
+                              mPrice2: product.price2,
+                              imageURL: product.image,
+                              notValid: product.valid,
+                            );
+                          })
+                      : ListView.builder(
+                          itemCount: filterNames.length,
+                          itemBuilder: (context, int i) {
+                            final ProductsModel product = filterNames[i];
+                            final currentUser = signedInUser.email;
+                            return MessageW(
+                              mText: product.text,
+                              mPrice: product.price,
+                              mSender: product.sender,
+                              isMe: currentUser == product.sender,
+                              mPrice1: product.price1,
+                              mPrice2: product.price2,
+                              imageURL: product.image,
+                              notValid: product.valid,
+                            );
+                          });
                 } else {
                   return Center(child: CircularProgressIndicator());
                 }
