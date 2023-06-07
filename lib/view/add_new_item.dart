@@ -2,6 +2,7 @@ import 'package:alrawda_store/controller/add_items_function.dart';
 import 'package:alrawda_store/controller/take_photo_cubit/from_camera/take_photo_cubit.dart';
 import 'package:alrawda_store/view/list_of_products.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:alrawda_store/my_color.dart';
@@ -35,8 +36,26 @@ class _AddNewItemState extends State<AddNewItem> {
 
 
   final _fireStore = FirebaseFirestore.instance;
+  bool internet = true ;
+  @override
+  void initState() {
+    super.initState();
+    final subscription = Connectivity()
+        .onConnectivityChanged
+        .listen((ConnectivityResult result) {
+      // Got a new connectivity status!
+      if (result == ConnectivityResult.none) {
+        setState(() {
+          internet = false;
+        });
+      } else {
+        setState(() {
+          internet = true;
+        });
+      }
+    });
 
-
+  }
   @override
   void dispose() {
     messageController.dispose() ;
@@ -47,12 +66,17 @@ class _AddNewItemState extends State<AddNewItem> {
     super.dispose();
   }
 
-
-
   GlobalKey<FormState> formKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
+    if (internet == false) {
+      return Scaffold(
+          body: Center(
+              child: Container(
+                child: Text("no internet plz check"),
+              )));
+    }
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
@@ -229,6 +253,7 @@ class _AddNewItemState extends State<AddNewItem> {
                                 priceController.clear();
                                 price1Controller.clear();
                                 price2Controller.clear();
+
                                 _fireStore.collection("product").add({
                                   "text": widget.typeName,
                                   "price": widget.price,
@@ -239,7 +264,6 @@ class _AddNewItemState extends State<AddNewItem> {
                                   "sender": signedInUser.email,
                                   "notValid" : "0"
                                 });
-
                                 Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => ListOfProducts()));
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(

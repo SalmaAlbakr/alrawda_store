@@ -1,7 +1,9 @@
+import 'package:alrawda_store/controller/add_items_function.dart';
 import 'package:alrawda_store/controller/auth_user.dart';
 import 'package:alrawda_store/my_color.dart';
 import 'package:alrawda_store/view/list_of_products.dart';
 import 'package:alrawda_store/view/sign_in_chat_screen.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -20,9 +22,38 @@ class _RegisterScreenState extends State<RegisterScreen> {
   late String email;
   late String password;
   bool isObscure = true;
+
+  bool internet = true ;
+  @override
+  void initState() {
+    getCurrentUser();
+    super.initState();
+    final subscription = Connectivity()
+        .onConnectivityChanged
+        .listen((ConnectivityResult result) {
+      // Got a new connectivity status!
+      if (result == ConnectivityResult.none) {
+        setState(() {
+          internet = false;
+        });
+      } else {
+        setState(() {
+          internet = true;
+        });
+      }
+    });
+
+  }
   GlobalKey<FormState> formKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
+    if (internet == false) {
+      return Scaffold(
+          body: Center(
+              child: Container(
+                child: Text("no internet plz check"),
+              )));
+    }
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
