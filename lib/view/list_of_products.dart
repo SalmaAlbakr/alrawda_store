@@ -185,17 +185,17 @@ class _ListOfProductsState extends State<ListOfProducts> {
                       : ListView.builder(
                           itemCount: filterNames.length,
                           itemBuilder: (context, int i) {
-                            final ProductsModel product = filterNames[i];
+                            final ProductsModel filteredProduct = filterNames[i];
                             final currentUser = signedInUser.email;
                             return MessageW(
-                              mText: product.text,
-                              mPrice: product.price,
-                              mSender: product.sender,
-                              isMe: currentUser == product.sender,
-                              mPrice1: product.price1,
-                              mPrice2: product.price2,
-                              imageURL: product.image,
-                              notValid: product.valid,
+                              mText: filteredProduct.text,
+                              mPrice: filteredProduct.price,
+                              mSender: filteredProduct.sender,
+                              isMe: currentUser == filteredProduct.sender,
+                              mPrice1: filteredProduct.price1,
+                              mPrice2: filteredProduct.price2,
+                              imageURL: filteredProduct.image,
+                              notValid: filteredProduct.valid,
                             );
                           });
                 } else {
