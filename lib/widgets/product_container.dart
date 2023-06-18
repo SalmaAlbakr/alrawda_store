@@ -34,42 +34,51 @@ class MessageW extends StatelessWidget {
         ),
         child: ListTile(
           leading: Container(
-              width: MediaQuery.of(context).size.width *0.2,
+              width: MediaQuery.of(context).size.width * 0.2,
               child: Image.network(imageURL)),
           title: Text(
             mText,
             maxLines: 10,
             style: TextStyle(
-             // fontSize: 25,
+              // fontSize: 25,
               fontWeight: FontWeight.bold,
               color: Colors.blue[800],
             ),
           ),
           subtitle: Column(
             children: [
-              notValid == "0" ?
-              Text(mPrice,style: TextStyle(
-                // fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),) :
-                  Text("المنتج غير متاح"),
-
-              signedInUser.email! == "salma@email.com" ?
-              Column(
-                children: [
-                  Text(mPrice1,style: TextStyle(
-                    // fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),),
-                  Text(mPrice2,style: TextStyle(
-                    // fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),),
-                ],
-              ) : Text("سعر خاص للجمله"),
+              notValid == "0"
+                  ? Text(
+                      mPrice,
+                      style: TextStyle(
+                        // fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    )
+                  : Text("المنتج غير متاح"),
+              signedInUser.email! == "salma@email.com"
+                  ? Column(
+                      children: [
+                        Text(
+                          mPrice1,
+                          style: TextStyle(
+                            // fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
+                        Text(
+                          mPrice2,
+                          style: TextStyle(
+                            // fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ],
+                    )
+                  : Text("سعر خاص للجمله"),
             ],
           ),
         ),
