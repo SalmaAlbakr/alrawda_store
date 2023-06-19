@@ -46,6 +46,12 @@ class _ListOfProductsState extends State<ListOfProducts> {
   }
 
   @override
+  void dispose() {
+    searchController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     if (internet == false) {
       return NoInternetScreen();
