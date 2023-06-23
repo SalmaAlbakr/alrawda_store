@@ -13,8 +13,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ListOfProducts extends StatefulWidget {
-  const ListOfProducts({Key? key}) : super(key: key);
-
+   ListOfProducts({Key? key , required this.catName}) : super(key: key);
+ final String catName;
   @override
   State<ListOfProducts> createState() => _ListOfProductsState();
 }
@@ -50,6 +50,8 @@ class _ListOfProductsState extends State<ListOfProducts> {
     searchController.dispose();
     super.dispose();
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -166,6 +168,13 @@ class _ListOfProductsState extends State<ListOfProducts> {
               builder: (context, AsyncSnapshot<List<ProductsModel>> snapshot) {
                 if (snapshot.hasData) {
                   final List<ProductsModel> products = snapshot.data!;
+                  List<ProductsModel> catItem = products
+                      .where(
+                        (element) =>
+                            element.text.contains(widget.catName),
+                      )
+                      .toList();
+
                   List<ProductsModel> filterNames = products
                       .where(
                         (element) =>
@@ -174,9 +183,9 @@ class _ListOfProductsState extends State<ListOfProducts> {
                       .toList();
                   return searchController.text == ""
                       ? ListView.builder(
-                          itemCount: products.length,
+                          itemCount: catItem.length,
                           itemBuilder: (context, int i) {
-                            final ProductsModel product = products[i];
+                            final ProductsModel product = catItem[i];
                             final currentUser = signedInUser.email;
                             return MessageW(
                               mText: product.text,

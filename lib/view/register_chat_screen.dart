@@ -1,6 +1,7 @@
 import 'package:alrawda_store/controller/add_items_function.dart';
 import 'package:alrawda_store/controller/auth_user.dart';
 import 'package:alrawda_store/my_color.dart';
+import 'package:alrawda_store/view/home_screen.dart';
 import 'package:alrawda_store/view/list_of_products.dart';
 import 'package:alrawda_store/view/sign_in_chat_screen.dart';
 import 'package:alrawda_store/widgets/no_internet.dart';
@@ -236,7 +237,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           email: email, password: password);
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => ListOfProducts(),
+          builder: (context) => HomeScreen(),
         ),
       );
       setState(() {

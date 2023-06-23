@@ -1,5 +1,6 @@
 import 'package:alrawda_store/controller/add_items_function.dart';
 import 'package:alrawda_store/controller/take_photo_cubit/from_camera/take_photo_cubit.dart';
+import 'package:alrawda_store/view/home_screen.dart';
 import 'package:alrawda_store/view/list_of_products.dart';
 import 'package:alrawda_store/widgets/no_internet.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -276,7 +277,7 @@ class _AddNewItemState extends State<AddNewItem> {
                               });
                               Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(
-                                  builder: (context) => ListOfProducts(),
+                                  builder: (context) => HomeScreen(),
                                 ),
                               );
                             } else {

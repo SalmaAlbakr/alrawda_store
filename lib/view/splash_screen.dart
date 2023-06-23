@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:alrawda_store/view/home_screen.dart';
 import 'package:alrawda_store/view/list_of_products.dart';
 import 'package:alrawda_store/view/start_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -23,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
           MaterialPageRoute(
             builder: (BuildContext context) {
               return _auth.currentUser != null
-                  ? ListOfProducts()
+                  ? HomeScreen()
                   : StartScreen();
             },
           ),

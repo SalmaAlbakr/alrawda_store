@@ -1,5 +1,6 @@
 import 'package:alrawda_store/controller/auth_user.dart';
 import 'package:alrawda_store/my_color.dart';
+import 'package:alrawda_store/view/home_screen.dart';
 import 'package:alrawda_store/view/list_of_products.dart';
 import 'package:alrawda_store/view/register_chat_screen.dart';
 import 'package:alrawda_store/widgets/no_internet.dart';
@@ -228,7 +229,7 @@ class _SignInScreenState extends State<SignInScreen> {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => ListOfProducts(),
+          builder: (context) => HomeScreen(),
         ),
       );
       setState(() {

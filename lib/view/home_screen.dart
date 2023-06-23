@@ -1,10 +1,10 @@
 import 'package:alrawda_store/category_type.dart';
+import 'package:alrawda_store/view/list_of_products.dart';
 import 'package:alrawda_store/widgets/cat_contaner.dart';
 import 'package:flutter/material.dart';
 
-
 class HomeScreen extends StatelessWidget {
-   HomeScreen({Key? key}) : super(key: key);
+  HomeScreen({Key? key}) : super(key: key);
   List MyList1 = [
     [Categories.lawhat, "image/img.png"],
     [Categories.panel, "image/img_1.png"],
@@ -38,13 +38,24 @@ class HomeScreen extends StatelessWidget {
         child: Center(
           child: Column(
             children: [
-              Text("أهلا بيكم في الروضه :  ",style: TextStyle(fontWeight: FontWeight.bold),),
+              Text(
+                "أهلا بيكم في الروضه :  ",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
               Expanded(
                 child: GridView.builder(
-                    itemCount: MyList1.length,
-                    itemBuilder: (context,int i){
-                  return NewWidget(MyList1: MyList1, i: i);
-                }, gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),),
+                  itemCount: MyList1.length,
+                  itemBuilder: (context, int i) {
+                    return GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => ListOfProducts(catName: MyList1[i][0],)));
+                        },
+                        child: NewWidget(MyList1: MyList1, i: i));
+                  },
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2),
+                ),
               )
             ],
           ),
