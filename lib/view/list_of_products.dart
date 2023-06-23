@@ -147,6 +147,7 @@ class _ListOfProductsState extends State<ListOfProducts> {
                     hintText: "بحث",
                     prefixIcon: Icon(
                       Icons.search,
+
                     ),
                   ),
                   onChanged: (value) {
