@@ -1,7 +1,7 @@
-import 'package:alrawda_store/category_type.dart';
+import 'package:alrawda_store/model/category_type.dart';
 import 'package:alrawda_store/view/list_of_products.dart';
 import 'package:flutter/material.dart';
-import 'package:alrawda_store/widgets/cat_contaner.dart';
+import 'package:alrawda_store/widgets/category_contaner.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
