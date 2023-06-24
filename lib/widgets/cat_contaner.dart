@@ -21,8 +21,14 @@ class NewWidget extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Image.asset(MyList1[i][1]),
-            Text(MyList1[i][0]),
+            Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  border: Border.all(),
+                ),
+                child: Image.asset(MyList1[i][1])),
+            SizedBox(height: 15,),
+            Text(MyList1[i][0],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15),),
           ],
         ),
       ),

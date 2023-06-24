@@ -1,6 +1,6 @@
 class Categories {
 
-  static const String panel = "كشاف" ;
+  static const String panel = "كشافات" ;
   static const String lamb = "لمبه" ;
   static const String isolatedWires = "سلك معزول" ;
   static const String exportedCable = "كابلات مستورده" ;
@@ -10,7 +10,7 @@ class Categories {
   static const String electricHose = "خراطيم كهرباء" ;
   static const String Zippers = "سوسته" ;
   static const String PlasticBowls = "بواط بلاستيك" ;
-  static const String SheetMetal = "بواط ساج" ;
+  static const String SheetMetal = "بواط صاج" ;
   static const String AutomaticSwitch = "مفتاح اتوماتيك" ;
   static const String magicBox = "علب ماجيك" ;
   static const String LEDHoses = "خراطيم ليد" ;
@@ -22,5 +22,6 @@ class Categories {
   static const String Dawaya = "دوايه" ;
   static const String finishingAccessories = "اكسسوارات تشطيب" ;
   static const String headlampInterfaces = "كشافات واجهات" ;
+  static const String upandDown= "أب داون " ;
 
 }
