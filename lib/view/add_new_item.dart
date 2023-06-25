@@ -297,7 +297,6 @@ List <String> CategoriesList = [Categories.lawhat , Categories.panel, Categories
                               priceController.clear();
                               price1Controller.clear();
                               price2Controller.clear();
-
                               _fireStore.collection("product").add({
                                 "text": widget.typeName,
                                 "price": widget.price,
@@ -308,8 +307,8 @@ List <String> CategoriesList = [Categories.lawhat , Categories.panel, Categories
                                     .imageUrl,
                                 "time": FieldValue.serverTimestamp(),
                                 "sender": signedInUser.email,
-                                "notValid": "0"
-                                "Category"
+                                "notValid": "0" ,
+                                "Category" : widget.categoryType
                               });
                               Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(
