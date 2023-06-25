@@ -171,7 +171,7 @@ class _ListOfProductsState extends State<ListOfProducts> {
                   List<ProductsModel> catItem = products
                       .where(
                         (element) =>
-                            element.text.contains(widget.catName),
+                            element.Category.contains(widget.catName),
                       )
                       .toList();
 

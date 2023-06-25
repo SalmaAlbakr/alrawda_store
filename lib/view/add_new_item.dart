@@ -1,5 +1,6 @@
 import 'package:alrawda_store/controller/add_items_function.dart';
 import 'package:alrawda_store/controller/take_photo_cubit/from_camera/take_photo_cubit.dart';
+import 'package:alrawda_store/model/category_type.dart';
 import 'package:alrawda_store/view/home_screen.dart';
 import 'package:alrawda_store/view/list_of_products.dart';
 import 'package:alrawda_store/widgets/no_internet.dart';
@@ -20,12 +21,24 @@ class AddNewItem extends StatefulWidget {
   String? price1;
   String? price2;
   String? imageURL;
+  String? categoryType;
 
   @override
   State<AddNewItem> createState() => _AddNewItemState();
 }
 
 class _AddNewItemState extends State<AddNewItem> {
+
+List <String> CategoriesList = [Categories.lawhat , Categories.panel, Categories.lamb,Categories.isolatedWires,
+  Categories.sheildWires,Categories.exportedCable,Categories.spot,Categories.electricHose,Categories.Zippers,
+  Categories.PlasticBowls,Categories.SheetMetal,Categories.AutomaticSwitch,Categories.magicBox,
+  Categories.LEDHoses,Categories.moshtarakWithoutWires,Categories.moshtarakWithWires,Categories.trans,
+  Categories.fesha,Categories.weldingTape,Categories.Dawaya,Categories.finishingAccessories, Categories.headlampInterfaces,
+  Categories.magicBox,Categories.magicBox,
+];
+
+
+
   final messageController = TextEditingController();
 
   final priceController = TextEditingController();
@@ -223,6 +236,28 @@ class _AddNewItemState extends State<AddNewItem> {
                             Icons.filter,
                           ),
                         ),
+
+                        Expanded(
+                          child: DropdownButton<String>(
+                            underline: Container(),
+                            borderRadius: BorderRadius.all(Radius.circular(15)),
+                            value: widget.categoryType,
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                widget.categoryType = newValue!;
+                              });
+                            },
+                            isExpanded: true,
+                            items: CategoriesList.map((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                          ),
+                        ),
+
+
                       ],
                     ),
                     SizedBox(
@@ -274,6 +309,7 @@ class _AddNewItemState extends State<AddNewItem> {
                                 "time": FieldValue.serverTimestamp(),
                                 "sender": signedInUser.email,
                                 "notValid": "0"
+                                "Category"
                               });
                               Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(
