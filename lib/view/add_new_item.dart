@@ -101,6 +101,26 @@ List <String> CategoriesList = [Categories.lawhat , Categories.panel, Categories
                 height: MediaQuery.of(context).size.height,
                 child: Column(
                   children: [
+                    Container(
+                      child: DropdownButton<String>(
+                        hint: Text("ادخل نوع الصنف"),
+                        underline: Container(),
+                        borderRadius: BorderRadius.all(Radius.circular(15)),
+                        value: widget.categoryType,
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            widget.categoryType = newValue!;
+                          });
+                        },
+                        isExpanded: true,
+                        items: CategoriesList.map((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                      ),
+                    ),
                     SizedBox(
                       height: 20,
                     ),
@@ -237,25 +257,7 @@ List <String> CategoriesList = [Categories.lawhat , Categories.panel, Categories
                           ),
                         ),
 
-                        Expanded(
-                          child: DropdownButton<String>(
-                            underline: Container(),
-                            borderRadius: BorderRadius.all(Radius.circular(15)),
-                            value: widget.categoryType,
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                widget.categoryType = newValue!;
-                              });
-                            },
-                            isExpanded: true,
-                            items: CategoriesList.map((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                          ),
-                        ),
+
 
 
                       ],
@@ -292,7 +294,9 @@ List <String> CategoriesList = [Categories.lawhat , Categories.panel, Categories
                                 context
                                         .read<TakePhotoByCameraCubit>()
                                         .imageUrl !=
-                                    null) {
+                                    null
+                            && widget.categoryType != null
+                            ) {
                               messageController.clear();
                               priceController.clear();
                               price1Controller.clear();
@@ -309,6 +313,7 @@ List <String> CategoriesList = [Categories.lawhat , Categories.panel, Categories
                                 "sender": signedInUser.email,
                                 "notValid": "0" ,
                                 "Category" : widget.categoryType
+                                /// TODO : اضافة سعر الشراء وتظهر للأدمن فقط
                               });
                               Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(

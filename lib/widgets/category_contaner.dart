@@ -14,21 +14,32 @@ class NewWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          border: Border.all(),
-        ),
+      child: Card(
+        // decoration: BoxDecoration(
+        //   borderRadius: BorderRadius.circular(15),
+        //   border: Border.all(),
+        // ),
         child: Column(
           children: [
             Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  border: Border.all(),
-                ),
-                child: Image.asset(MyList1[i][1])),
-            SizedBox(height: 15,),
-            Text(MyList1[i][0],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15),),
+                // decoration: BoxDecoration(
+                //   borderRadius: BorderRadius.circular(15),
+                //   border: Border.all(),
+                // ),
+                child: Image.asset(MyList1[i][1])
+            ),
+            // CircleAvatar(
+            //   radius: 60,
+            //   backgroundImage: AssetImage(MyList1[i][1]),
+            //   // child: Image.asset(MyList1[i][1])
+            // ),
+            SizedBox(
+              height: 15,
+            ),
+            Text(
+              MyList1[i][0],
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+            ),
           ],
         ),
       ),
