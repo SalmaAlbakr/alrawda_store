@@ -103,7 +103,7 @@ class _AboutScreenState extends State<AboutScreen> {
                           },
                           child: Row(
                             children: [
-                              Icon(Icons.whatsapp),
+                              Icon(Icons.whatshot),
                               SizedBox(width: 7),
                               Text("01002095050"),
                             ],
@@ -120,7 +120,7 @@ class _AboutScreenState extends State<AboutScreen> {
                           },
                           child: Row(
                             children: [
-                              Icon(Icons.whatsapp),
+                              Icon(Icons.whatshot),
                               SizedBox(width: 7),
                               Text("01157891602"),
                             ],
