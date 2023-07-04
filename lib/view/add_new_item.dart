@@ -22,6 +22,7 @@ class AddNewItem extends StatefulWidget {
   String? price2;
   String? imageURL;
   String? categoryType;
+  String? buyPrice;
 
   @override
   State<AddNewItem> createState() => _AddNewItemState();
@@ -46,6 +47,7 @@ List <String> CategoriesList = [Categories.lawhat , Categories.panel, Categories
   final price1Controller = TextEditingController();
 
   final price2Controller = TextEditingController();
+  final buyPriceController = TextEditingController();
 
   final _fireStore = FirebaseFirestore.instance;
   bool internet = true;
@@ -121,9 +123,9 @@ List <String> CategoriesList = [Categories.lawhat , Categories.panel, Categories
                         }).toList(),
                       ),
                     ),
-                    SizedBox(
-                      height: 20,
-                    ),
+                    // SizedBox(
+                    //   height: 20,
+                    // ),
                     Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: TextFormField(
@@ -147,11 +149,37 @@ List <String> CategoriesList = [Categories.lawhat , Categories.panel, Categories
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 20,
-                    ),
+                    // SizedBox(
+                    //   height: 20,
+                    // ),
                     Row(
                       children: [
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: TextFormField(
+                              validator: (String? value) {
+                                if (value == "") {
+                                  return "يجب تسجيل سعر الشراء ";
+                                }
+                                return null;
+                              },
+                              keyboardType: TextInputType.number,
+                              controller: buyPriceController,
+                              onChanged: (value) {
+                                widget.buyPrice = "سعر الشراء  : " + value;
+                              },
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: MyColors.mainColor,
+                                  ),
+                                ),
+                                labelText: "سعر الشراء",
+                              ),
+                            ),
+                          ),
+                        ),
                         Expanded(
                           child: Padding(
                             padding: const EdgeInsets.all(5.0),
@@ -178,6 +206,10 @@ List <String> CategoriesList = [Categories.lawhat , Categories.panel, Categories
                             ),
                           ),
                         ),
+                      ],
+                    ),
+                    Row(
+                      children: [
                         Expanded(
                           child: Padding(
                             padding: const EdgeInsets.all(5.0),
@@ -232,9 +264,9 @@ List <String> CategoriesList = [Categories.lawhat , Categories.panel, Categories
                         ),
                       ],
                     ),
-                    SizedBox(
-                      height: 20,
-                    ),
+                    // SizedBox(
+                    //   height: 20,
+                    // ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
@@ -262,9 +294,9 @@ List <String> CategoriesList = [Categories.lawhat , Categories.panel, Categories
 
                       ],
                     ),
-                    SizedBox(
-                      height: 20,
-                    ),
+                    // SizedBox(
+                    //   height: 20,
+                    // ),
                     if (state is ChoosePhoto)
                       Expanded(
                         child: ModalProgressHUD(
@@ -306,6 +338,7 @@ List <String> CategoriesList = [Categories.lawhat , Categories.panel, Categories
                                 "price": widget.price,
                                 "price1": widget.price1,
                                 "price2": widget.price2,
+                                "buyPrice":widget.buyPrice,
                                 "image": context
                                     .read<TakePhotoByCameraCubit>()
                                     .imageUrl,
@@ -313,7 +346,7 @@ List <String> CategoriesList = [Categories.lawhat , Categories.panel, Categories
                                 "sender": signedInUser.email,
                                 "notValid": "0" ,
                                 "Category" : widget.categoryType
-                                /// TODO : اضافة سعر الشراء وتظهر للأدمن فقط
+
                               });
                               Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(
