@@ -165,7 +165,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: CarouselSlider(
                     options: CarouselOptions(
                         autoPlay: true,
-                        //height: 400.0
                     ),
                     items: ["image/img.png","image/img_3.png","image/بواط بلاستيك.jpg",].map((i) {
                       return Builder(

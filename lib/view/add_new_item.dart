@@ -2,7 +2,6 @@ import 'package:alrawda_store/controller/add_items_function.dart';
 import 'package:alrawda_store/controller/take_photo_cubit/from_camera/take_photo_cubit.dart';
 import 'package:alrawda_store/model/category_type.dart';
 import 'package:alrawda_store/view/home_screen.dart';
-import 'package:alrawda_store/view/list_of_products.dart';
 import 'package:alrawda_store/widgets/no_internet.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -29,16 +28,32 @@ class AddNewItem extends StatefulWidget {
 }
 
 class _AddNewItemState extends State<AddNewItem> {
-
-List <String> CategoriesList = [Categories.lawhat , Categories.panel, Categories.lamb,Categories.isolatedWires,
-  Categories.sheildWires,Categories.exportedCable,Categories.spot,Categories.electricHose,Categories.Zippers,
-  Categories.PlasticBowls,Categories.SheetMetal,Categories.AutomaticSwitch,Categories.magicBox,
-  Categories.LEDHoses,Categories.moshtarakWithoutWires,Categories.moshtarakWithWires,Categories.trans,
-  Categories.fesha,Categories.weldingTape,Categories.Dawaya,Categories.finishingAccessories, Categories.headlampInterfaces,
-  Categories.magicBox,Categories.magicBox,
-];
-
-
+  List<String> CategoriesList = [
+    Categories.lawhat,
+    Categories.panel,
+    Categories.lamb,
+    Categories.isolatedWires,
+    Categories.sheildWires,
+    Categories.exportedCable,
+    Categories.spot,
+    Categories.electricHose,
+    Categories.Zippers,
+    Categories.PlasticBowls,
+    Categories.SheetMetal,
+    Categories.AutomaticSwitch,
+    Categories.magicBox,
+    Categories.LEDHoses,
+    Categories.moshtarakWithoutWires,
+    Categories.moshtarakWithWires,
+    Categories.trans,
+    Categories.fesha,
+    Categories.weldingTape,
+    Categories.Dawaya,
+    Categories.finishingAccessories,
+    Categories.headlampInterfaces,
+    Categories.magicBox,
+    Categories.magicBox,
+  ];
 
   final messageController = TextEditingController();
 
@@ -57,7 +72,6 @@ List <String> CategoriesList = [Categories.lawhat , Categories.panel, Categories
     final subscription = Connectivity()
         .onConnectivityChanged
         .listen((ConnectivityResult result) {
-      // Got a new connectivity status!
       if (result == ConnectivityResult.none) {
         setState(() {
           internet = false;
@@ -123,9 +137,6 @@ List <String> CategoriesList = [Categories.lawhat , Categories.panel, Categories
                         }).toList(),
                       ),
                     ),
-                    // SizedBox(
-                    //   height: 20,
-                    // ),
                     Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: TextFormField(
@@ -149,9 +160,6 @@ List <String> CategoriesList = [Categories.lawhat , Categories.panel, Categories
                         ),
                       ),
                     ),
-                    // SizedBox(
-                    //   height: 20,
-                    // ),
                     Row(
                       children: [
                         Expanded(
@@ -264,9 +272,6 @@ List <String> CategoriesList = [Categories.lawhat , Categories.panel, Categories
                         ),
                       ],
                     ),
-                    // SizedBox(
-                    //   height: 20,
-                    // ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
@@ -288,15 +293,8 @@ List <String> CategoriesList = [Categories.lawhat , Categories.panel, Categories
                             Icons.filter,
                           ),
                         ),
-
-
-
-
                       ],
                     ),
-                    // SizedBox(
-                    //   height: 20,
-                    // ),
                     if (state is ChoosePhoto)
                       Expanded(
                         child: ModalProgressHUD(
@@ -326,9 +324,8 @@ List <String> CategoriesList = [Categories.lawhat , Categories.panel, Categories
                                 context
                                         .read<TakePhotoByCameraCubit>()
                                         .imageUrl !=
-                                    null
-                            && widget.categoryType != null
-                            ) {
+                                    null &&
+                                widget.categoryType != null) {
                               messageController.clear();
                               priceController.clear();
                               price1Controller.clear();
@@ -338,15 +335,14 @@ List <String> CategoriesList = [Categories.lawhat , Categories.panel, Categories
                                 "price": widget.price,
                                 "price1": widget.price1,
                                 "price2": widget.price2,
-                                "buyPrice":widget.buyPrice,
+                                "buyPrice": widget.buyPrice,
                                 "image": context
                                     .read<TakePhotoByCameraCubit>()
                                     .imageUrl,
                                 "time": FieldValue.serverTimestamp(),
                                 "sender": signedInUser.email,
-                                "notValid": "0" ,
-                                "Category" : widget.categoryType
-
+                                "notValid": "0",
+                                "Category": widget.categoryType
                               });
                               Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(
