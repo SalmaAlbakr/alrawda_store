@@ -21,7 +21,6 @@ class _AboutScreenState extends State<AboutScreen> {
     final subscription = Connectivity()
         .onConnectivityChanged
         .listen((ConnectivityResult result) {
-      // Got a new connectivity status!
       if (result == ConnectivityResult.none) {
         setState(() {
           internet = false;

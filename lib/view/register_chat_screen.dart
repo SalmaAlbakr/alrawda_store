@@ -2,7 +2,6 @@ import 'package:alrawda_store/controller/add_items_function.dart';
 import 'package:alrawda_store/controller/auth_user.dart';
 import 'package:alrawda_store/my_color.dart';
 import 'package:alrawda_store/view/home_screen.dart';
-import 'package:alrawda_store/view/list_of_products.dart';
 import 'package:alrawda_store/view/sign_in_chat_screen.dart';
 import 'package:alrawda_store/widgets/no_internet.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -33,7 +32,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
     final subscription = Connectivity()
         .onConnectivityChanged
         .listen((ConnectivityResult result) {
-      // Got a new connectivity status!
       if (result == ConnectivityResult.none) {
         setState(() {
           internet = false;
@@ -248,5 +246,3 @@ class _RegisterScreenState extends State<RegisterScreen> {
     }
   }
 }
-
-

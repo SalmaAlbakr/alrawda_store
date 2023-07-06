@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:alrawda_store/view/home_screen.dart';
-import 'package:alrawda_store/view/list_of_products.dart';
 import 'package:alrawda_store/view/start_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -23,9 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
             builder: (BuildContext context) {
-              return _auth.currentUser != null
-                  ? HomeScreen()
-                  : StartScreen();
+              return _auth.currentUser != null ? HomeScreen() : StartScreen();
             },
           ),
         );

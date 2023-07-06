@@ -23,45 +23,44 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:
-          SafeArea(
-            child: Column(
-              children: [
-                TextFormField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: MyColors.mainColor,
-                      ),
-                    ),
-                    hintText: "بحث",
-                    prefixIcon: Icon(
-                      Icons.search,
-
-                    ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            TextFormField(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: MyColors.mainColor,
                   ),
-                  onChanged: (value) {
-                    setState(() {});
-                  },
-                  controller: searchController,
                 ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: FutureBuilder(
-                        future: ProductRepo().getAllProduct(),
-                        builder: (context, AsyncSnapshot<List<ProductsModel>> snapshot) {
-                          if (snapshot.hasData) {
-                            final List<ProductsModel> products = snapshot.data!;
+                hintText: "بحث",
+                prefixIcon: Icon(
+                  Icons.search,
+                ),
+              ),
+              onChanged: (value) {
+                setState(() {});
+              },
+              controller: searchController,
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: FutureBuilder(
+                    future: ProductRepo().getAllProduct(),
+                    builder:
+                        (context, AsyncSnapshot<List<ProductsModel>> snapshot) {
+                      if (snapshot.hasData) {
+                        final List<ProductsModel> products = snapshot.data!;
 
-                            List<ProductsModel> filterNames = products
-                                .where(
-                                  (element) =>
+                        List<ProductsModel> filterNames = products
+                            .where(
+                              (element) =>
                                   element.text.contains(searchController.text),
                             )
-                                .toList();
-                            return searchController.text == ""
-                                ? ListView.builder(
+                            .toList();
+                        return searchController.text == ""
+                            ? ListView.builder(
                                 itemCount: products.length,
                                 itemBuilder: (context, int i) {
                                   final ProductsModel product = products[i];
@@ -78,10 +77,11 @@ class _SearchScreenState extends State<SearchScreen> {
                                     buyPrice: product.buyPrice,
                                   );
                                 })
-                                : ListView.builder(
+                            : ListView.builder(
                                 itemCount: filterNames.length,
                                 itemBuilder: (context, int i) {
-                                  final ProductsModel filteredProduct = filterNames[i];
+                                  final ProductsModel filteredProduct =
+                                      filterNames[i];
                                   final currentUser = signedInUser.email;
                                   return MessageW(
                                     mText: filteredProduct.text,
@@ -95,15 +95,15 @@ class _SearchScreenState extends State<SearchScreen> {
                                     buyPrice: filteredProduct.buyPrice,
                                   );
                                 });
-                          } else {
-                            return Text("ادخل اسم الصنف الذي تريد البحث عنه");
-                          }
-                        }),
-                  ),
-                ),
-              ],
+                      } else {
+                        return Text("ادخل اسم الصنف الذي تريد البحث عنه");
+                      }
+                    }),
+              ),
             ),
-          ),
+          ],
+        ),
+      ),
     );
   }
 }
