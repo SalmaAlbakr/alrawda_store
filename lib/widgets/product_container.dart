@@ -12,6 +12,7 @@ class MessageW extends StatelessWidget {
     required this.mPrice2,
     required this.notValid,
     required this.imageURL,
+    required this.buyPrice,
   }) : super(key: key);
 
   final mText;
@@ -22,6 +23,7 @@ class MessageW extends StatelessWidget {
   final mSender;
   final bool isMe;
   final notValid;
+  final buyPrice;
 
   @override
   Widget build(BuildContext context) {
@@ -60,6 +62,14 @@ class MessageW extends StatelessWidget {
               signedInUser.email! == "salma@email.com"
                   ? Column(
                       children: [
+                        Text(
+                         buyPrice,
+                          style: TextStyle(
+                            // fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
                         Text(
                           mPrice1,
                           style: TextStyle(

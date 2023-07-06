@@ -42,15 +42,14 @@ class _HomeScreenState extends State<HomeScreen> {
     [Categories.magicBox, "image/علب ماجيك.jpg"],
     [Categories.LEDHoses, "image/خرطوك ليد.jpg"],
     [Categories.fesha, "image/دكر و نتايه.jpg"],
-    [Categories.moshtarakWithoutWires, "text4"],
+    [Categories.moshtarakWithoutWires, "image/IMG_20230705_043139.jpg"],
     [Categories.moshtarakWithWires, "image/Screenshot from 2023-07-04 06-13-13.png"],
     [Categories.trans, "image/ترنز.jpg"],
     [Categories.weldingTape, "image/شريط لحام.jpg"],
-    [Categories.Dawaya, "text4"],
+    [Categories.Dawaya, "image/IMG_20230705_044240.jpg"],
     [Categories.finishingAccessories, "image/Screenshot from 2023-07-04 06-15-22.png"],
     [Categories.headlampInterfaces, "image/Screenshot from 2023-07-04 06-11-01.png"],
-    [Categories.magicBox, "image/علب ماجيك.jpg"],
-    [Categories.magicBox, "text4"],
+    [Categories.upandDown, "image/IMG_20230706_001849.jpg"],
   ];
 
   final _auth = FirebaseAuth.instance;

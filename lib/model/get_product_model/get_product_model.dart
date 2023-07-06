@@ -7,6 +7,7 @@ class ProductsModel {
   final String price2;
   final String valid;
   final String Category;
+  final String buyPrice;
 
   ProductsModel({
     required Map<String, dynamic> data,
@@ -17,5 +18,7 @@ class ProductsModel {
         price1 = data['price1']['stringValue'],
         price2 = data['price2']['stringValue'],
         valid = data['notValid']['stringValue'],
-         Category = data['Category']['stringValue'];
+         Category = data['Category']['stringValue'],
+         buyPrice = data['buyPrice']['stringValue'];
+
 }
