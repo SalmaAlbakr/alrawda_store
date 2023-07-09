@@ -197,6 +197,7 @@ class _ListOfProductsState extends State<ListOfProducts> {
                               mPrice2: product.price2,
                               imageURL: product.image,
                               notValid: product.valid,
+                              buyPrice: product.buyPrice,
                             );
                           })
                       : ListView.builder(
@@ -213,6 +214,7 @@ class _ListOfProductsState extends State<ListOfProducts> {
                               mPrice2: filteredProduct.price2,
                               imageURL: filteredProduct.image,
                               notValid: filteredProduct.valid,
+                              buyPrice: filteredProduct.buyPrice,
                             );
                           });
                 } else {
