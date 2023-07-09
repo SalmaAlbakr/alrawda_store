@@ -4,8 +4,13 @@ import 'package:url_launcher/url_launcher.dart';
 //facebook function
 facebookURL() async {
   final Uri url = Uri.parse(
-      'https://www.facebook.com');
-  if (!await launchUrl(url)) {
+      'https://www.facebook.com/profile.php?id=100010451593865&mibextid=ZbWKwL');
+  if (!await launchUrl(url
+ ,
+    webViewConfiguration: WebViewConfiguration(
+      enableJavaScript: false
+    )
+  )) {
     var _url;
     throw Exception('Could not launch $_url');
   }
