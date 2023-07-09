@@ -54,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final _auth = FirebaseAuth.instance;
 
-  final _controller = PageController();
+  // final _controller = PageController();
 
   @override
   Widget build(BuildContext context) {
