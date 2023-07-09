@@ -165,14 +165,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     options: CarouselOptions(
                         autoPlay: true,
                     ),
-                    items: ["image/img.png","image/img_3.png","image/بواط بلاستيك.jpg",].map((i) {
+                    items: ["image/slid1.png","image/slide2.png","image/slide2.png",].map((i) {
                       return Builder(
                         builder: (BuildContext context) {
                           return Container(
                               width: MediaQuery.of(context).size.width,
                               margin: EdgeInsets.symmetric(horizontal: 5.0),
                               decoration: BoxDecoration(
-                                  color: Colors.grey
+                                  color: Colors.blue[900]
                               ),
                               child: Image.asset(i),
                           );
