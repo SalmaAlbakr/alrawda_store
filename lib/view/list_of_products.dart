@@ -61,106 +61,13 @@ class _ListOfProductsState extends State<ListOfProducts> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        // endDrawer: Drawer(
-        //   child: ListView(
-        //     children: [
-        //       DrawerHeader(
-        //         decoration: BoxDecoration(color: MyColors.mainColor),
-        //         child: Column(
-        //           mainAxisAlignment: MainAxisAlignment.center,
-        //           children: [
-        //             Text(
-        //               "شركة الروضه",
-        //               style: GoogleFonts.alexandria(
-        //                   color: Colors.white, fontSize: 40),
-        //             ),
-        //           ],
-        //         ),
-        //       ),
-        //       TextButton(
-        //         onPressed: () {
-        //           Navigator.of(context).push(
-        //             MaterialPageRoute(
-        //               builder: (context) => AboutScreen(),
-        //             ),
-        //           );
-        //         },
-        //         child: Text(
-        //           "للتواصل معنا",
-        //           style: TextStyle(color: MyColors.mainColor),
-        //         ),
-        //       ),
-        //       TextButton(
-        //         onPressed: () async {
-        //           await _auth.signOut();
-        //           Navigator.of(context).push(
-        //             MaterialPageRoute(
-        //               builder: (context) => StartScreen(),
-        //             ),
-        //           );
-        //         },
-        //         child: Text(
-        //           "تسجيل الخروج",
-        //           style: TextStyle(color: MyColors.mainColor),
-        //         ),
-        //       ),
-        //     ],
-        //   ),
-        // ),
-        // floatingActionButton: signedInUser.email! == "salma@email.com"
-        //     ? FloatingActionButton(
-        //         backgroundColor: MyColors.mainColor,
-        //         child: Icon(Icons.add),
-        //         onPressed: () {
-        //           Navigator.of(context).push(
-        //             MaterialPageRoute(
-        //               builder: (context) => AddNewItem(),
-        //             ),
-        //           );
-        //         })
-        //     : null,
+
         appBar: AppBar(
           iconTheme: IconThemeData(
             color: Colors.black,
           ),
-          //automaticallyImplyLeading: false,
           backgroundColor: Colors.white,
           title: Text(widget.categoryName , style: TextStyle(color: Colors.black),)
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.start,
-          //   children: [
-          //     SizedBox(width: 10),
-          //     Text(
-          //       " ",
-          //       style: TextStyle(
-          //         color: MyColors.mainColor,
-          //         fontWeight: FontWeight.bold,
-          //         decoration: TextDecoration.underline,
-          //       ),
-          //     ),
-          //     SizedBox(width: 25),
-          //     Expanded(
-          //       child: TextFormField(
-          //         decoration: InputDecoration(
-          //           border: OutlineInputBorder(
-          //             borderSide: BorderSide(
-          //               color: MyColors.mainColor,
-          //             ),
-          //           ),
-          //           hintText: "بحث",
-          //           prefixIcon: Icon(
-          //             Icons.search,
-          //
-          //           ),
-          //         ),
-          //         onChanged: (value) {
-          //           setState(() {});
-          //         },
-          //         controller: searchController,
-          //       ),
-          //     ),
-          //   ],
-          // ),
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),

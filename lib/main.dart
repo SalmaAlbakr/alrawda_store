@@ -1,8 +1,6 @@
 import 'package:alrawda_store/controller/take_photo_cubit/from_camera/take_photo_cubit.dart';
 import 'package:alrawda_store/my_color.dart';
 import 'package:alrawda_store/view/home_screen.dart';
-import 'package:alrawda_store/view/slider_pics.dart';
-import 'package:alrawda_store/view/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

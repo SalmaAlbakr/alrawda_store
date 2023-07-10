@@ -59,7 +59,7 @@ class MessageW extends StatelessWidget {
                       ),
                     )
                   : Text("المنتج غير متاح"),
-              signedInUser.email! == "salma@email.com"
+              signedInUser.email! == "elrawda123@gmail.com"
                   ? Column(
                       children: [
                         Text(

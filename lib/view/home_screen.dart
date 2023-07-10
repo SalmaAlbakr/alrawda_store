@@ -79,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-              signedInUser.email! == "salma@email.com"?  TextButton(
+              signedInUser.email! == "elrawda123@gmail.com"?  TextButton(
                 onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
@@ -148,38 +148,22 @@ class _HomeScreenState extends State<HomeScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(height: 15,),
-                /*Container(
-                  height: 200,
-                  child: PageView(
-                    controller: _controller,
-                    children: [
-                      Image.asset("image/img.png"),
-                      Image.asset("image/img_3.png"),
-                      Image.asset("image/بواط بلاستيك.jpg"),
-                    ],
+                CarouselSlider(
+                  options: CarouselOptions(
+                    enlargeCenterPage: true,
+                      autoPlay: true,
                   ),
-                ),*/
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: CarouselSlider(
-                    options: CarouselOptions(
-                        autoPlay: true,
-                    ),
-                    items: ["image/slid1.png","image/slide2.png","image/slide2.png",].map((i) {
-                      return Builder(
-                        builder: (BuildContext context) {
-                          return Container(
-                              width: MediaQuery.of(context).size.width,
-                              margin: EdgeInsets.symmetric(horizontal: 5.0),
-                              decoration: BoxDecoration(
-                                  color: Colors.blue[900]
-                              ),
-                              child: Image.asset(i),
-                          );
-                        },
-                      );
-                    }).toList(),
-                  ),
+                  items: ["image/slide01.PNG","image/slide3.PNG","image/0000.PNG"].map((i) {
+                    return Builder(
+                      builder: (BuildContext context) {
+                        return Container(
+                            width: MediaQuery.of(context).size.width,
+                            margin: EdgeInsets.symmetric(horizontal: 5.0),
+                            child: Image.asset(i),
+                        );
+                      },
+                    );
+                  }).toList(),
                 ),
                 Expanded(
                   child: GridView.builder(

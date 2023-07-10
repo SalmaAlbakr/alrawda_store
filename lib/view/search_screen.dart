@@ -96,7 +96,8 @@ class _SearchScreenState extends State<SearchScreen> {
                                   );
                                 });
                       } else {
-                        return Text("ادخل اسم الصنف الذي تريد البحث عنه");
+                        return CircularProgressIndicator();
+                          //Text("ادخل اسم الصنف الذي تريد البحث عنه");
                       }
                     }),
               ),
