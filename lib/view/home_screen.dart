@@ -123,6 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           backgroundColor: Colors.white,
           elevation: 0.2,
           title: Row(
@@ -131,7 +132,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 "أهلا بيكم في الروضه:-  ",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 30,
+                    fontSize: 25,
                     color: Colors.blue[900]),
               ),
               IconButton(onPressed: (){
