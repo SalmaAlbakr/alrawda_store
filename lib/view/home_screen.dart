@@ -194,3 +194,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+// add icons on drawer screen
+//change appbar color
+//categories direction

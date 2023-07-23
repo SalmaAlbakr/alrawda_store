@@ -119,6 +119,7 @@ class _AddNewItemState extends State<AddNewItem> {
                   children: [
                     Container(
                       child: DropdownButton<String>(
+
                         hint: Text("ادخل نوع الصنف"),
                         underline: Container(),
                         borderRadius: BorderRadius.all(Radius.circular(15)),
@@ -132,7 +133,13 @@ class _AddNewItemState extends State<AddNewItem> {
                         items: CategoriesList.map((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
-                            child: Text(value),
+                            // child: Row(
+                            //   mainAxisAlignment: MainAxisAlignment.end,
+                            //   children: [
+                            //     Text(value , ),
+                            //   ],
+                            // ),
+                            child: Center(child: Text(value , )),
                           );
                         }).toList(),
                       ),

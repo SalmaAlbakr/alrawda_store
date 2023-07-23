@@ -37,7 +37,10 @@ class MessageW extends StatelessWidget {
         child: ListTile(
           leading: Container(
               width: MediaQuery.of(context).size.width * 0.2,
-              child: Image.network(imageURL)),
+              child: Container(
+                height: 70,
+                  width: 70,
+                  child: Image.network(imageURL))),
           title: Text(
             mText,
             maxLines: 10,
