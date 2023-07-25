@@ -22,6 +22,7 @@ class AddNewItem extends StatefulWidget {
   String? imageURL;
   String? categoryType;
   String? buyPrice;
+  String? companyName;
 
   @override
   State<AddNewItem> createState() => _AddNewItemState();
@@ -54,6 +55,8 @@ class _AddNewItemState extends State<AddNewItem> {
     Categories.magicBox,
     Categories.magicBox,
   ];
+
+
 
   final messageController = TextEditingController();
 
@@ -120,7 +123,7 @@ class _AddNewItemState extends State<AddNewItem> {
                     Container(
                       child: DropdownButton<String>(
 
-                        hint: Text("ادخل نوع الصنف"),
+                        hint: Text(" نوع الصنف"),
                         underline: Container(),
                         borderRadius: BorderRadius.all(Radius.circular(15)),
                         value: widget.categoryType,
@@ -144,6 +147,36 @@ class _AddNewItemState extends State<AddNewItem> {
                         }).toList(),
                       ),
                     ),
+                    // Container(
+                    //   child: DropdownButton<String>(
+                    //
+                    //     hint: Text(" أسم الشركه"),
+                    //     underline: Container(),
+                    //     borderRadius: BorderRadius.all(Radius.circular(15)),
+                    //     value: widget.companyName,
+                    //     onChanged: (String? newValue) {
+                    //       setState(() {
+                    //         widget.companyName = newValue!;
+                    //       });
+                    //     },
+                    //     isExpanded: true,
+                    //     items:
+                    //     widget.categoryType == Categories.lawhat ?
+                    //     Categories.lawhatCompanies.map((String value) {
+                    //       return DropdownMenuItem<String>(
+                    //         value: value,
+                    //         child: Center(child: Text(value , )),
+                    //       );
+                    //     }).toList() :
+                    //
+                    //     ["1" , "2"].map((String value) {
+                    //       return DropdownMenuItem<String>(
+                    //         value: value,
+                    //         child: Center(child: Text(value , )),
+                    //       );
+                    //     }).toList()
+                    //   ),
+                    // ),
                     Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: TextFormField(
@@ -349,7 +382,8 @@ class _AddNewItemState extends State<AddNewItem> {
                                 "time": FieldValue.serverTimestamp(),
                                 "sender": signedInUser.email,
                                 "notValid": "0",
-                                "Category": widget.categoryType
+                                "Category": widget.categoryType,
+                               // "companyName": widget.companyName,
                               });
                               Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(

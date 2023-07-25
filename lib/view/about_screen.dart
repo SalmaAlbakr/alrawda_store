@@ -41,6 +41,7 @@ class _AboutScreenState extends State<AboutScreen> {
       textDirection: TextDirection.rtl,
       child: Scaffold(
         appBar: AppBar(
+          title: Text("أهلا بيك في الروضه"),
           backgroundColor: MyColors.mainColor,
         ),
         body: SafeArea(
@@ -86,7 +87,7 @@ class _AboutScreenState extends State<AboutScreen> {
                       },
                       child: Row(
                         children: [
-                          Icon(Icons.location_on_outlined),
+                          Icon(Icons.location_on_outlined,),
                           SizedBox(width: 7),
                           Text("شارع مصر اسيوط البطيء - البدرشين - الجيزه"),
                         ],

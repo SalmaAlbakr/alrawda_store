@@ -84,23 +84,8 @@ class _SearchScreenState extends State<SearchScreen> {
                               )
                               .toList();
                           return searchController.text == ""
-                              ? ListView.builder(
-                                  itemCount: products.length,
-                                  itemBuilder: (context, int i) {
-                                    final ProductsModel product = products[i];
-                                    final currentUser = signedInUser.email;
-                                    return MessageW(
-                                      mText: product.text,
-                                      mPrice: product.price,
-                                      mSender: product.sender,
-                                      isMe: currentUser == product.sender,
-                                      mPrice1: product.price1,
-                                      mPrice2: product.price2,
-                                      imageURL: product.image,
-                                      notValid: product.valid,
-                                      buyPrice: product.buyPrice,
-                                    );
-                                  })
+                              ? SizedBox(
+                          )
                               : ListView.builder(
                                   itemCount: filterNames.length,
                                   itemBuilder: (context, int i) {
@@ -120,7 +105,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                     );
                                   });
                         } else {
-                          return CircularProgressIndicator();
+                          return Center(child: CircularProgressIndicator());
                             //Text("ادخل اسم الصنف الذي تريد البحث عنه");
                         }
                       }),

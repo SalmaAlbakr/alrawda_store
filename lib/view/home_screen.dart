@@ -91,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(Icons.add),
-                    SizedBox(width: 10,),
+                    SizedBox(width: 5,),
                     Text(
                       "اضافة صنف جديد",
                       style: TextStyle(color: MyColors.mainColor),
