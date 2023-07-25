@@ -87,9 +87,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   );
                 },
-                child: Text(
-                  "اضافة صنف جديد",
-                  style: TextStyle(color: MyColors.mainColor),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.add),
+                    SizedBox(width: 10,),
+                    Text(
+                      "اضافة صنف جديد",
+                      style: TextStyle(color: MyColors.mainColor),
+                    ),
+                  ],
                 ),
               ): SizedBox(),
               TextButton(
@@ -100,9 +107,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   );
                 },
-                child: Text(
-                  "للتواصل معنا",
-                  style: TextStyle(color: MyColors.mainColor),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.contact_phone_rounded),
+                    SizedBox(width: 10,),
+                    Text(
+                      "للتواصل معنا",
+                      style: TextStyle(color: MyColors.mainColor),
+                    ),
+                  ],
                 ),
               ),
               TextButton(
@@ -114,9 +128,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   );
                 },
-                child: Text(
-                  "تسجيل الخروج",
-                  style: TextStyle(color: MyColors.mainColor),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.login_outlined),
+                    SizedBox(width: 5,),
+                    Text(
+                      "تسجيل الخروج",
+                      style: TextStyle(color: MyColors.mainColor),
+                    ),
+                  ],
                 ),
               ),
             ],
@@ -194,5 +215,4 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-// add icons on drawer screen
-//change appbar color
+
