@@ -154,7 +154,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     enlargeCenterPage: true,
                       autoPlay: true,
                   ),
-                  items: ["image/slide01.PNG","image/slide3.PNG","image/0000.PNG"].map((i) {
+                  items: ["image/slide01.PNG","image/slide3.PNG","image/0000.PNG","image/Screenshot from 2023-07-25 17-40-37.png"].map((i) {
                     return Builder(
                       builder: (BuildContext context) {
                         return Container(
@@ -196,4 +196,3 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 // add icons on drawer screen
 //change appbar color
-//categories direction

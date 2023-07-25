@@ -61,7 +61,7 @@ class MessageW extends StatelessWidget {
                         color: Colors.black,
                       ),
                     )
-                  : Text("المنتج غير متاح"),
+                  : Text("المنتج غير متاح",style: TextStyle(color: Colors.red[900],fontWeight: FontWeight.bold,fontSize: 23),),
               signedInUser.email! == "elrawda123@gmail.com"
                   ? Column(
                       children: [

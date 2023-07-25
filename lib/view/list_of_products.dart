@@ -74,14 +74,16 @@ class _ListOfProductsState extends State<ListOfProducts> {
                   List<ProductsModel> catItem = products
                       .where(
                         (element) =>
-                            element.Category.contains(widget.categoryName),
+                            element.Category == widget.categoryName
+                            //contains(widget.categoryName),
                       )
                       .toList();
 
                   List<ProductsModel> filterNames = products
                       .where(
                         (element) =>
-                            element.text.contains(searchController.text),
+                            element.text.
+                            contains(searchController.text),
                       )
                       .toList();
                   return searchController.text == ""
