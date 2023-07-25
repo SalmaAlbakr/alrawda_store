@@ -1,16 +1,11 @@
 import 'package:alrawda_store/controller/add_items_function.dart';
 import 'package:alrawda_store/model/get_product_model/get_product_model.dart';
 import 'package:alrawda_store/model/get_product_model/get_product_repo.dart';
-import 'package:alrawda_store/my_color.dart';
-import 'package:alrawda_store/view/about_screen.dart';
-import 'package:alrawda_store/view/add_new_item.dart';
-import 'package:alrawda_store/view/start_screen.dart';
 import 'package:alrawda_store/widgets/no_internet.dart';
 import 'package:alrawda_store/widgets/product_container.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter/material.dart';
 
 class ListOfProducts extends StatefulWidget {
    ListOfProducts({Key? key , required this.categoryName}) : super(key: key);

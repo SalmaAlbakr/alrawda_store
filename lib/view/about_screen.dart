@@ -102,7 +102,10 @@ class _AboutScreenState extends State<AboutScreen> {
                           },
                           child: Row(
                             children: [
-                              Icon(Icons.whatshot),
+                              Container(
+                                  height: 25,
+                                  width: 25,
+                                  child: Image.asset("image/whats.PNG")),
                               SizedBox(width: 7),
                               Text("01002095050"),
                             ],
@@ -119,7 +122,10 @@ class _AboutScreenState extends State<AboutScreen> {
                           },
                           child: Row(
                             children: [
-                              Icon(Icons.whatshot),
+                              Container(
+                                  height: 25,
+                                  width: 25,
+                                  child: Image.asset("image/whats.PNG")),
                               SizedBox(width: 7),
                               Text("01157891602"),
                             ],
