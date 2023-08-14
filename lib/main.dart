@@ -1,5 +1,6 @@
 import 'package:alrawda_store/controller/take_photo_cubit/from_camera/take_photo_cubit.dart';
 import 'package:alrawda_store/my_color.dart';
+import 'package:alrawda_store/view/companies_screen.dart';
 import 'package:alrawda_store/view/home_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home:SplashScreen (),
+      home:CompaniesScreen (),
     );
   }
 }

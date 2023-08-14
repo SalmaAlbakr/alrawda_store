@@ -24,15 +24,6 @@ class Categories {
   static const String headlampInterfaces = "كشافات واجهات" ;//
   static const String upandDown= "أب داون " ;// no
 
-  static const List <String>  lawhatCompanies =[
-    "سيجاأم",
-    "فينوس",
-    "الحمد",
-    "دراجون و MN",
-    "النور",
-    "الجوده لايت",
-    "المصرية"
 
-  ];
 
 }
