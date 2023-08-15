@@ -196,7 +196,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           onTap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (context) => CompaniesScreen(CatName: 'اسلاك',)
+                                builder: (context) => CompaniesScreen(CatName: " مفاتيح كهرباء أوتوماتيك",)
                                 //     ListOfProducts(
                                 //   categoryName: MyList1[i][0],
                                 // ),
