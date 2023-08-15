@@ -24,7 +24,7 @@ class CompaniesScreen extends StatefulWidget {
 
 class _CompaniesScreenState extends State<CompaniesScreen> {
 
-  getData() async {
+  getCompanies() async {
     CollectionReference dataOfProduct = FirebaseFirestore.instance.collection("Categories").doc(widget.CatName).collection("الشركات");
     QuerySnapshot snapOfData = await dataOfProduct.get();
 
@@ -38,7 +38,7 @@ print(list);
 
   @override
   void initState() {
-    getData();
+    getCompanies();
     getCurrentUser();
     super.initState();
   }
