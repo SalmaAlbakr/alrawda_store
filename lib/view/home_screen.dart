@@ -3,6 +3,7 @@ import 'package:alrawda_store/model/category_type.dart';
 import 'package:alrawda_store/my_color.dart';
 import 'package:alrawda_store/view/about_screen.dart';
 import 'package:alrawda_store/view/add_new_item.dart';
+import 'package:alrawda_store/view/companies_screen.dart';
 import 'package:alrawda_store/view/list_of_products.dart';
 import 'package:alrawda_store/view/search_screen.dart';
 import 'package:alrawda_store/view/start_screen.dart';
@@ -195,9 +196,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           onTap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (context) => ListOfProducts(
-                                  categoryName: MyList1[i][0],
-                                ),
+                                builder: (context) => CompaniesScreen(CatName: 'اسلاك',)
+                                //     ListOfProducts(
+                                //   categoryName: MyList1[i][0],
+                                // ),
                               ),
                             );
                           },

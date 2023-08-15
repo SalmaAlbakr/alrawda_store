@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home:CompaniesScreen (),
+      home:HomeScreen (),
     );
   }
 }
