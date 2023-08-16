@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 class NewWidget extends StatelessWidget {
   NewWidget({
     Key? key,
-    required this.MyList1,
-    required this.i,
+    required this.image,
+    required this.name,
   }) : super(key: key);
 
-  final List MyList1;
-  final int i;
+  final String image;
+  final String name;
 
   @override
   Widget build(BuildContext context) {
@@ -19,15 +19,16 @@ class NewWidget extends StatelessWidget {
         child: Column(
           children: [
             Container(
-
-                child: Image.asset(MyList1[i][1])
+              height: 100,
+                width: 100,
+                child: Image.network(image)
             ),
 
             SizedBox(
               height: 15,
             ),
             Text(
-              MyList1[i][0],
+              name,
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
             ),
           ],
