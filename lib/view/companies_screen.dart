@@ -25,16 +25,20 @@ class CompaniesScreen extends StatefulWidget {
 class _CompaniesScreenState extends State<CompaniesScreen> {
  String? name ;
  String? image ;
+ List Companies = [];
+
   getCompanies() async {
     CollectionReference dataOfProduct = FirebaseFirestore.instance.collection("Categories").doc(widget.CatName).collection("الشركات");
     QuerySnapshot snapOfData = await dataOfProduct.get();
 
     List<QueryDocumentSnapshot> list = snapOfData.docs;
-print(list);
+      print(list);
     list.forEach((element) {
-
+      setState(() {
+        Companies.add(element.data());
+      });
     }) ;
-
+         print(Companies);
   }
 
   @override
@@ -135,20 +139,22 @@ print(list);
                 ),*/
                 Expanded(
                   child: GridView.builder(
-                    itemCount: 2,
+                    itemCount: Companies.length,
                     itemBuilder: (context, int i) {
-                      return Container();
-                        // GestureDetector(
-                        //   onTap: () {
-                        //     Navigator.of(context).push(
-                        //       MaterialPageRoute(
-                        //         builder: (context) => ListOfProducts(
-                        //           categoryName: lawhatCompanies[i][0],
-                        //         ),
-                        //       ),
-                        //     );
-                        //   },
-                        //   child: NewWidget(MyList1: MyList1, i: i));
+                      return
+                        //Container();
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => ListOfProducts(
+                                  categoryName: Companies[i]["name"],
+                                ),
+                              ),
+                            );
+                          },
+                          child: NewWidget( image: Companies[i]["image"],
+                            name: Companies[i]["name"],));
                     },
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2),

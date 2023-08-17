@@ -30,7 +30,9 @@ class _HomeScreenState extends State<HomeScreen> {
     List<QueryDocumentSnapshot> list = snapOfData.docs;
 
     list.forEach((element) {
-      Categories.add(element.data());
+      setState(() {
+        Categories.add(element.data());
+      });
     });
   }
 
