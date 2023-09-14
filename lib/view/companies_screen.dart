@@ -23,8 +23,8 @@ class CompaniesScreen extends StatefulWidget {
 }
 
 class _CompaniesScreenState extends State<CompaniesScreen> {
- String? name ;
- String? image ;
+ //String? name ;
+ //String? image ;
  List Companies = [];
 
   getCompanies() async {
@@ -38,7 +38,6 @@ class _CompaniesScreenState extends State<CompaniesScreen> {
         Companies.add(element.data());
       });
     }) ;
-         print(Companies);
   }
 
   @override
@@ -47,45 +46,8 @@ class _CompaniesScreenState extends State<CompaniesScreen> {
     getCurrentUser();
     super.initState();
   }
-  // List MyList1 = [
-  //   [Categories.lawhat, "image/img.png"],
-  //   [Categories.panel, "image/img_1 (1).png"],
-  //   [Categories.lamb, "image/img_2.png"],
-  //   [Categories.isolatedWires, "image/img_3.png"],
-  //   [Categories.sheildWires, "image/61LfVGtRccL._AC_UF350,350_QL80_.jpg"],
-  //   [Categories.exportedCable, "image/شركة-الكابلات-الكهربائية-المصرية.jpg"],
-  //   [Categories.spot, "image/اسبوتات.jpg"],
-  //   [Categories.electricHose, "image/خرطوم كهربا.jpg"],
-  //   [Categories.Zippers, "image/سوسته.jpg"],
-  //   [Categories.PlasticBowls, "image/بواط بلاستيك.jpg"],
-  //   [Categories.SheetMetal, "image/bwatsaag.png"],
-  //   [Categories.AutomaticSwitch, "image/مفاتيح اتومانيك.jpg"],
-  //   [Categories.magicBox, "image/علب ماجيك.jpg"],
-  //   [Categories.LEDHoses, "image/خرطوك ليد.jpg"],
-  //   [Categories.fesha, "image/دكر و نتايه.jpg"],
-  //   [Categories.moshtarakWithoutWires, "image/IMG_20230705_043139.jpg"],
-  //   [Categories.moshtarakWithWires, "image/Screenshot from 2023-07-04 06-13-13.png"],
-  //   [Categories.trans, "image/ترنز.jpg"],
-  //   [Categories.weldingTape, "image/شريط لحام.jpg"],
-  //   [Categories.Dawaya, "image/IMG_20230705_044240.jpg"],
-  //   [Categories.finishingAccessories, "image/Screenshot from 2023-07-04 06-15-22.png"],
-  //   [Categories.headlampInterfaces, "image/Screenshot from 2023-07-04 06-11-01.png"],
-  //   [Categories.upandDown, "image/IMG_20230706_001849.jpg"],
-  // ];
-  // static const List <String>  lawhatCompanies =[
-  //   "سيجاأم",
-  //   "فينوس",
-  //   "الحمد",
-  //   "دراجون و MN",
-  //   "النور",
-  //   "الجوده لايت",
-  //   "المصرية"
-  //
-  // ];
 
   final _auth = FirebaseAuth.instance;
-
-  // final _controller = PageController();
 
   @override
   Widget build(BuildContext context) {
@@ -148,7 +110,8 @@ class _CompaniesScreenState extends State<CompaniesScreen> {
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) => ListOfProducts(
-                                  categoryName: Companies[i]["name"],
+                                  companyName: Companies[i]["name"],
+                                  categoryName: widget.CatName,
                                 ),
                               ),
                             );

@@ -29,34 +29,46 @@ class AddNewItem extends StatefulWidget {
 }
 
 class _AddNewItemState extends State<AddNewItem> {
-  List<String> CategoriesList = [
-    Categories.lawhat,
-    Categories.panel,
-    Categories.lamb,
-    Categories.isolatedWires,
-    Categories.sheildWires,
-    Categories.exportedCable,
-    Categories.spot,
-    Categories.electricHose,
-    Categories.Zippers,
-    Categories.PlasticBowls,
-    Categories.SheetMetal,
-    Categories.AutomaticSwitch,
-    Categories.magicBox,
-    Categories.LEDHoses,
-    Categories.moshtarakWithoutWires,
-    Categories.moshtarakWithWires,
-    Categories.trans,
-    Categories.fesha,
-    Categories.weldingTape,
-    Categories.Dawaya,
-    Categories.finishingAccessories,
-    Categories.headlampInterfaces,
-    Categories.magicBox,
-    Categories.magicBox,
-  ];
 
+  int iC = 0;
 
+  List CompaniesData = [];
+  List<String> CompaniesName = [];
+
+  getCompanies() async {
+    CollectionReference dataOfProduct = FirebaseFirestore.instance.collection("Categories").doc(widget.categoryType).collection("الشركات");
+    QuerySnapshot snapOfData = await dataOfProduct.get();
+
+    List<QueryDocumentSnapshot> list = snapOfData.docs;
+    print(list);
+    list.forEach((element) {
+      setState(() {
+        CompaniesData.add(element.data());
+        CompaniesName.add(CompaniesData[iC]["name"]);
+        iC++;
+      });
+    }) ;
+
+  }
+
+  int im = 0;
+  List CategoriesData = [];
+  List<String> CategoriesName = [];
+
+  getCategories() async {
+    CollectionReference dataOfProduct =
+    FirebaseFirestore.instance.collection("Categories");
+    QuerySnapshot snapOfData = await dataOfProduct.get();
+
+    List<QueryDocumentSnapshot> list = snapOfData.docs;
+    list.forEach((element) {
+      setState(() {
+        CategoriesData.add(element.data());
+        CategoriesName.add(CategoriesData[im]["name"]);
+        im++;
+      });
+    });
+  }
 
   final messageController = TextEditingController();
 
@@ -71,6 +83,8 @@ class _AddNewItemState extends State<AddNewItem> {
   bool internet = true;
   @override
   void initState() {
+   // getCompanies();
+    getCategories();
     super.initState();
     final subscription = Connectivity()
         .onConnectivityChanged
@@ -122,18 +136,44 @@ class _AddNewItemState extends State<AddNewItem> {
                   children: [
                     Container(
                       child: DropdownButton<String>(
-
                         hint: Text(" نوع الصنف"),
                         underline: Container(),
                         borderRadius: BorderRadius.all(Radius.circular(15)),
                         value: widget.categoryType,
                         onChanged: (String? newValue) {
                           setState(() {
+                            CompaniesName.clear();
                             widget.categoryType = newValue!;
+                            getCompanies();
+
+                          });
+
+                        },
+                        isExpanded: true,
+                        items: CategoriesName.map((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Center(child: Text(value , )),
+                          );
+                        }).toList(),
+                      ),
+                    ),
+
+                    widget.categoryType == null ? Container()
+                        : Container(
+                      child: DropdownButton<String>(
+
+                        hint: Text(" الشركه"),
+                        underline: Container(),
+                        borderRadius: BorderRadius.all(Radius.circular(15)),
+                        value: widget.companyName,
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            widget.companyName = newValue!;
                           });
                         },
                         isExpanded: true,
-                        items: CategoriesList.map((String value) {
+                        items: CompaniesName.map((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
                             // child: Row(
@@ -370,7 +410,8 @@ class _AddNewItemState extends State<AddNewItem> {
                               priceController.clear();
                               price1Controller.clear();
                               price2Controller.clear();
-                              _fireStore.collection("product").add({
+                              //_fireStore.collection("product").add({
+                              _fireStore.collection("Categories").doc(widget.categoryType).collection("الشركات").doc(widget.companyName).collection("الاصناف").doc(widget.typeName).set({
                                 "text": widget.typeName,
                                 "price": widget.price,
                                 "price1": widget.price1,
@@ -383,7 +424,7 @@ class _AddNewItemState extends State<AddNewItem> {
                                 "sender": signedInUser.email,
                                 "notValid": "0",
                                 "Category": widget.categoryType,
-                               // "companyName": widget.companyName,
+                                "companyName": widget.companyName,
                               });
                               Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(
