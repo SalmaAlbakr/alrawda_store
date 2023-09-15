@@ -1,6 +1,7 @@
 import 'package:alrawda_store/controller/add_items_function.dart';
 import 'package:alrawda_store/model/get_product_model/get_product_model.dart';
 import 'package:alrawda_store/model/get_product_model/get_product_repo.dart';
+import 'package:alrawda_store/view/search_screen.dart';
 import 'package:alrawda_store/widgets/no_internet.dart';
 import 'package:alrawda_store/widgets/product_container.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -20,7 +21,7 @@ class ListOfProducts extends StatefulWidget {
 }
 
 class _ListOfProductsState extends State<ListOfProducts> {
-  final searchController = TextEditingController();
+//  final searchController = TextEditingController();
 
   final _auth = FirebaseAuth.instance;
 
@@ -67,7 +68,7 @@ class _ListOfProductsState extends State<ListOfProducts> {
 
   @override
   void dispose() {
-    searchController.dispose();
+    // searchController.dispose();
     super.dispose();
   }
 
@@ -107,11 +108,21 @@ class _ListOfProductsState extends State<ListOfProducts> {
           title: Row(
             children: [
               Text(widget.categoryName , style: TextStyle(color: Colors.black),),
-              Expanded(
-                child: TextFormField(
-                  controller: searchController,
-                ),
-              ),
+
+              IconButton(onPressed: (){
+
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (context) => SearchScreen(categoryName: widget.categoryName, companyName: widget.companyName,),
+                  ),
+                );
+              }, icon:Icon( Icons.search))
+
+              // Expanded(
+              //   child: TextFormField(
+              //     controller: searchController,
+              //   ),
+              // ),
             ],
           )
         ),
