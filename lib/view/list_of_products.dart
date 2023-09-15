@@ -20,24 +20,25 @@ class ListOfProducts extends StatefulWidget {
 }
 
 class _ListOfProductsState extends State<ListOfProducts> {
- // final searchController = TextEditingController();
+  final searchController = TextEditingController();
 
   final _auth = FirebaseAuth.instance;
 
   List Product = [];
+
+
 
   getProduct() async {
     CollectionReference dataOfProduct = FirebaseFirestore.instance.collection("Categories").doc(widget.categoryName).collection("الشركات").doc(widget.companyName).collection("الاصناف");
     QuerySnapshot snapOfData = await dataOfProduct.get();
 
     List<QueryDocumentSnapshot> list = snapOfData.docs;
-    print(list);
+
     list.forEach((element) {
       setState(() {
         Product.add(element.data());
       });
 
-      print(Product);
     }) ;
 
   }
@@ -66,7 +67,7 @@ class _ListOfProductsState extends State<ListOfProducts> {
 
   @override
   void dispose() {
-   // searchController.dispose();
+    searchController.dispose();
     super.dispose();
   }
 
@@ -74,6 +75,23 @@ class _ListOfProductsState extends State<ListOfProducts> {
 
   @override
   Widget build(BuildContext context) {
+
+    // List filterNames = [];
+    //
+    // Product.forEach((element) {
+    //   if (searchController.text == element["text"]){
+    //     filterNames.add(element);
+    //       print(filterNames);
+    //   }
+    //   else {
+    //     print("/////////////////////////////////////////////////////////");
+    //   }
+    //  // searchController.text == element["text"]
+    //
+    //
+    // });
+
+
     if (internet == false) {
       return NoInternetScreen();
     }
@@ -86,7 +104,16 @@ class _ListOfProductsState extends State<ListOfProducts> {
             color: Colors.black,
           ),
           backgroundColor: Colors.white,
-          title: Text(widget.categoryName , style: TextStyle(color: Colors.black),)
+          title: Row(
+            children: [
+              Text(widget.categoryName , style: TextStyle(color: Colors.black),),
+              Expanded(
+                child: TextFormField(
+                  controller: searchController,
+                ),
+              ),
+            ],
+          )
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),

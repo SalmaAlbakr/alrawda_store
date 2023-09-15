@@ -2,6 +2,8 @@ import 'package:alrawda_store/controller/take_photo_cubit/from_camera/take_photo
 import 'package:alrawda_store/my_color.dart';
 import 'package:alrawda_store/view/companies_screen.dart';
 import 'package:alrawda_store/view/home_screen.dart';
+import 'package:alrawda_store/view/start_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,7 +24,7 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   MyApp({super.key});
-
+final _user = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -33,7 +35,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home:  HomeScreen (),
+      home:  _user.currentUser == null ? StartScreen () : HomeScreen()
     );
   }
 }

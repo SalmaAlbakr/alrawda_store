@@ -12,27 +12,23 @@ class NewWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Card(
+    return Card(
+      child: Column(
+        children: [
+          Container(
+            height: 100,
+              width: 100,
+              child: Image.network(image)
+          ),
 
-        child: Column(
-          children: [
-            Container(
-              height: 100,
-                width: 100,
-                child: Image.network(image)
-            ),
-
-            SizedBox(
-              height: 15,
-            ),
-            Text(
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
               name,
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

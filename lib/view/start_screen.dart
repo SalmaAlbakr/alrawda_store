@@ -1,6 +1,8 @@
 import 'package:alrawda_store/my_color.dart';
+import 'package:alrawda_store/view/home_screen.dart';
 import 'package:alrawda_store/view/register_chat_screen.dart';
 import 'package:alrawda_store/view/sign_in_chat_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -71,6 +73,45 @@ class StartScreen extends StatelessWidget {
                   },
                   child: Text(
                     "إنشاء حساب جديد",
+                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 25,
+              ),
+              Container(
+                width: 300,
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(
+                      MyColors.mainColor,
+                    ),
+                  ),
+                  onPressed: () async {
+
+                    try {
+                      final userCredential =
+                          await FirebaseAuth.instance.signInAnonymously();
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (context) => HomeScreen(),
+                        ),
+                      );
+                    } on FirebaseAuthException catch (e) {
+                      switch (e.code) {
+                        case "operation-not-allowed":
+                          print("Anonymous auth hasn't been enabled for this project.");
+                          break;
+                        default:
+                          print("Unknown error.");
+                      }
+                    }
+
+
+                  },
+                  child: Text(
+                    "تصفح بدون تسجيل دخول",
                     style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                   ),
                 ),

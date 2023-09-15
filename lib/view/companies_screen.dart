@@ -59,19 +59,19 @@ class _CompaniesScreenState extends State<CompaniesScreen> {
           automaticallyImplyLeading: false,
           backgroundColor: Colors.white,
           elevation: 0.2,
-          title: Row(
+          title: Column (
             children: [
               Text(
-                "الشركات المتاحه  ",
+               widget.CatName,
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 25,
+                    fontSize: 20,
                     color: Colors.blue[900]),
               ),
-              IconButton(onPressed: (){
+            Text("الشركات المتاحه" , style: TextStyle(
+              color: Colors.black26
 
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => SearchScreen()));
-              }, icon: Icon(Icons.search))
+            ),)
             ],
           ),
           iconTheme: IconThemeData(),

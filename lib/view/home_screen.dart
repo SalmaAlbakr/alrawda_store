@@ -66,30 +66,35 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-              signedInUser.email! == "elrawda123@gmail.com"
-                  ? TextButton(
-                      onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => AddNewItem(),
-                          ),
-                        );
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.add),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text(
-                            "اضافة صنف جديد",
-                            style: TextStyle(color: MyColors.mainColor),
-                          ),
-                        ],
-                      ),
-                    )
-                  : SizedBox(),
+
+             signedInUser.isAnonymous ?
+             SizedBox() :
+             signedInUser.email! == "elrawda123@gmail.com"
+                 ?
+             TextButton(
+               onPressed: () {
+                 Navigator.of(context).push(
+                   MaterialPageRoute(
+                     builder: (context) => AddNewItem(),
+                   ),
+                 );
+               },
+               child: Row(
+                 mainAxisAlignment: MainAxisAlignment.center,
+                 children: [
+                   Icon(Icons.add),
+                   SizedBox(
+                     width: 5,
+                   ),
+                   Text(
+                     "اضافة صنف جديد",
+                     style: TextStyle(color: MyColors.mainColor),
+                   ),
+                 ],
+               ),
+             )
+                 :
+             SizedBox(),
               TextButton(
                 onPressed: () {
                   Navigator.of(context).push(
@@ -154,16 +159,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: Colors.blue[900],
                 ),
               ),
-              IconButton(
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => SearchScreen(),
-                    ),
-                  );
-                },
-                icon: Icon(Icons.search),
-              )
+              // IconButton(
+              //   onPressed: () {
+              //     Navigator.of(context).push(
+              //       MaterialPageRoute(
+              //         builder: (context) => SearchScreen(),
+              //       ),
+              //     );
+              //   },
+              //   icon: Icon(Icons.search),
+              // )
             ],
           ),
           iconTheme: IconThemeData(),

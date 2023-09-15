@@ -107,6 +107,9 @@ class _AddNewItemState extends State<AddNewItem> {
     priceController.dispose();
     price1Controller.dispose();
     price2Controller.dispose();
+    buyPriceController.dispose();
+
+    widget.imageURL = "" ;
 
     super.dispose();
   }
@@ -159,8 +162,9 @@ class _AddNewItemState extends State<AddNewItem> {
                       ),
                     ),
 
-                    widget.categoryType == null ? Container()
-                        : Container(
+                    // widget.categoryType == null ? Container()
+                    //     :
+                    Container(
                       child: DropdownButton<String>(
 
                         hint: Text(" الشركه"),
@@ -187,36 +191,6 @@ class _AddNewItemState extends State<AddNewItem> {
                         }).toList(),
                       ),
                     ),
-                    // Container(
-                    //   child: DropdownButton<String>(
-                    //
-                    //     hint: Text(" أسم الشركه"),
-                    //     underline: Container(),
-                    //     borderRadius: BorderRadius.all(Radius.circular(15)),
-                    //     value: widget.companyName,
-                    //     onChanged: (String? newValue) {
-                    //       setState(() {
-                    //         widget.companyName = newValue!;
-                    //       });
-                    //     },
-                    //     isExpanded: true,
-                    //     items:
-                    //     widget.categoryType == Categories.lawhat ?
-                    //     Categories.lawhatCompanies.map((String value) {
-                    //       return DropdownMenuItem<String>(
-                    //         value: value,
-                    //         child: Center(child: Text(value , )),
-                    //       );
-                    //     }).toList() :
-                    //
-                    //     ["1" , "2"].map((String value) {
-                    //       return DropdownMenuItem<String>(
-                    //         value: value,
-                    //         child: Center(child: Text(value , )),
-                    //       );
-                    //     }).toList()
-                    //   ),
-                    // ),
                     Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: TextFormField(
@@ -410,8 +384,8 @@ class _AddNewItemState extends State<AddNewItem> {
                               priceController.clear();
                               price1Controller.clear();
                               price2Controller.clear();
-                              //_fireStore.collection("product").add({
-                              _fireStore.collection("Categories").doc(widget.categoryType).collection("الشركات").doc(widget.companyName).collection("الاصناف").doc(widget.typeName).set({
+                              buyPriceController.clear();
+                           await  _fireStore.collection("Categories").doc(widget.categoryType).collection("الشركات").doc(widget.companyName).collection("الاصناف").doc(widget.typeName).set({
                                 "text": widget.typeName,
                                 "price": widget.price,
                                 "price1": widget.price1,
@@ -426,9 +400,10 @@ class _AddNewItemState extends State<AddNewItem> {
                                 "Category": widget.categoryType,
                                 "companyName": widget.companyName,
                               });
-                              Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                  builder: (context) => HomeScreen(),
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  backgroundColor: Colors.green,
+                                  content: Text("تم اضافة الصنف بنجاح"),
                                 ),
                               );
                             } else {
