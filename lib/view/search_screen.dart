@@ -9,10 +9,13 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 
 class SearchScreen extends StatefulWidget {
-   SearchScreen({Key? key ,   required this.categoryName,
-     required this.companyName,}) : super(key: key);
-   final String categoryName;
-   final String companyName;
+  SearchScreen({
+    Key? key,
+    required this.categoryName,
+    required this.companyName,
+  }) : super(key: key);
+  final String categoryName;
+  final String companyName;
   @override
   State<SearchScreen> createState() => _SearchScreenState();
 }
@@ -23,6 +26,7 @@ class _SearchScreenState extends State<SearchScreen> {
   bool internet = true;
   @override
   void initState() {
+    getProduct();
     getCurrentUser();
 
     final subscription = Connectivity()
@@ -40,9 +44,15 @@ class _SearchScreenState extends State<SearchScreen> {
     });
     super.initState();
   }
+
   List Product = [];
   getProduct() async {
-    CollectionReference dataOfProduct = FirebaseFirestore.instance.collection("Categories").doc(widget.categoryName).collection("الشركات").doc(widget.companyName).collection("الاصناف");
+    CollectionReference dataOfProduct = FirebaseFirestore.instance
+        .collection("Categories")
+        .doc(widget.categoryName)
+        .collection("الشركات")
+        .doc(widget.companyName)
+        .collection("الاصناف");
     QuerySnapshot snapOfData = await dataOfProduct.get();
 
     List<QueryDocumentSnapshot> list = snapOfData.docs;
@@ -51,13 +61,15 @@ class _SearchScreenState extends State<SearchScreen> {
       setState(() {
         Product.add(element.data());
       });
-
-    }) ;
-
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    List filterNames = Product.where(
+      (element) => element["text"].contains(searchController.text),
+    ).toList();
+
     if (internet == false) {
       return NoInternetScreen();
     }
@@ -87,47 +99,27 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: FutureBuilder(
-                      future: getProduct(),
-                      builder:
-                          (context, AsyncSnapshot snapshot) {
-                        if (snapshot.hasData) {
-                          final List products = snapshot.data!;
-
-                          List filterNames = products
-                              .where(
-                                (element) =>
-                                    element["text"].contains(searchController.text),
-                              )
-                              .toList();
-                          return searchController.text == ""
-                              ? SizedBox(
-                          )
-                              : ListView.builder(
-                                  itemCount: filterNames.length,
-                                  itemBuilder: (context, int i) {
-                                    final  filteredProduct =
-                                        filterNames[i];
-                                    final currentUser = signedInUser.email;
-                                    return MessageW(
-                                      mText: filterNames[i]["text"],
-                                      mPrice: filterNames[i]["price"],
-                                      mSender: filterNames[i]["sender"],
-                                      isMe: currentUser == filterNames[i]["sender"],
-                                      mPrice1: filterNames[i]["price1"],
-                                      mPrice2: filterNames[i]["price2"],
-                                      imageURL: filterNames[i]["image"],
-                                      notValid: filterNames[i]["notValid"],
-                                      buyPrice: filterNames[i]["buyPrice"],
-                                    );
-                                  });
-                        } else {
-                          return Center(child: CircularProgressIndicator());
-                            //Text("ادخل اسم الصنف الذي تريد البحث عنه");
-                        }
-                      }),
-                ),
+                    padding: const EdgeInsets.all(8.0),
+                    child: searchController.text == ""
+                        ?  SizedBox()
+                        : ListView.builder(
+                            itemCount: filterNames.length,
+                            itemBuilder: (context, int i) {
+                              final filteredProduct = filterNames[i];
+                              final currentUser = signedInUser.email;
+                              return MessageW(
+                                mText: filterNames[i]["text"],
+                                mPrice: filterNames[i]["price"],
+                                mSender: filterNames[i]["sender"],
+                                isMe: currentUser == filterNames[i]["sender"],
+                                mPrice1: filterNames[i]["price1"],
+                                mPrice2: filterNames[i]["price2"],
+                                imageURL: filterNames[i]["image"],
+                                notValid: filterNames[i]["notValid"],
+                                buyPrice: filterNames[i]["buyPrice"],
+                              );
+                            })
+                    ),
               ),
             ],
           ),
