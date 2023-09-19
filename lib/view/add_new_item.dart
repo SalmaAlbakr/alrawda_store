@@ -109,8 +109,6 @@ class _AddNewItemState extends State<AddNewItem> {
     price2Controller.dispose();
     buyPriceController.dispose();
 
-    widget.imageURL = "" ;
-
     super.dispose();
   }
 
@@ -124,6 +122,66 @@ class _AddNewItemState extends State<AddNewItem> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
+        floatingActionButton: SizedBox(
+          height: 80,
+          width: 80,
+          child: FloatingActionButton(
+            // shape: BeveledRectangleBorder(
+            //     borderRadius: BorderRadius.circular(10)
+            // ),
+            child: Icon(Icons.add ,size: 50,),
+            onPressed: () async {
+              if (formKey.currentState!.validate() &&
+                  context.read<TakePhotoByCameraCubit>().image !=
+                      null &&
+                  context
+                      .read<TakePhotoByCameraCubit>()
+                      .imageUrl !=
+                      null &&
+                  widget.categoryType != null) {
+                messageController.clear();
+                priceController.clear();
+                price1Controller.clear();
+                price2Controller.clear();
+                buyPriceController.clear();
+                CategoriesData.clear();
+                CompaniesData.clear();
+
+                await  _fireStore.collection("Categories").doc(widget.categoryType).collection("الشركات").doc(widget.companyName).collection("الاصناف").doc(widget.typeName).set({
+                  "text": widget.typeName,
+                  "price": widget.price,
+                  "price1": widget.price1,
+                  "price2": widget.price2,
+                  "buyPrice": widget.buyPrice,
+                  "image": context
+                      .read<TakePhotoByCameraCubit>()
+                      .imageUrl,
+                  "time": FieldValue.serverTimestamp(),
+                  "sender": "elrawda",
+                  //signedInUser.email,
+                  "notValid": "0",
+                  "Category": widget.categoryType,
+                  "companyName": widget.companyName,
+                });
+                setState(() {
+
+                });
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    backgroundColor: Colors.green,
+                    content: Text("تم اضافة الصنف بنجاح"),
+                  ),
+                );
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    backgroundColor: Colors.red,
+                    content: Text("يجب تسجيل الصنف"),
+                  ),
+                );
+              }
+            },),
+        ),
         appBar: AppBar(
           backgroundColor: MyColors.mainColor,
           title: Text("إضافة صنف جديد"),
@@ -366,65 +424,73 @@ class _AddNewItemState extends State<AddNewItem> {
                       )
                     else
                       Expanded(child: SizedBox()),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        child: ElevatedButton(
-                          onPressed: () async {
-                            if (formKey.currentState!.validate() &&
-                                context.read<TakePhotoByCameraCubit>().image !=
-                                    null &&
-                                context
-                                        .read<TakePhotoByCameraCubit>()
-                                        .imageUrl !=
-                                    null &&
-                                widget.categoryType != null) {
-                              messageController.clear();
-                              priceController.clear();
-                              price1Controller.clear();
-                              price2Controller.clear();
-                              buyPriceController.clear();
-                           await  _fireStore.collection("Categories").doc(widget.categoryType).collection("الشركات").doc(widget.companyName).collection("الاصناف").doc(widget.typeName).set({
-                                "text": widget.typeName,
-                                "price": widget.price,
-                                "price1": widget.price1,
-                                "price2": widget.price2,
-                                "buyPrice": widget.buyPrice,
-                                "image": context
-                                    .read<TakePhotoByCameraCubit>()
-                                    .imageUrl,
-                                "time": FieldValue.serverTimestamp(),
-                                "sender": signedInUser.email,
-                                "notValid": "0",
-                                "Category": widget.categoryType,
-                                "companyName": widget.companyName,
-                              });
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  backgroundColor: Colors.green,
-                                  content: Text("تم اضافة الصنف بنجاح"),
-                                ),
-                              );
-                            } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  backgroundColor: Colors.red,
-                                  content: Text("يجب تسجيل الصنف"),
-                                ),
-                              );
-                            }
-                          },
-                          child: Text(
-                            "حفظ",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
+                   // Container(),
+                   //  Padding(
+                   //    padding: const EdgeInsets.all(8.0),
+                   //    child: Container(
+                   //      width: MediaQuery.of(context).size.width,
+                   //      child: ElevatedButton(
+                   //        onPressed: () async {
+                   //          if (formKey.currentState!.validate() &&
+                   //              context.read<TakePhotoByCameraCubit>().image !=
+                   //                  null &&
+                   //              context
+                   //                      .read<TakePhotoByCameraCubit>()
+                   //                      .imageUrl !=
+                   //                  null &&
+                   //              widget.categoryType != null) {
+                   //            messageController.clear();
+                   //            priceController.clear();
+                   //            price1Controller.clear();
+                   //            price2Controller.clear();
+                   //            buyPriceController.clear();
+                   //            CategoriesData.clear();
+                   //            CompaniesData.clear();
+                   //
+                   //         await  _fireStore.collection("Categories").doc(widget.categoryType).collection("الشركات").doc(widget.companyName).collection("الاصناف").doc(widget.typeName).set({
+                   //              "text": widget.typeName,
+                   //              "price": widget.price,
+                   //              "price1": widget.price1,
+                   //              "price2": widget.price2,
+                   //              "buyPrice": widget.buyPrice,
+                   //              "image": context
+                   //                  .read<TakePhotoByCameraCubit>()
+                   //                  .imageUrl,
+                   //              "time": FieldValue.serverTimestamp(),
+                   //              "sender": "elrawda",
+                   //              //signedInUser.email,
+                   //              "notValid": "0",
+                   //              "Category": widget.categoryType,
+                   //              "companyName": widget.companyName,
+                   //            });
+                   //         setState(() {
+                   //
+                   //         });
+                   //            ScaffoldMessenger.of(context).showSnackBar(
+                   //              SnackBar(
+                   //                backgroundColor: Colors.green,
+                   //                content: Text("تم اضافة الصنف بنجاح"),
+                   //              ),
+                   //            );
+                   //          } else {
+                   //            ScaffoldMessenger.of(context).showSnackBar(
+                   //              SnackBar(
+                   //                backgroundColor: Colors.red,
+                   //                content: Text("يجب تسجيل الصنف"),
+                   //              ),
+                   //            );
+                   //          }
+                   //        },
+                   //        child: Text(
+                   //          "حفظ",
+                   //          style: TextStyle(
+                   //            fontWeight: FontWeight.bold,
+                   //            fontSize: 20,
+                   //          ),
+                   //        ),
+                   //      ),
+                   //    ),
+                   //  ),
                   ],
                 ),
               );
