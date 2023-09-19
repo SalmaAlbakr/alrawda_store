@@ -162,10 +162,6 @@ class _AddNewItemState extends State<AddNewItem> {
                   "Category": widget.categoryType,
                   "companyName": widget.companyName,
                 });
-                setState(() {
-                  widget.imageURL = "";
-
-                });
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     backgroundColor: Colors.green,
