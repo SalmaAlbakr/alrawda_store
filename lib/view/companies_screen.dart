@@ -56,7 +56,7 @@ class _CompaniesScreenState extends State<CompaniesScreen> {
       textDirection: TextDirection.rtl,
       child: Scaffold(
         appBar: AppBar(
-          automaticallyImplyLeading: false,
+        //  automaticallyImplyLeading: false,
           backgroundColor: Colors.white,
           elevation: 0.2,
           title: Column (
