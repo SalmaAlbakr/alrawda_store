@@ -44,3 +44,4 @@ final _user = FirebaseAuth.instance;
     );
   }
 }
+

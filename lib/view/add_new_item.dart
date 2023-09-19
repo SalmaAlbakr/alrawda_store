@@ -157,13 +157,13 @@ class _AddNewItemState extends State<AddNewItem> {
                       .read<TakePhotoByCameraCubit>()
                       .imageUrl,
                   "time": FieldValue.serverTimestamp(),
-                  "sender": "elrawda",
-                  //signedInUser.email,
+                  "sender": signedInUser.email,
                   "notValid": "0",
                   "Category": widget.categoryType,
                   "companyName": widget.companyName,
                 });
                 setState(() {
+                  widget.imageURL = "";
 
                 });
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -172,6 +172,9 @@ class _AddNewItemState extends State<AddNewItem> {
                     content: Text("تم اضافة الصنف بنجاح"),
                   ),
                 );
+
+                context
+                    .read<TakePhotoByCameraCubit>().reset();
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
