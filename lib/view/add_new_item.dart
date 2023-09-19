@@ -196,6 +196,11 @@ class _AddNewItemState extends State<AddNewItem> {
                   children: [
                     Container(
                       child: DropdownButton<String>(
+                        onTap: (){
+                          setState(() {
+                            widget.companyName = null ;
+                          });
+                        },
                         hint: Text(" نوع الصنف"),
                         underline: Container(),
                         borderRadius: BorderRadius.all(Radius.circular(15)),
@@ -219,8 +224,6 @@ class _AddNewItemState extends State<AddNewItem> {
                       ),
                     ),
 
-                    // widget.categoryType == null ? Container()
-                    //     :
                     Container(
                       child: DropdownButton<String>(
 
@@ -237,12 +240,6 @@ class _AddNewItemState extends State<AddNewItem> {
                         items: CompaniesName.map((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
-                            // child: Row(
-                            //   mainAxisAlignment: MainAxisAlignment.end,
-                            //   children: [
-                            //     Text(value , ),
-                            //   ],
-                            // ),
                             child: Center(child: Text(value , )),
                           );
                         }).toList(),
