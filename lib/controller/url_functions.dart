@@ -4,9 +4,9 @@ import 'package:url_launcher/url_launcher.dart';
 //facebook function
 facebookURL() async {
   final Uri url = await Uri.parse(
-      'https://www.facebook.com/Rawdakabel?mibextid=ZbWKwL');
+      'https://www.facebook.com/Rawdakabel' );
   if (!await launchUrl(url
- ,
+ ,mode: LaunchMode.externalApplication,
     webViewConfiguration: WebViewConfiguration(
       enableJavaScript: false,
     )
