@@ -14,7 +14,6 @@ class NoInternetScreen extends StatelessWidget {
             children: [
               Icon(Icons.signal_wifi_connected_no_internet_4_rounded),
               Text("no internet plz check",style: TextStyle(
-                // fontSize: 35,
                 fontWeight: FontWeight.bold,
                 color: Colors.red,
               )),

@@ -89,7 +89,6 @@ class StartScreen extends StatelessWidget {
                     ),
                   ),
                   onPressed: () async {
-
                     try {
                       final userCredential =
                           await FirebaseAuth.instance.signInAnonymously();
@@ -101,14 +100,13 @@ class StartScreen extends StatelessWidget {
                     } on FirebaseAuthException catch (e) {
                       switch (e.code) {
                         case "operation-not-allowed":
-                          print("Anonymous auth hasn't been enabled for this project.");
+                          print(
+                              "Anonymous auth hasn't been enabled for this project.");
                           break;
                         default:
                           print("Unknown error.");
                       }
                     }
-
-
                   },
                   child: Text(
                     "تصفح بدون تسجيل دخول",

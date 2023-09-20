@@ -13,7 +13,6 @@ class AboutScreen extends StatefulWidget {
 }
 
 class _AboutScreenState extends State<AboutScreen> {
-
   bool internet = true;
   @override
   void initState() {
@@ -32,6 +31,7 @@ class _AboutScreenState extends State<AboutScreen> {
       }
     });
   }
+
   @override
   Widget build(BuildContext context) {
     if (internet == false) {
@@ -67,7 +67,8 @@ class _AboutScreenState extends State<AboutScreen> {
                     width: 350,
                     child: ElevatedButton(
                       onPressed: () {
-                        facebookURL();
+                        AboutFunction().facebookURL();
+                        //facebookURL();
                       },
                       child: Row(
                         children: [
@@ -83,11 +84,13 @@ class _AboutScreenState extends State<AboutScreen> {
                     width: 350,
                     child: ElevatedButton(
                       onPressed: () {
-                        locationFunction();
+                        AboutFunction().locationFunction();
                       },
                       child: Row(
                         children: [
-                          Icon(Icons.location_on_outlined,),
+                          Icon(
+                            Icons.location_on_outlined,
+                          ),
                           SizedBox(width: 7),
                           Text("شارع مصر اسيوط البطيء - البدرشين - الجيزه"),
                         ],
@@ -99,14 +102,15 @@ class _AboutScreenState extends State<AboutScreen> {
                       Expanded(
                         child: ElevatedButton(
                           onPressed: () {
-                            whatsUrl("01002095050");
+                            AboutFunction().whatsUrl("01002095050");
                           },
                           child: Row(
                             children: [
                               Container(
-                                  height: 25,
-                                  width: 25,
-                                  child: Image.asset("image/whats.PNG")),
+                                height: 25,
+                                width: 25,
+                                child: Image.asset("image/whats.PNG"),
+                              ),
                               SizedBox(width: 7),
                               Text("01002095050"),
                             ],
@@ -119,14 +123,15 @@ class _AboutScreenState extends State<AboutScreen> {
                       Expanded(
                         child: ElevatedButton(
                           onPressed: () {
-                            whatsUrl("01157891602");
+                            AboutFunction().whatsUrl("01157891602");
                           },
                           child: Row(
                             children: [
                               Container(
-                                  height: 25,
-                                  width: 25,
-                                  child: Image.asset("image/whats.PNG")),
+                                height: 25,
+                                width: 25,
+                                child: Image.asset("image/whats.PNG"),
+                              ),
                               SizedBox(width: 7),
                               Text("01157891602"),
                             ],
@@ -140,7 +145,7 @@ class _AboutScreenState extends State<AboutScreen> {
                       Expanded(
                         child: ElevatedButton(
                           onPressed: () {
-                            PhoneUrl("01110955595");
+                            AboutFunction().PhoneUrl("01110955595");
                           },
                           child: Row(
                             children: [
@@ -157,7 +162,7 @@ class _AboutScreenState extends State<AboutScreen> {
                       Expanded(
                         child: ElevatedButton(
                           onPressed: () {
-                            PhoneUrl("01142323655");
+                            AboutFunction().PhoneUrl("01142323655");
                           },
                           child: Row(
                             children: [

@@ -1,7 +1,5 @@
 import 'package:alrawda_store/controller/add_items_function.dart';
 import 'package:alrawda_store/controller/take_photo_cubit/from_camera/take_photo_cubit.dart';
-import 'package:alrawda_store/model/category_type.dart';
-import 'package:alrawda_store/view/home_screen.dart';
 import 'package:alrawda_store/widgets/no_internet.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -29,14 +27,16 @@ class AddNewItem extends StatefulWidget {
 }
 
 class _AddNewItemState extends State<AddNewItem> {
-
   int iC = 0;
 
   List CompaniesData = [];
   List<String> CompaniesName = [];
 
   getCompanies() async {
-    CollectionReference dataOfProduct = FirebaseFirestore.instance.collection("Categories").doc(widget.categoryType).collection("الشركات");
+    CollectionReference dataOfProduct = FirebaseFirestore.instance
+        .collection("Categories")
+        .doc(widget.categoryType)
+        .collection("الشركات");
     QuerySnapshot snapOfData = await dataOfProduct.get();
 
     List<QueryDocumentSnapshot> list = snapOfData.docs;
@@ -47,8 +47,7 @@ class _AddNewItemState extends State<AddNewItem> {
         CompaniesName.add(CompaniesData[iC]["name"]);
         iC++;
       });
-    }) ;
-
+    });
   }
 
   int im = 0;
@@ -57,7 +56,7 @@ class _AddNewItemState extends State<AddNewItem> {
 
   getCategories() async {
     CollectionReference dataOfProduct =
-    FirebaseFirestore.instance.collection("Categories");
+        FirebaseFirestore.instance.collection("Categories");
     QuerySnapshot snapOfData = await dataOfProduct.get();
 
     List<QueryDocumentSnapshot> list = snapOfData.docs;
@@ -83,7 +82,7 @@ class _AddNewItemState extends State<AddNewItem> {
   bool internet = true;
   @override
   void initState() {
-   // getCompanies();
+    // getCompanies();
     getCategories();
     super.initState();
     final subscription = Connectivity()
@@ -126,18 +125,14 @@ class _AddNewItemState extends State<AddNewItem> {
           height: 80,
           width: 80,
           child: FloatingActionButton(
-            // shape: BeveledRectangleBorder(
-            //     borderRadius: BorderRadius.circular(10)
-            // ),
-            child: Icon(Icons.add ,size: 50,),
+            child: Icon(
+              Icons.add,
+              size: 50,
+            ),
             onPressed: () async {
               if (formKey.currentState!.validate() &&
-                  context.read<TakePhotoByCameraCubit>().image !=
-                      null &&
-                  context
-                      .read<TakePhotoByCameraCubit>()
-                      .imageUrl !=
-                      null &&
+                  context.read<TakePhotoByCameraCubit>().image != null &&
+                  context.read<TakePhotoByCameraCubit>().imageUrl != null &&
                   widget.categoryType != null) {
                 messageController.clear();
                 priceController.clear();
@@ -147,15 +142,20 @@ class _AddNewItemState extends State<AddNewItem> {
                 CategoriesData.clear();
                 CompaniesData.clear();
 
-                await  _fireStore.collection("Categories").doc(widget.categoryType).collection("الشركات").doc(widget.companyName).collection("الاصناف").doc(widget.typeName).set({
+                await _fireStore
+                    .collection("Categories")
+                    .doc(widget.categoryType)
+                    .collection("الشركات")
+                    .doc(widget.companyName)
+                    .collection("الاصناف")
+                    .doc(widget.typeName)
+                    .set({
                   "text": widget.typeName,
                   "price": widget.price,
                   "price1": widget.price1,
                   "price2": widget.price2,
                   "buyPrice": widget.buyPrice,
-                  "image": context
-                      .read<TakePhotoByCameraCubit>()
-                      .imageUrl,
+                  "image": context.read<TakePhotoByCameraCubit>().imageUrl,
                   "time": FieldValue.serverTimestamp(),
                   "sender": signedInUser.email,
                   "notValid": "0",
@@ -169,8 +169,7 @@ class _AddNewItemState extends State<AddNewItem> {
                   ),
                 );
 
-                context
-                    .read<TakePhotoByCameraCubit>().reset();
+                context.read<TakePhotoByCameraCubit>().reset();
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
@@ -179,7 +178,8 @@ class _AddNewItemState extends State<AddNewItem> {
                   ),
                 );
               }
-            },),
+            },
+          ),
         ),
         appBar: AppBar(
           backgroundColor: MyColors.mainColor,
@@ -196,9 +196,9 @@ class _AddNewItemState extends State<AddNewItem> {
                   children: [
                     Container(
                       child: DropdownButton<String>(
-                        onTap: (){
+                        onTap: () {
                           setState(() {
-                            widget.companyName = null ;
+                            widget.companyName = null;
                           });
                         },
                         hint: Text(" نوع الصنف"),
@@ -210,23 +210,22 @@ class _AddNewItemState extends State<AddNewItem> {
                             CompaniesName.clear();
                             widget.categoryType = newValue!;
                             getCompanies();
-
                           });
-
                         },
                         isExpanded: true,
                         items: CategoriesName.map((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
-                            child: Center(child: Text(value , )),
+                            child: Center(
+                                child: Text(
+                              value,
+                            )),
                           );
                         }).toList(),
                       ),
                     ),
-
                     Container(
                       child: DropdownButton<String>(
-
                         hint: Text(" الشركه"),
                         underline: Container(),
                         borderRadius: BorderRadius.all(Radius.circular(15)),
@@ -240,7 +239,11 @@ class _AddNewItemState extends State<AddNewItem> {
                         items: CompaniesName.map((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
-                            child: Center(child: Text(value , )),
+                            child: Center(
+                              child: Text(
+                                value,
+                              ),
+                            ),
                           );
                         }).toList(),
                       ),
@@ -420,73 +423,6 @@ class _AddNewItemState extends State<AddNewItem> {
                       )
                     else
                       Expanded(child: SizedBox()),
-                   // Container(),
-                   //  Padding(
-                   //    padding: const EdgeInsets.all(8.0),
-                   //    child: Container(
-                   //      width: MediaQuery.of(context).size.width,
-                   //      child: ElevatedButton(
-                   //        onPressed: () async {
-                   //          if (formKey.currentState!.validate() &&
-                   //              context.read<TakePhotoByCameraCubit>().image !=
-                   //                  null &&
-                   //              context
-                   //                      .read<TakePhotoByCameraCubit>()
-                   //                      .imageUrl !=
-                   //                  null &&
-                   //              widget.categoryType != null) {
-                   //            messageController.clear();
-                   //            priceController.clear();
-                   //            price1Controller.clear();
-                   //            price2Controller.clear();
-                   //            buyPriceController.clear();
-                   //            CategoriesData.clear();
-                   //            CompaniesData.clear();
-                   //
-                   //         await  _fireStore.collection("Categories").doc(widget.categoryType).collection("الشركات").doc(widget.companyName).collection("الاصناف").doc(widget.typeName).set({
-                   //              "text": widget.typeName,
-                   //              "price": widget.price,
-                   //              "price1": widget.price1,
-                   //              "price2": widget.price2,
-                   //              "buyPrice": widget.buyPrice,
-                   //              "image": context
-                   //                  .read<TakePhotoByCameraCubit>()
-                   //                  .imageUrl,
-                   //              "time": FieldValue.serverTimestamp(),
-                   //              "sender": "elrawda",
-                   //              //signedInUser.email,
-                   //              "notValid": "0",
-                   //              "Category": widget.categoryType,
-                   //              "companyName": widget.companyName,
-                   //            });
-                   //         setState(() {
-                   //
-                   //         });
-                   //            ScaffoldMessenger.of(context).showSnackBar(
-                   //              SnackBar(
-                   //                backgroundColor: Colors.green,
-                   //                content: Text("تم اضافة الصنف بنجاح"),
-                   //              ),
-                   //            );
-                   //          } else {
-                   //            ScaffoldMessenger.of(context).showSnackBar(
-                   //              SnackBar(
-                   //                backgroundColor: Colors.red,
-                   //                content: Text("يجب تسجيل الصنف"),
-                   //              ),
-                   //            );
-                   //          }
-                   //        },
-                   //        child: Text(
-                   //          "حفظ",
-                   //          style: TextStyle(
-                   //            fontWeight: FontWeight.bold,
-                   //            fontSize: 20,
-                   //          ),
-                   //        ),
-                   //      ),
-                   //    ),
-                   //  ),
                   ],
                 ),
               );

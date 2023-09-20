@@ -3,8 +3,6 @@ import 'package:alrawda_store/my_color.dart';
 import 'package:alrawda_store/view/about_screen.dart';
 import 'package:alrawda_store/view/add_new_item.dart';
 import 'package:alrawda_store/view/companies_screen.dart';
-import 'package:alrawda_store/view/list_of_products.dart';
-import 'package:alrawda_store/view/search_screen.dart';
 import 'package:alrawda_store/view/start_screen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -66,35 +64,32 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-
-             signedInUser.isAnonymous ?
-             SizedBox() :
-             signedInUser.email! == "elrawda123@gmail.com"
-                 ?
-             TextButton(
-               onPressed: () {
-                 Navigator.of(context).push(
-                   MaterialPageRoute(
-                     builder: (context) => AddNewItem(),
-                   ),
-                 );
-               },
-               child: Row(
-                 mainAxisAlignment: MainAxisAlignment.center,
-                 children: [
-                   Icon(Icons.add),
-                   SizedBox(
-                     width: 5,
-                   ),
-                   Text(
-                     "اضافة صنف جديد",
-                     style: TextStyle(color: MyColors.mainColor),
-                   ),
-                 ],
-               ),
-             )
-                 :
-             SizedBox(),
+              signedInUser.isAnonymous
+                  ? SizedBox()
+                  : signedInUser.email! == "elrawda123@gmail.com"
+                      ? TextButton(
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => AddNewItem(),
+                              ),
+                            );
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.add),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                "اضافة صنف جديد",
+                                style: TextStyle(color: MyColors.mainColor),
+                              ),
+                            ],
+                          ),
+                        )
+                      : SizedBox(),
               TextButton(
                 onPressed: () {
                   Navigator.of(context).push(
@@ -159,16 +154,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: Colors.blue[900],
                 ),
               ),
-              // IconButton(
-              //   onPressed: () {
-              //     Navigator.of(context).push(
-              //       MaterialPageRoute(
-              //         builder: (context) => SearchScreen(),
-              //       ),
-              //     );
-              //   },
-              //   icon: Icon(Icons.search),
-              // )
             ],
           ),
           iconTheme: IconThemeData(),

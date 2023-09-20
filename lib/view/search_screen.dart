@@ -1,6 +1,4 @@
 import 'package:alrawda_store/controller/add_items_function.dart';
-import 'package:alrawda_store/model/get_product_model/get_product_model.dart';
-import 'package:alrawda_store/model/get_product_model/get_product_repo.dart';
 import 'package:alrawda_store/my_color.dart';
 import 'package:alrawda_store/widgets/no_internet.dart';
 import 'package:alrawda_store/widgets/product_container.dart';
@@ -101,7 +99,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: searchController.text == ""
-                        ?  SizedBox()
+                        ? SizedBox()
                         : ListView.builder(
                             itemCount: filterNames.length,
                             itemBuilder: (context, int i) {
@@ -118,8 +116,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                 notValid: filterNames[i]["notValid"],
                                 buyPrice: filterNames[i]["buyPrice"],
                               );
-                            })
-                    ),
+                            })),
               ),
             ],
           ),

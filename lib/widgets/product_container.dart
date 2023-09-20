@@ -36,11 +36,13 @@ class MessageW extends StatelessWidget {
         ),
         child: ListTile(
           leading: Container(
-              width: MediaQuery.of(context).size.width * 0.2,
-              child: Container(
-                height: 70,
-                  width: 70,
-                  child: Image.network(imageURL))),
+            width: MediaQuery.of(context).size.width * 0.2,
+            child: Container(
+              height: 70,
+              width: 70,
+              child: Image.network(imageURL),
+            ),
+          ),
           title: Text(
             mText,
             maxLines: 10,
@@ -61,12 +63,18 @@ class MessageW extends StatelessWidget {
                         color: Colors.black,
                       ),
                     )
-                  : Text("المنتج غير متاح",style: TextStyle(color: Colors.red[900],fontWeight: FontWeight.bold,fontSize: 23),),
+                  : Text(
+                      "المنتج غير متاح",
+                      style: TextStyle(
+                          color: Colors.red[900],
+                          fontWeight: FontWeight.bold,
+                          fontSize: 23),
+                    ),
               signedInUser.email! == "elrawda123@gmail.com"
                   ? Column(
                       children: [
                         Text(
-                         buyPrice,
+                          buyPrice,
                           style: TextStyle(
                             // fontSize: 18,
                             fontWeight: FontWeight.bold,
