@@ -98,7 +98,8 @@ class _CompaniesScreenState extends State<CompaniesScreen> {
                       );
                     },
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2),
+                      crossAxisCount: 2,
+                    ),
                   ),
                 )
               ],
