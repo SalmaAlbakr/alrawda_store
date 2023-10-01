@@ -147,7 +147,7 @@ class _HomeScreenState extends State<HomeScreen> {
           title: Row(
             children: [
               Text(
-                "أهلا بيكم في الروضه:-  ",
+                "أهلا بكم في الروضه:-  ",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 25,

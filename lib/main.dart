@@ -37,6 +37,8 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
-        home: _user.currentUser == null ? StartScreen() : HomeScreen());
+        home: SplashScreen()
+       // _user.currentUser == null ? StartScreen() : HomeScreen()
+    );
   }
 }
