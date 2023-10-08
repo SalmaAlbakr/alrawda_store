@@ -88,18 +88,25 @@ class _ListOfProductsState extends State<ListOfProducts> {
                   widget.categoryName,
                   style: TextStyle(color: Colors.black),
                 ),
-                IconButton(
-                  onPressed: () {
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                        builder: (context) => SearchScreen(
-                          categoryName: widget.categoryName,
-                          companyName: widget.companyName,
+                SizedBox(width: 90,),
+                Container(
+                  width: 35,
+                  height: 35,
+                  color: Colors.deepOrange,
+                  child: IconButton(
+                    color: Colors.white,
+                    onPressed: () {
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (context) => SearchScreen(
+                            categoryName: widget.categoryName,
+                            companyName: widget.companyName,
+                          ),
                         ),
-                      ),
-                    );
-                  },
-                  icon: Icon(Icons.search),
+                      );
+                    },
+                    icon: Icon(Icons.search),
+                  ),
                 )
               ],
             )),

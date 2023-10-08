@@ -46,23 +46,21 @@ class _CompaniesScreenState extends State<CompaniesScreen> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
+        backgroundColor: Colors.blue[900],
         appBar: AppBar(
-          backgroundColor: Colors.white,
-          elevation: 0.2,
-          title: Column(
-            children: [
-              Text(
+          backgroundColor: Colors.blue[900],
+          elevation: 0.1,
+          title: Padding(
+            padding: const EdgeInsets.all(1),
+            child: Expanded(
+              child: Text(
                 widget.CatName,
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                    color: Colors.blue[900]),
+                    fontSize: 25,
+                    color: Colors.white),
               ),
-              Text(
-                "الشركات المتاحه",
-                style: TextStyle(color: Colors.black26),
-              )
-            ],
+            ),
           ),
           iconTheme: IconThemeData(),
         ),

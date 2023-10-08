@@ -48,7 +48,9 @@ class _HomeScreenState extends State<HomeScreen> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
+        backgroundColor: Colors.blue[900],
         endDrawer: Drawer(
+         shadowColor: Colors.deepOrangeAccent,
           child: ListView(
             children: [
               DrawerHeader(
@@ -141,8 +143,10 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         appBar: AppBar(
+
+          iconTheme: IconThemeData(color: Colors.deepOrange),
           automaticallyImplyLeading: false,
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.blue[900],
           elevation: 0.2,
           title: Row(
             children: [
@@ -151,12 +155,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 25,
-                  color: Colors.blue[900],
+                  color: Colors.white,
                 ),
               ),
             ],
           ),
-          iconTheme: IconThemeData(),
         ),
         body: SafeArea(
           child: Center(

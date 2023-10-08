@@ -70,7 +70,7 @@ class MessageW extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                           fontSize: 23),
                     ),
-              signedInUser.email! == "elrawda123@gmail.com"
+              signedInUser.email == "elrawda123@gmail.com"
                   ? Column(
                       children: [
                         Text(

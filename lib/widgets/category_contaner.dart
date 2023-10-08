@@ -18,7 +18,10 @@ class NewWidget extends StatelessWidget {
           Container(
             height: 100,
               width: 100,
-              child: Image.network(image)
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Image.network(image),
+              )
           ),
 
           Padding(

@@ -109,7 +109,7 @@ class StartScreen extends StatelessWidget {
                     }
                   },
                   child: Text(
-                    "تصفح بدون تسجيل دخول",
+                    "منتجات الروضه ",
                     style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                   ),
                 ),
