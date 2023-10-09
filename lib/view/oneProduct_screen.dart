@@ -1,9 +1,4 @@
-import 'package:alrawda_store/controller/add_items_function.dart';
-import 'package:alrawda_store/view/list_of_products.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:alrawda_store/widgets/category_contaner.dart';
 
 class OneProductPage extends StatefulWidget {
   OneProductPage(
