@@ -15,19 +15,32 @@ class OneProductPage extends StatefulWidget {
 class _OneProductPageState extends State<OneProductPage> {
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-      body: SafeArea(
-        child: Center(
-          child: Column(
-            children: [
-              Text("PRODUCT NAME"),
-                Container(
-                  child: Image.network("https://firebasestorage.googleapis.com/v0/b/alrawda-store.appspot.com/o/company%2F%D9%85%D8%B5%D8%B7%D9%81%D9%89%20%D9%85%D8%AD%D9%85%D9%88%D8%AF.jpeg?alt=media&token=999883e6-4745-4bd7-81b0-46477f81effe&_gl=1*1wwljvm*_ga*MTI5NzMyMDM4NS4xNjkwMzMwMTAw*_ga_CW55HF8NVT*MTY5NjgwNjc1OC4xNi4xLjE2OTY4MDY4NDguMzIuMC4w"),
-                ),
-              Row(
+    return  Directionality(
+      textDirection: TextDirection.rtl,
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor:Colors.blue[900] ,
+          title: Text("شركة الروضه",style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 25,
+              color: Colors.white),),
+        ),
+        body: SafeArea(
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Text("مثلا اي صنف",style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25,
+                      color: Colors.black),),
+                    Container(
+                      child: Image.network("https://firebasestorage.googleapis.com/v0/b/alrawda-store.appspot.com/o/company%2F%D9%85%D8%B5%D8%B7%D9%81%D9%89%20%D9%85%D8%AD%D9%85%D9%88%D8%AF.jpeg?alt=media&token=999883e6-4745-4bd7-81b0-46477f81effe&_gl=1*1wwljvm*_ga*MTI5NzMyMDM4NS4xNjkwMzMwMTAw*_ga_CW55HF8NVT*MTY5NjgwNjc1OC4xNi4xLjE2OTY4MDY4NDguMzIuMC4w"),
+                    ),
                   Text(
-                    "سعر القطاعي",
+                    "سعر القطاعي:155",
                     style: TextStyle(
                       // fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -51,18 +64,13 @@ class _OneProductPageState extends State<OneProductPage> {
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
                     ),
-                  )
-
+                  ),
+                  SizedBox(height: 70,),
+                  Text("ملحوظه: سعر جمله 1 يبدأ من ال10 لفه "
+                      "' سعر جمله 2 يبدأ من  ال5 لفه",style: TextStyle(fontSize: 25),overflow: TextOverflow.ellipsis,maxLines: 5,)
                 ],
-
               ),
-              SizedBox(height: 20,),
-              Row(
-                children: [
-                  Text("ملحوظه: سعر جمله 1 يبدأ من ال10 لفه ' سعرجمله 2 يبدأ من  ال5 لفه")
-                ],
-              )
-            ],
+            ),
           ),
         ),
       ),
