@@ -32,7 +32,21 @@ class MessageW extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
         focusColor: Colors.blueGrey,
-        onTap: (){Navigator.of(context).push(MaterialPageRoute(builder: (context)=>OneProductPage()));},
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => OneProductPage(
+                productName: mText,
+                onePiecePrice: mPrice,
+                price1: mPrice1,
+                price2: mPrice2,
+                image: imageURL,
+                buyPrice: buyPrice,
+                notValid: notValid,
+              ),
+            ),
+          );
+        },
         child: Container(
           decoration: BoxDecoration(
             color: Colors.white,
