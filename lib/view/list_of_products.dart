@@ -77,6 +77,7 @@ class _ListOfProductsState extends State<ListOfProducts> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
+        backgroundColor: Colors.blue[900],
         appBar: AppBar(
             iconTheme: IconThemeData(
               color: Colors.black,
@@ -88,7 +89,7 @@ class _ListOfProductsState extends State<ListOfProducts> {
                   widget.categoryName,
                   style: TextStyle(color: Colors.black),
                 ),
-                SizedBox(width: 90,),
+                Expanded(child: SizedBox()),
                 Container(
                   width: 35,
                   height: 35,

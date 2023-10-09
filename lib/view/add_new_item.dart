@@ -312,7 +312,7 @@ class _AddNewItemState extends State<AddNewItem> {
                               keyboardType: TextInputType.number,
                               controller: priceController,
                               onChanged: (value) {
-                                widget.price = "سعر القطاعي : " + value;
+                                widget.price = "السعر : " + value;
                               },
                               decoration: InputDecoration(
                                 border: OutlineInputBorder(

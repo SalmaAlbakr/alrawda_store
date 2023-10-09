@@ -75,50 +75,60 @@ class _SearchScreenState extends State<SearchScreen> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
+        appBar: AppBar(
+          backgroundColor:Colors.blue[900] ,
+          title: Text("شركة الروضه",style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 25,
+              color: Colors.white),),
+        ),
         body: SafeArea(
-          child: Column(
-            children: [
-              TextFormField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: MyColors.mainColor,
+          child: Padding(
+            padding: const EdgeInsets.all(15),
+            child: Column(
+              children: [
+                TextFormField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: MyColors.mainColor,
+                      ),
+                    ),
+                    hintText: "أبحث هنا",
+                    prefixIcon: Icon(
+                      Icons.search,
                     ),
                   ),
-                  hintText: "بحث",
-                  prefixIcon: Icon(
-                    Icons.search,
-                  ),
+                  onChanged: (value) {
+                    setState(() {});
+                  },
+                  controller: searchController,
                 ),
-                onChanged: (value) {
-                  setState(() {});
-                },
-                controller: searchController,
-              ),
-              Expanded(
-                child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: searchController.text == ""
-                        ? SizedBox()
-                        : ListView.builder(
-                            itemCount: filterNames.length,
-                            itemBuilder: (context, int i) {
-                              final filteredProduct = filterNames[i];
-                              final currentUser = signedInUser.email;
-                              return MessageW(
-                                mText: filterNames[i]["text"],
-                                mPrice: filterNames[i]["price"],
-                                mSender: filterNames[i]["sender"],
-                                isMe: currentUser == filterNames[i]["sender"],
-                                mPrice1: filterNames[i]["price1"],
-                                mPrice2: filterNames[i]["price2"],
-                                imageURL: filterNames[i]["image"],
-                                notValid: filterNames[i]["notValid"],
-                                buyPrice: filterNames[i]["buyPrice"],
-                              );
-                            })),
-              ),
-            ],
+                Expanded(
+                  child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: searchController.text == ""
+                          ? SizedBox()
+                          : ListView.builder(
+                              itemCount: filterNames.length,
+                              itemBuilder: (context, int i) {
+                                final filteredProduct = filterNames[i];
+                                final currentUser = signedInUser.email;
+                                return MessageW(
+                                  mText: filterNames[i]["text"],
+                                  mPrice: filterNames[i]["price"],
+                                  mSender: filterNames[i]["sender"],
+                                  isMe: currentUser == filterNames[i]["sender"],
+                                  mPrice1: filterNames[i]["price1"],
+                                  mPrice2: filterNames[i]["price2"],
+                                  imageURL: filterNames[i]["image"],
+                                  notValid: filterNames[i]["notValid"],
+                                  buyPrice: filterNames[i]["buyPrice"],
+                                );
+                              })),
+                ),
+              ],
+            ),
           ),
         ),
       ),
