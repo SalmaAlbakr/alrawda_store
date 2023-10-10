@@ -73,44 +73,45 @@ class _ListOfProductsState extends State<ListOfProducts> {
       child: Scaffold(
         backgroundColor: Colors.blue[900],
         appBar: AppBar(
-            iconTheme: IconThemeData(
-              color: Colors.black,
-            ),
-            backgroundColor: Colors.white,
-            title: Row(
-              children: [
-                Text(
-                  widget.categoryName,
-                  style: TextStyle(
-                    color: Colors.black,
-                  ),
+          iconTheme: IconThemeData(
+            color: Colors.black,
+          ),
+          backgroundColor: Colors.white,
+          title: Row(
+            children: [
+              Text(
+                widget.categoryName,
+                style: TextStyle(
+                  color: Colors.black,
                 ),
-                Expanded(
-                  child: SizedBox(),
-                ),
-                Container(
-                  width: 35,
-                  height: 35,
-                  color: Colors.deepOrange,
-                  child: IconButton(
-                    color: Colors.white,
-                    onPressed: () {
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                          builder: (context) => SearchScreen(
-                            categoryName: widget.categoryName,
-                            companyName: widget.companyName,
-                          ),
+              ),
+              Expanded(
+                child: SizedBox(),
+              ),
+              Container(
+                width: 35,
+                height: 35,
+                color: Colors.deepOrange,
+                child: IconButton(
+                  color: Colors.white,
+                  onPressed: () {
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (context) => SearchScreen(
+                          categoryName: widget.categoryName,
+                          companyName: widget.companyName,
                         ),
-                      );
-                    },
-                    icon: Icon(
-                      Icons.search,
-                    ),
+                      ),
+                    );
+                  },
+                  icon: Icon(
+                    Icons.search,
                   ),
-                )
-              ],
-            )),
+                ),
+              )
+            ],
+          ),
+        ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Product != []
