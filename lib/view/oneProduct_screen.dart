@@ -49,46 +49,60 @@ class _OneProductPageState extends State<OneProductPage> {
                     widget.productName,
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 25,
-                        color: Colors.black),
+                        fontSize: 20,
+                        color: Color(0xff1D267D)),
                   ),
+                  SizedBox(height: 15,),
                   Container(
                     height: 500,
                     width: 500,
                     child: Image.network(widget.image),
                   ),
-                  Text(
-                    widget.onePiecePrice,
-                    style: TextStyle(
-                      // fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
+                  SizedBox(height: 10,),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Color(0xffA5D7E8),
+                      borderRadius: BorderRadius.circular(15),
+                      border: Border.all(),
+                    ),
+                   // color: Color(0xffA5D7E8),
+                    child: Column(
+                      children: [
+                        Text(
+                          widget.onePiecePrice,
+                          style: TextStyle(
+                             fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black87,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 15,
+                        ),
+                        Text(
+                          widget.price1,
+                          style: TextStyle(
+                             fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black87,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 15,
+                        ),
+                        Text(
+                          widget.price2,
+                          style: TextStyle(
+                             fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black87,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   SizedBox(
-                    width: 15,
-                  ),
-                  Text(
-                    widget.price1,
-                    style: TextStyle(
-                      // fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 15,
-                  ),
-                  Text(
-                    widget.price2,
-                    style: TextStyle(
-                      // fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 60,
+                    height: 40,
                   ),
                   Wrap(
                     children: [
