@@ -23,7 +23,6 @@ class _CompaniesScreenState extends State<CompaniesScreen> {
     QuerySnapshot snapOfData = await dataOfProduct.get();
 
     List<QueryDocumentSnapshot> list = snapOfData.docs;
-    print(list);
     list.forEach((element) {
       setState(() {
         Companies.add(element.data());

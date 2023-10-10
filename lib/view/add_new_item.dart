@@ -40,7 +40,6 @@ class _AddNewItemState extends State<AddNewItem> {
     QuerySnapshot snapOfData = await dataOfProduct.get();
 
     List<QueryDocumentSnapshot> list = snapOfData.docs;
-    print(list);
     list.forEach((element) {
       setState(() {
         CompaniesData.add(element.data());
