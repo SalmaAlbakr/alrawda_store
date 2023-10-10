@@ -1,3 +1,4 @@
+import 'package:alrawda_store/view/about_screen.dart';
 import 'package:flutter/material.dart';
 
 class OneProductPage extends StatefulWidget {
@@ -52,6 +53,8 @@ class _OneProductPageState extends State<OneProductPage> {
                         color: Colors.black),
                   ),
                   Container(
+                    height: 500,
+                    width: 500,
                     child: Image.network(widget.image),
                   ),
                   Text(
@@ -85,14 +88,27 @@ class _OneProductPageState extends State<OneProductPage> {
                     ),
                   ),
                   SizedBox(
-                    height: 70,
+                    height: 60,
                   ),
-                  Text(
-                    "ملحوظه: سعر جمله 1 يبدأ من ال10 لفه "
-                    "' سعر جمله 2 يبدأ من  ال5 لفه",
-                    style: TextStyle(fontSize: 25),
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 5,
+                  Wrap(
+                    children: [
+                      Text("ملحوظه :",style: TextStyle(fontSize: 25,color: Colors.red,fontWeight: FontWeight.bold),
+                        ),
+                      Text(
+                        " أسعار الجمله تحدد علي حسب الكميات لمعرفة تفاصيل أكثر  "
+                        ,
+                        style: TextStyle(fontSize: 20),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 20,
+                      ),
+                      Center(
+                        child: TextButton(onPressed: (){Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AboutScreen()));}, child: Text(
+                          "تواصل معنا  "
+                          ,
+                          style: TextStyle(fontSize: 25,decoration: TextDecoration.underline),
+                        ),),
+                      )
+                    ],
                   )
                 ],
               ),
