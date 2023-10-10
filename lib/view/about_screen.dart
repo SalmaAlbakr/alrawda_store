@@ -17,7 +17,7 @@ class _AboutScreenState extends State<AboutScreen> {
   @override
   void initState() {
     super.initState();
-    final subscription = Connectivity()
+    Connectivity()
         .onConnectivityChanged
         .listen((ConnectivityResult result) {
       if (result == ConnectivityResult.none) {
@@ -68,7 +68,6 @@ class _AboutScreenState extends State<AboutScreen> {
                     child: ElevatedButton(
                       onPressed: () {
                         AboutFunction().facebookURL();
-                        //facebookURL();
                       },
                       child: Row(
                         children: [

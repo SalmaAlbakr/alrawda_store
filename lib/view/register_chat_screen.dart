@@ -29,9 +29,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   void initState() {
     getCurrentUser();
     super.initState();
-    final subscription = Connectivity()
-        .onConnectivityChanged
-        .listen((ConnectivityResult result) {
+    Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
       if (result == ConnectivityResult.none) {
         setState(() {
           internet = false;
@@ -70,7 +68,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       Text(
                         "شركة الروضه",
                         style: GoogleFonts.alexandria(
-                            color: Colors.blue[800], fontSize: 40),
+                          color: Colors.blue[800],
+                          fontSize: 40,
+                        ),
                       ),
                       SizedBox(
                         height: 20,

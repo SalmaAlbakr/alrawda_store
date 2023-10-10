@@ -24,7 +24,9 @@ class StartScreen extends StatelessWidget {
               Text(
                 "الروضه",
                 style: GoogleFonts.alexandria(
-                    decoration: TextDecoration.underline, fontSize: 50),
+                  decoration: TextDecoration.underline,
+                  fontSize: 50,
+                ),
               ),
               SizedBox(
                 height: 25,
@@ -73,7 +75,10 @@ class StartScreen extends StatelessWidget {
                   },
                   child: Text(
                     "إنشاء حساب جديد",
-                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
@@ -90,8 +95,7 @@ class StartScreen extends StatelessWidget {
                   ),
                   onPressed: () async {
                     try {
-                      final userCredential =
-                          await FirebaseAuth.instance.signInAnonymously();
+                      await FirebaseAuth.instance.signInAnonymously();
                       Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
                           builder: (context) => HomeScreen(),
@@ -110,7 +114,10 @@ class StartScreen extends StatelessWidget {
                   },
                   child: Text(
                     "منتجات الروضه ",
-                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),

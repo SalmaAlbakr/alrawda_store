@@ -16,19 +16,20 @@ class NewWidget extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            height: 100,
+              height: 100,
               width: 100,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Image.network(image),
-              )
-          ),
-
+              )),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
               name,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 15,
+              ),
             ),
           ),
         ],

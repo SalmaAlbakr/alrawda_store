@@ -4,7 +4,6 @@ import 'package:alrawda_store/widgets/no_internet.dart';
 import 'package:alrawda_store/widgets/product_container.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ListOfProducts extends StatefulWidget {
@@ -20,8 +19,6 @@ class ListOfProducts extends StatefulWidget {
 }
 
 class _ListOfProductsState extends State<ListOfProducts> {
-  final _auth = FirebaseAuth.instance;
-
   List Product = [];
 
   getProduct() async {
@@ -48,10 +45,7 @@ class _ListOfProductsState extends State<ListOfProducts> {
     getProduct();
     getCurrentUser();
     super.initState();
-    final subscription = Connectivity()
-        .onConnectivityChanged
-        .listen((ConnectivityResult result) {
-      // Got a new connectivity status!
+    Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
       if (result == ConnectivityResult.none) {
         setState(() {
           internet = false;
@@ -87,9 +81,13 @@ class _ListOfProductsState extends State<ListOfProducts> {
               children: [
                 Text(
                   widget.categoryName,
-                  style: TextStyle(color: Colors.black),
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
                 ),
-                Expanded(child: SizedBox()),
+                Expanded(
+                  child: SizedBox(),
+                ),
                 Container(
                   width: 35,
                   height: 35,
@@ -106,31 +104,34 @@ class _ListOfProductsState extends State<ListOfProducts> {
                         ),
                       );
                     },
-                    icon: Icon(Icons.search),
+                    icon: Icon(
+                      Icons.search,
+                    ),
                   ),
                 )
               ],
             )),
         body: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Product != []
-                ? ListView.builder(
-                    itemCount: Product.length,
-                    itemBuilder: (context, int i) {
-                      final currentUser = signedInUser.email;
-                      return MessageW(
-                        mText: Product[i]["text"],
-                        mPrice: Product[i]["price"],
-                        mSender: Product[i]["sender"],
-                        isMe: currentUser == Product[i]["sender"],
-                        mPrice1: Product[i]["price1"],
-                        mPrice2: Product[i]["price2"],
-                        imageURL: Product[i]["image"],
-                        notValid: Product[i]["notValid"],
-                        buyPrice: Product[i]["buyPrice"],
-                      );
-                    })
-                : CircularProgressIndicator()),
+          padding: const EdgeInsets.all(8.0),
+          child: Product != []
+              ? ListView.builder(
+                  itemCount: Product.length,
+                  itemBuilder: (context, int i) {
+                    final currentUser = signedInUser.email;
+                    return MessageW(
+                      mText: Product[i]["text"],
+                      mPrice: Product[i]["price"],
+                      mSender: Product[i]["sender"],
+                      isMe: currentUser == Product[i]["sender"],
+                      mPrice1: Product[i]["price1"],
+                      mPrice2: Product[i]["price2"],
+                      imageURL: Product[i]["image"],
+                      notValid: Product[i]["notValid"],
+                      buyPrice: Product[i]["buyPrice"],
+                    );
+                  })
+              : CircularProgressIndicator(),
+        ),
       ),
     );
   }

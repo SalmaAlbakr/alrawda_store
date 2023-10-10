@@ -82,10 +82,9 @@ class _AddNewItemState extends State<AddNewItem> {
   bool internet = true;
   @override
   void initState() {
-    // getCompanies();
     getCategories();
     super.initState();
-    final subscription = Connectivity()
+     Connectivity()
         .onConnectivityChanged
         .listen((ConnectivityResult result) {
       if (result == ConnectivityResult.none) {
@@ -130,54 +129,7 @@ class _AddNewItemState extends State<AddNewItem> {
               size: 50,
             ),
             onPressed: () async {
-              if (formKey.currentState!.validate() &&
-                  context.read<TakePhotoByCameraCubit>().image != null &&
-                  context.read<TakePhotoByCameraCubit>().imageUrl != null &&
-                  widget.categoryType != null) {
-                messageController.clear();
-                priceController.clear();
-                price1Controller.clear();
-                price2Controller.clear();
-                buyPriceController.clear();
-                CategoriesData.clear();
-                CompaniesData.clear();
-
-                await _fireStore
-                    .collection("Categories")
-                    .doc(widget.categoryType)
-                    .collection("الشركات")
-                    .doc(widget.companyName)
-                    .collection("الاصناف")
-                    .doc(widget.typeName)
-                    .set({
-                  "text": widget.typeName,
-                  "price": widget.price,
-                  "price1": widget.price1,
-                  "price2": widget.price2,
-                  "buyPrice": widget.buyPrice,
-                  "image": context.read<TakePhotoByCameraCubit>().imageUrl,
-                  "time": FieldValue.serverTimestamp(),
-                  "sender": signedInUser.email,
-                  "notValid": "0",
-                  "Category": widget.categoryType,
-                  "companyName": widget.companyName,
-                });
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    backgroundColor: Colors.green,
-                    content: Text("تم اضافة الصنف بنجاح"),
-                  ),
-                );
-
-                context.read<TakePhotoByCameraCubit>().reset();
-              } else {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    backgroundColor: Colors.red,
-                    content: Text("يجب تسجيل الصنف"),
-                  ),
-                );
-              }
+              await SendData(context);
             },
           ),
         ),
@@ -217,9 +169,10 @@ class _AddNewItemState extends State<AddNewItem> {
                           return DropdownMenuItem<String>(
                             value: value,
                             child: Center(
-                                child: Text(
-                              value,
-                            )),
+                              child: Text(
+                                value,
+                              ),
+                            ),
                           );
                         }).toList(),
                       ),
@@ -418,11 +371,14 @@ class _AddNewItemState extends State<AddNewItem> {
                         child: ModalProgressHUD(
                           inAsyncCall: false,
                           child: Image.file(
-                              context.read<TakePhotoByCameraCubit>().image!),
+                            context.read<TakePhotoByCameraCubit>().image!,
+                          ),
                         ),
                       )
                     else
-                      Expanded(child: SizedBox()),
+                      Expanded(
+                        child: SizedBox(),
+                      ),
                   ],
                 ),
               );
@@ -431,5 +387,56 @@ class _AddNewItemState extends State<AddNewItem> {
         ),
       ),
     );
+  }
+
+  Future<void> SendData(BuildContext context) async {
+    if (formKey.currentState!.validate() &&
+        context.read<TakePhotoByCameraCubit>().image != null &&
+        context.read<TakePhotoByCameraCubit>().imageUrl != null &&
+        widget.categoryType != null) {
+      messageController.clear();
+      priceController.clear();
+      price1Controller.clear();
+      price2Controller.clear();
+      buyPriceController.clear();
+      CategoriesData.clear();
+      CompaniesData.clear();
+
+      await _fireStore
+          .collection("Categories")
+          .doc(widget.categoryType)
+          .collection("الشركات")
+          .doc(widget.companyName)
+          .collection("الاصناف")
+          .doc(widget.typeName)
+          .set({
+        "text": widget.typeName,
+        "price": widget.price,
+        "price1": widget.price1,
+        "price2": widget.price2,
+        "buyPrice": widget.buyPrice,
+        "image": context.read<TakePhotoByCameraCubit>().imageUrl,
+        "time": FieldValue.serverTimestamp(),
+        "sender": signedInUser.email,
+        "notValid": "0",
+        "Category": widget.categoryType,
+        "companyName": widget.companyName,
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: Colors.green,
+          content: Text("تم اضافة الصنف بنجاح"),
+        ),
+      );
+
+      context.read<TakePhotoByCameraCubit>().reset();
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: Colors.red,
+          content: Text("يجب تسجيل الصنف"),
+        ),
+      );
+    }
   }
 }

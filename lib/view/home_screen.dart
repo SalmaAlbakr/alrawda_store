@@ -50,18 +50,22 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Scaffold(
         backgroundColor: Colors.blue[900],
         endDrawer: Drawer(
-         shadowColor: Colors.deepOrangeAccent,
+          shadowColor: Colors.deepOrangeAccent,
           child: ListView(
             children: [
               DrawerHeader(
-                decoration: BoxDecoration(color: MyColors.mainColor),
+                decoration: BoxDecoration(
+                  color: MyColors.mainColor,
+                ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       "شركة الروضه",
                       style: GoogleFonts.alexandria(
-                          color: Colors.white, fontSize: 40),
+                        color: Colors.white,
+                        fontSize: 40,
+                      ),
                     ),
                   ],
                 ),
@@ -109,7 +113,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     Text(
                       "للتواصل معنا",
-                      style: TextStyle(color: MyColors.mainColor),
+                      style: TextStyle(
+                        color: MyColors.mainColor,
+                      ),
                     ),
                   ],
                 ),
@@ -143,7 +149,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         appBar: AppBar(
-
           iconTheme: IconThemeData(color: Colors.deepOrange),
           automaticallyImplyLeading: false,
           backgroundColor: Colors.blue[900],

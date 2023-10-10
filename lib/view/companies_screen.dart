@@ -1,12 +1,11 @@
 import 'package:alrawda_store/controller/add_items_function.dart';
 import 'package:alrawda_store/view/list_of_products.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:alrawda_store/widgets/category_contaner.dart';
 
 class CompaniesScreen extends StatefulWidget {
-  String CatName;
+ final String CatName;
   CompaniesScreen({Key? key, required this.CatName}) : super(key: key);
 
   @override
@@ -39,7 +38,7 @@ class _CompaniesScreenState extends State<CompaniesScreen> {
     super.initState();
   }
 
-  final _auth = FirebaseAuth.instance;
+
 
   @override
   Widget build(BuildContext context) {
@@ -52,14 +51,12 @@ class _CompaniesScreenState extends State<CompaniesScreen> {
           elevation: 0.1,
           title: Padding(
             padding: const EdgeInsets.all(1),
-            child: Expanded(
-              child: Text(
-                widget.CatName,
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 25,
-                    color: Colors.white),
-              ),
+            child: Text(
+              widget.CatName,
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 25,
+                  color: Colors.white),
             ),
           ),
           iconTheme: IconThemeData(),

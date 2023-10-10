@@ -35,7 +35,10 @@ class _OneProductPageState extends State<OneProductPage> {
           title: Text(
             "شركة الروضه",
             style: TextStyle(
-                fontWeight: FontWeight.bold, fontSize: 25, color: Colors.white),
+              fontWeight: FontWeight.bold,
+              fontSize: 25,
+              color: Colors.white,
+            ),
           ),
         ),
         body: SafeArea(
@@ -43,35 +46,38 @@ class _OneProductPageState extends State<OneProductPage> {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: ListView(
-                // crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     widget.productName,
                     style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        color: Color(0xff1D267D)),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      color: Color(0xff1D267D),
+                    ),
                   ),
-                  SizedBox(height: 15,),
+                  SizedBox(
+                    height: 15,
+                  ),
                   Container(
                     height: 500,
                     width: 500,
                     child: Image.network(widget.image),
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(
+                    height: 10,
+                  ),
                   Container(
                     decoration: BoxDecoration(
                       color: Color(0xffA5D7E8),
                       borderRadius: BorderRadius.circular(15),
                       border: Border.all(),
                     ),
-                   // color: Color(0xffA5D7E8),
                     child: Column(
                       children: [
                         Text(
                           widget.onePiecePrice,
                           style: TextStyle(
-                             fontSize: 18,
+                            fontSize: 18,
                             fontWeight: FontWeight.bold,
                             color: Colors.black87,
                           ),
@@ -82,7 +88,7 @@ class _OneProductPageState extends State<OneProductPage> {
                         Text(
                           widget.price1,
                           style: TextStyle(
-                             fontSize: 18,
+                            fontSize: 18,
                             fontWeight: FontWeight.bold,
                             color: Colors.black87,
                           ),
@@ -93,7 +99,7 @@ class _OneProductPageState extends State<OneProductPage> {
                         Text(
                           widget.price2,
                           style: TextStyle(
-                             fontSize: 18,
+                            fontSize: 18,
                             fontWeight: FontWeight.bold,
                             color: Colors.black87,
                           ),
@@ -106,22 +112,38 @@ class _OneProductPageState extends State<OneProductPage> {
                   ),
                   Wrap(
                     children: [
-                      Text("ملحوظه :",style: TextStyle(fontSize: 25,color: Colors.red,fontWeight: FontWeight.bold),
-                        ),
                       Text(
-                        " أسعار الجمله تحدد علي حسب الكميات لمعرفة تفاصيل أكثر  "
-                        ,
+                        "ملحوظه :",
+                        style: TextStyle(
+                          fontSize: 25,
+                          color: Colors.red,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        " أسعار الجمله تحدد علي حسب الكميات لمعرفة تفاصيل أكثر  ",
                         style: TextStyle(fontSize: 20),
                         overflow: TextOverflow.ellipsis,
                         maxLines: 20,
                       ),
                       Center(
-                        child: TextButton(onPressed: (){Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AboutScreen()));}, child: Text(
-                          "تواصل معنا  "
-                          ,
-                          style: TextStyle(fontSize: 25,decoration: TextDecoration.underline),
-                        ),),
-                      )
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => AboutScreen(),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            "تواصل معنا  ",
+                            style: TextStyle(
+                              fontSize: 25,
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
+                        ),
+                      ),
                     ],
                   )
                 ],

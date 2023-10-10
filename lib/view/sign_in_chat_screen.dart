@@ -27,9 +27,7 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   void initState() {
     super.initState();
-    final subscription = Connectivity()
-        .onConnectivityChanged
-        .listen((ConnectivityResult result) {
+    Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
       if (result == ConnectivityResult.none) {
         setState(() {
           internet = false;
@@ -67,7 +65,9 @@ class _SignInScreenState extends State<SignInScreen> {
                       Text(
                         "شركة الروضه",
                         style: GoogleFonts.alexandria(
-                            color: Colors.blue[800], fontSize: 40),
+                          color: Colors.blue[800],
+                          fontSize: 40,
+                        ),
                       ),
                       SizedBox(
                         height: 20,
