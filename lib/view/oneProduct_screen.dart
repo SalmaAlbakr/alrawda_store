@@ -47,12 +47,25 @@ class _OneProductPageState extends State<OneProductPage> {
               padding: const EdgeInsets.all(8.0),
               child: ListView(
                 children: [
-                  Text(
-                    widget.productName,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      color: Color(0xff1D267D),
+                  SizedBox(height: 8,),
+                  Container(
+                    width: 100,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      color: Color(0xffA5D7E8),
+                      borderRadius: BorderRadius.circular(15),
+                      border: Border.all(),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        widget.productName,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Color(0xff1D267D),
+                        ),
+                      ),
                     ),
                   ),
                   SizedBox(
