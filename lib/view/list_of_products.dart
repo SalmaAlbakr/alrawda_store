@@ -128,7 +128,7 @@ class _ListOfProductsState extends State<ListOfProducts> {
                       mPrice2: Product[i]["price2"],
                       imageURL: Product[i]["image"],
                       notValid: Product[i]["notValid"],
-                      buyPrice: Product[i]["buyPrice"],
+                      buyPrice: Product[i]["buyPrice"], company: Product[i]["companyName"], category: Product[i]["Category"],
                     );
                   })
               : CircularProgressIndicator(),

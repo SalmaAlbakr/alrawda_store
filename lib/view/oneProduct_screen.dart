@@ -1,4 +1,5 @@
 import 'package:alrawda_store/view/about_screen.dart';
+import 'package:alrawda_store/view/edit_item_screen.dart';
 import 'package:flutter/material.dart';
 
 class OneProductPage extends StatefulWidget {
@@ -10,7 +11,11 @@ class OneProductPage extends StatefulWidget {
       required this.price2,
       required this.buyPrice,
       required this.image,
-      required this.notValid});
+      required this.notValid,
+      required this.company,
+      required this.category
+
+      });
 
   final String productName;
   final String onePiecePrice;
@@ -19,6 +24,8 @@ class OneProductPage extends StatefulWidget {
   final String buyPrice;
   final String image;
   final String notValid;
+  final String company;
+  final String category;
 
   @override
   State<OneProductPage> createState() => _OneProductPageState();
@@ -32,13 +39,27 @@ class _OneProductPageState extends State<OneProductPage> {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.blue[900],
-          title: Text(
-            "شركة الروضه",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 25,
-              color: Colors.white,
-            ),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "شركة الروضه",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 25,
+                  color: Colors.white,
+                ),
+              ),
+
+              TextButton(onPressed: (){
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => EditItemScreen(initialCompanyName: widget.company, initialCategoryName: widget.category, initialTypeName: widget.productName,)
+                  ),
+                );
+
+              }, child: Text("تعديل الصنف"))
+            ],
           ),
         ),
         body: SafeArea(

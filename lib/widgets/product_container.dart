@@ -14,6 +14,8 @@ class MessageW extends StatelessWidget {
     required this.notValid,
     required this.imageURL,
     required this.buyPrice,
+    required this.company,
+    required this.category,
   }) : super(key: key);
 
   final mText;
@@ -25,6 +27,8 @@ class MessageW extends StatelessWidget {
   final bool isMe;
   final notValid;
   final buyPrice;
+  final company;
+  final category;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +46,7 @@ class MessageW extends StatelessWidget {
                 price2: mPrice2,
                 image: imageURL,
                 buyPrice: buyPrice,
-                notValid: notValid,
+                notValid: notValid, company: company, category: category,
               ),
             ),
           );
