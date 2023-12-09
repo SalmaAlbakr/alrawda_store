@@ -13,9 +13,7 @@ class OneProductPage extends StatefulWidget {
       required this.image,
       required this.notValid,
       required this.company,
-      required this.category
-
-      });
+      required this.category});
 
   final String productName;
   final String onePiecePrice;
@@ -50,15 +48,26 @@ class _OneProductPageState extends State<OneProductPage> {
                   color: Colors.white,
                 ),
               ),
-
-              TextButton(onPressed: (){
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => EditItemScreen(initialCompanyName: widget.company, initialCategoryName: widget.category, initialTypeName: widget.productName,)
-                  ),
-                );
-
-              }, child: Text("تعديل الصنف"))
+              TextButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                          builder: (context) => EditItemScreen(
+                                initialCompanyName: widget.company,
+                                initialCategoryName: widget.category,
+                                initialTypeName: widget.productName,
+                                typeName: widget.productName,
+                                price: widget.onePiecePrice,
+                                price1: widget.price1,
+                                price2: widget.price2,
+                                imageURL: widget.image,
+                                categoryType: widget.category,
+                                buyPrice: widget.buyPrice,
+                                companyName: widget.company,
+                              )),
+                    );
+                  },
+                  child: Text("تعديل الصنف"))
             ],
           ),
         ),
@@ -68,7 +77,9 @@ class _OneProductPageState extends State<OneProductPage> {
               padding: const EdgeInsets.all(8.0),
               child: ListView(
                 children: [
-                  SizedBox(height: 8,),
+                  SizedBox(
+                    height: 8,
+                  ),
                   Container(
                     width: 100,
                     height: 60,

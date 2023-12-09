@@ -13,6 +13,14 @@ class EditItemScreen extends StatefulWidget {
     required this.initialCompanyName,
     required this.initialCategoryName,
     required this.initialTypeName,
+    required this.typeName,
+    required this.price,
+    required this.price1,
+    required this.price2,
+    required this.imageURL,
+    required this.categoryType,
+    required this.buyPrice,
+    required this.companyName,
     Key? key,
   }) : super(key: key);
 
@@ -24,7 +32,7 @@ class EditItemScreen extends StatefulWidget {
   String? categoryType;
   String? buyPrice;
   String? companyName;
- // String? categoryName;
+
   String? initialTypeName;
   String? initialCompanyName;
   String? initialCategoryName;
@@ -41,46 +49,53 @@ class _EditItemScreenState extends State<EditItemScreen> {
     getCategories();
     //getCompanies();
     // Fetch the existing data for editing
-    if (widget.typeName != null) {
-      fetchDataForEditing();
-    }
+    // if (widget.typeName != null) {
+    //   fetchDataForEditing();
+    // }
   }
 
   // Add a new method to fetch existing data for editing
-  void fetchDataForEditing() async {
-    try {
-      print(widget.typeName);
-      DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
-          .collection("Categories")
-          .doc(widget.categoryType)
-          .collection("الشركات")
-          .doc(widget.companyName)
-          .collection("الاصناف")
-          .doc(widget.typeName) // Use the provided document ID
-          .get();
-
-      if (documentSnapshot.exists) {
-        // Populate form fields with existing data
-        setState(() {
-          widget.initialTypeName = documentSnapshot.get("text");
-          widget.price = documentSnapshot.get("price");
-          widget.price1 = documentSnapshot.get("price1");
-          widget.price2 = documentSnapshot.get("price2");
-          widget.buyPrice = documentSnapshot.get("buyPrice");
-          widget.imageURL = documentSnapshot.get("image");
-         // widget.t = documentSnapshot.get("time");
-         // widget. = documentSnapshot.get("sender");
-          //widget. = documentSnapshot.get("notValid");
-          widget.initialCategoryName = documentSnapshot.get("Category");
-          widget.initialCompanyName = documentSnapshot.get("companyName");
-          // Populate other fields as needed
-        });
-      }
-    } catch (e) {
-      // Handle errors
-      print("Error fetching data for editing: $e");
-    }
-  }
+  // void fetchDataForEditing() async {
+  //   try {
+  //
+  //
+  //
+  //     print(widget.typeName);
+  //     DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
+  //         .collection("Categories")
+  //         .doc(widget.categoryType)
+  //         .collection("الشركات")
+  //         .doc(widget.companyName)
+  //         .collection("الاصناف")
+  //         .doc(widget.typeName) // Use the provided document ID
+  //         .get();
+  //
+  //     if (documentSnapshot.exists) {
+  //       // Populate form fields with existing data
+  //       setState(() {
+  //         widget.initialTypeName = documentSnapshot.get("text");
+  //         widget.price = documentSnapshot.get("price");
+  //         widget.price1 = documentSnapshot.get("price1");
+  //         widget.price2 = documentSnapshot.get("price2");
+  //         widget.buyPrice = documentSnapshot.get("buyPrice");
+  //         widget.imageURL = documentSnapshot.get("image");
+  //        // widget.t = documentSnapshot.get("time");
+  //        // widget. = documentSnapshot.get("sender");
+  //         //widget. = documentSnapshot.get("notValid");
+  //         widget.initialCategoryName = documentSnapshot.get("Category");
+  //         widget.initialCompanyName = documentSnapshot.get("companyName");
+  //
+  //         widget.categoryType = documentSnapshot.get("Category");
+  //         widget.companyName = documentSnapshot.get("companyName");
+  //         widget.typeName = documentSnapshot.get("text");
+  //         // Populate other fields as needed
+  //       });
+  //     }
+  //   } catch (e) {
+  //     // Handle errors
+  //     print("Error fetching data for editing: $e");
+  //   }
+  // }
 
   // ... (existing code)
 
@@ -180,6 +195,16 @@ class _EditItemScreenState extends State<EditItemScreen> {
       try {
         // Check if there are changes in company name, type name, or category
         if (true) {
+
+          await _fireStore
+              .collection("Categories")
+              .doc(widget.initialCategoryName!)
+              .collection("الشركات")
+              .doc(widget.initialCompanyName!)
+              .collection("الاصناف")
+              .doc(widget.initialTypeName!)
+              .delete();
+
           await _fireStore
               .collection("Categories")
               .doc(widget.categoryType!)
@@ -205,18 +230,8 @@ class _EditItemScreenState extends State<EditItemScreen> {
 
 
           // Delete the old document
-          await _fireStore
-              .collection("Categories")
-              .doc(widget.initialCategoryName!)
-              .collection("الشركات")
-              .doc(widget.initialCompanyName!)
-              .collection("الاصناف")
-              .doc(widget.initialTypeName!)
-              .delete();
+
         }
-        widget.categoryType = widget.initialCategoryName;
-        widget.companyName = widget.initialCompanyName;
-        widget.typeName = widget.initialTypeName;
 
         // Add a new document
 
