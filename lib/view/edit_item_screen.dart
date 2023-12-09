@@ -179,10 +179,7 @@ class _EditItemScreenState extends State<EditItemScreen> {
 
       try {
         // Check if there are changes in company name, type name, or category
-        if (
-            widget.typeName != widget.initialTypeName ||
-                widget.companyName != widget.initialCompanyName ||
-                widget.categoryType != widget.initialCategoryName) {
+        if (true) {
           await _fireStore
               .collection("Categories")
               .doc(widget.categoryType!)
@@ -217,9 +214,9 @@ class _EditItemScreenState extends State<EditItemScreen> {
               .doc(widget.initialTypeName!)
               .delete();
         }
-        // widget.categoryName = widget.initialCategoryName;
-        // widget.companyName = widget.initialCompanyName;
-        // widget.typeName = widget.initialTypeName;
+        widget.categoryType = widget.initialCategoryName;
+        widget.companyName = widget.initialCompanyName;
+        widget.typeName = widget.initialTypeName;
 
         // Add a new document
 
@@ -401,7 +398,7 @@ class _EditItemScreenState extends State<EditItemScreen> {
                               widget.companyName = null;
                             });
                           },
-                          hint: Text(" نوع الصنف"),
+                          hint: Text(widget.initialCategoryName!),
                           underline: Container(),
                           borderRadius: BorderRadius.all(Radius.circular(15)),
                           value: widget.categoryType,
@@ -427,7 +424,7 @@ class _EditItemScreenState extends State<EditItemScreen> {
                       ),
                       Container(
                         child: DropdownButton<String>(
-                          hint: Text(" الشركه"),
+                          hint: Text(widget.initialCompanyName!),
                           underline: Container(),
                           borderRadius: BorderRadius.all(Radius.circular(15)),
                           value: widget.companyName,

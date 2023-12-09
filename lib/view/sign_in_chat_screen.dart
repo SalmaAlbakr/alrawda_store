@@ -66,8 +66,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         "شركة الروضه",
                         style: GoogleFonts.alexandria(
                           color: Colors.blue[800],
-                          fontSize: 40,
-                        ),
+                          fontSize: 40,),
                       ),
                       SizedBox(
                         height: 20,
