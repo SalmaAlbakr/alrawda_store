@@ -1,5 +1,6 @@
 import 'package:alrawda_store/controller/add_items_function.dart';
 import 'package:alrawda_store/controller/take_photo_cubit/from_camera/take_photo_cubit.dart';
+import 'package:alrawda_store/view/oneProduct_screen.dart';
 import 'package:alrawda_store/widgets/no_internet.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -37,21 +38,33 @@ class EditItemScreen extends StatefulWidget {
   String? initialCompanyName;
   String? initialCategoryName;
 
-
   @override
   State<EditItemScreen> createState() => _EditItemScreenState();
 }
 
 class _EditItemScreenState extends State<EditItemScreen> {
+  final typeNameController = TextEditingController();
+
+  final priceController = TextEditingController();
+
+  final price1Controller = TextEditingController();
+
+  final price2Controller = TextEditingController();
+  final buyPriceController = TextEditingController();
+
   @override
   void initState() {
-    // ... (existing code)
     getCategories();
-    //getCompanies();
-    // Fetch the existing data for editing
-    // if (widget.typeName != null) {
-    //   fetchDataForEditing();
-    // }
+
+    typeNameController.text = widget.initialTypeName!;
+
+    priceController.text = widget.price!;
+
+    price1Controller.text = widget.price1!;
+
+    price2Controller.text = widget.price2!;
+    buyPriceController.text = widget.buyPrice!;
+    context.read<TakePhotoByCameraCubit>().imageUrl = widget.imageURL;
   }
 
   // Add a new method to fetch existing data for editing
@@ -184,75 +197,65 @@ class _EditItemScreenState extends State<EditItemScreen> {
   // }
 
   Future<void> SendData(BuildContext context) async {
-    if (formKey.currentState!.validate() &&
-        context.read<TakePhotoByCameraCubit>().image != null &&
-        context.read<TakePhotoByCameraCubit>().imageUrl != null &&
-        widget.initialTypeName != null) {
+    if (true) {
       setState(() {
         sendingData = true;
       });
 
       try {
-        // Check if there are changes in company name, type name, or category
-        if (true) {
+        await _fireStore
+            .collection("Categories")
+            .doc(widget.initialCategoryName!)
+            .collection("الشركات")
+            .doc(widget.initialCompanyName!)
+            .collection("الاصناف")
+            .doc(widget.initialTypeName!)
+            .delete();
 
-          await _fireStore
-              .collection("Categories")
-              .doc(widget.initialCategoryName!)
-              .collection("الشركات")
-              .doc(widget.initialCompanyName!)
-              .collection("الاصناف")
-              .doc(widget.initialTypeName!)
-              .delete();
+        await _fireStore
+            .collection("Categories")
+            .doc(widget.categoryType!)
+            .collection("الشركات")
+            .doc(widget.companyName!)
+            .collection("الاصناف")
+            .doc(widget.typeName)
+            .set({
+          "text": widget.typeName,
+          "price": widget.price,
+          "price1": widget.price1,
+          "price2": widget.price2,
+          "buyPrice": widget.buyPrice,
+          "image": context.read<TakePhotoByCameraCubit>().imageUrl,
+          "time": FieldValue.serverTimestamp(),
+          "sender": signedInUser.email,
+          "notValid": "0",
+          "Category": widget.categoryType,
+          "companyName": widget.companyName,
+          // Add other fields as needed
+        });
 
-          await _fireStore
-              .collection("Categories")
-              .doc(widget.categoryType!)
-              .collection("الشركات")
-              .doc(widget.companyName!)
-              .collection("الاصناف")
-              .doc(widget.typeName)
-              .set({
-            "text": widget.typeName,
-            "price": widget.price,
-            "price1": widget.price1,
-            "price2": widget.price2,
-            "buyPrice": widget.buyPrice,
-            "image": context.read<TakePhotoByCameraCubit>().imageUrl,
-            "time": FieldValue.serverTimestamp(),
-            "sender": signedInUser.email,
-            "notValid": "0",
-            "Category": widget.categoryType,
-            "companyName": widget.companyName,
-            // Add other fields as needed
-          });
-
-
-
-          // Delete the old document
-
-        }
-
-        // Add a new document
-
-        // Clear form fields and update UI
-        messageController.clear();
-        priceController.clear();
-        price1Controller.clear();
-        price2Controller.clear();
-        buyPriceController.clear();
         setState(() {
           sendingData = false;
         });
 
         // Show success message
-        ScaffoldMessenger.of(context).showSnackBar(
+     await   ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             backgroundColor: Colors.green,
             content: Text("تم اضافة الصنف بنجاح"),
           ),
         );
-
+        Navigator.of(context).pushReplacement(MaterialPageRoute(
+            builder: (context) => OneProductPage(
+                productName: widget.typeName!,
+                onePiecePrice: widget.price!,
+                price1: widget.price1!,
+                price2: widget.price2!,
+                buyPrice: widget.buyPrice!,
+                image: widget.imageURL!,
+                notValid: "0",
+                company: widget.companyName!,
+                category: widget.categoryType!)));
         // Reset photo data
         context.read<TakePhotoByCameraCubit>().reset();
       } catch (e) {
@@ -270,8 +273,7 @@ class _EditItemScreenState extends State<EditItemScreen> {
           ),
         );
       }
-    }
-    else {
+    } else {
       // Show validation error message
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -282,29 +284,9 @@ class _EditItemScreenState extends State<EditItemScreen> {
     }
   }
 
-
   int iC = 0;
   List CompaniesData = [];
   List<String> CompaniesName = [];
-  // List Product = [];
-  // getProduct() async {
-  //   CollectionReference dataOfProduct = FirebaseFirestore.instance
-  //       .collection("Categories")
-  //       .doc(widget.categoryName)
-  //       .collection("الشركات")
-  //       .doc(widget.companyName)
-  //       .collection("الاصناف")
-  //   ;
-  //   QuerySnapshot snapOfData = await dataOfProduct.get();
-  //
-  //   List<QueryDocumentSnapshot> list = snapOfData.docs;
-  //
-  //   list.forEach((element) {
-  //     setState(() {
-  //       Product.add(element.data());
-  //     });
-  //   });
-  // }
 
   getCompanies() async {
     CollectionReference dataOfProduct = FirebaseFirestore.instance
@@ -342,22 +324,13 @@ class _EditItemScreenState extends State<EditItemScreen> {
     });
   }
 
-  final messageController = TextEditingController();
-
-  final priceController = TextEditingController();
-
-  final price1Controller = TextEditingController();
-
-  final price2Controller = TextEditingController();
-  final buyPriceController = TextEditingController();
-
   final _fireStore = FirebaseFirestore.instance;
   bool sendingData = false;
   bool internet = true;
   @override
   @override
   void dispose() {
-    messageController.dispose();
+    typeNameController.dispose();
     priceController.dispose();
     price1Controller.dispose();
     price2Controller.dispose();
@@ -385,9 +358,7 @@ class _EditItemScreenState extends State<EditItemScreen> {
               size: 50,
             ),
             onPressed: () async {
-              //  SendData(context);
               await SendData(context);
-
             },
           ),
         ),
@@ -413,7 +384,7 @@ class _EditItemScreenState extends State<EditItemScreen> {
                               widget.companyName = null;
                             });
                           },
-                          hint: Text(widget.initialCategoryName!),
+                          //hint: Text(widget.initialCategoryName!),
                           underline: Container(),
                           borderRadius: BorderRadius.all(Radius.circular(15)),
                           value: widget.categoryType,
@@ -470,7 +441,7 @@ class _EditItemScreenState extends State<EditItemScreen> {
                             }
                             return null;
                           },
-                          controller: messageController,
+                          controller: typeNameController,
                           onChanged: (value) {
                             widget.typeName = value;
                           },
@@ -639,7 +610,8 @@ class _EditItemScreenState extends State<EditItemScreen> {
                         )
                       else
                         Expanded(
-                          child: SizedBox(),
+                          child: Image.network(
+                              context.read<TakePhotoByCameraCubit>().imageUrl!),
                         ),
                     ],
                   ),
