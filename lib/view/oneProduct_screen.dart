@@ -1,3 +1,4 @@
+import 'package:alrawda_store/controller/add_items_function.dart';
 import 'package:alrawda_store/view/about_screen.dart';
 import 'package:alrawda_store/view/edit_item_screen.dart';
 import 'package:flutter/material.dart';
@@ -48,6 +49,10 @@ class _OneProductPageState extends State<OneProductPage> {
                   color: Colors.white,
                 ),
               ),
+
+              signedInUser.isAnonymous
+                  ? SizedBox()
+                  : signedInUser.email! == "elrawda123@gmail.com" ?
               TextButton(
                   onPressed: () {
                     Navigator.of(context).push(
@@ -67,7 +72,7 @@ class _OneProductPageState extends State<OneProductPage> {
                               )),
                     );
                   },
-                  child: Text("تعديل الصنف"))
+                  child: Text("تعديل الصنف")) : SizedBox()
             ],
           ),
         ),

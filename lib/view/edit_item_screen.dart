@@ -1,5 +1,7 @@
 import 'package:alrawda_store/controller/add_items_function.dart';
 import 'package:alrawda_store/controller/take_photo_cubit/from_camera/take_photo_cubit.dart';
+import 'package:alrawda_store/view/companies_screen.dart';
+import 'package:alrawda_store/view/list_of_products.dart';
 import 'package:alrawda_store/view/oneProduct_screen.dart';
 import 'package:alrawda_store/widgets/no_internet.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -33,7 +35,6 @@ class EditItemScreen extends StatefulWidget {
   String? categoryType;
   String? buyPrice;
   String? companyName;
-
   String? initialTypeName;
   String? initialCompanyName;
   String? initialCategoryName;
@@ -255,7 +256,59 @@ class _EditItemScreenState extends State<EditItemScreen> {
                 image: widget.imageURL!,
                 notValid: "0",
                 company: widget.companyName!,
-                category: widget.categoryType!)));
+                category: widget.categoryType!),),);
+        // Reset photo data
+        context.read<TakePhotoByCameraCubit>().reset();
+      } catch (e) {
+        // Handle errors
+        print("Error updating data: $e");
+        setState(() {
+          sendingData = false;
+        });
+
+        // Show error message
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: Colors.red,
+            content: Text("حدث خطأ أثناء تعديل الصنف"),
+          ),
+        );
+      }
+    } else {
+      // Show validation error message
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: Colors.red,
+          content: Text("يجب تسجيل الصنف"),
+        ),
+      );
+    }
+  }
+  Future<void> DeleteData(BuildContext context) async {
+    if (true) {
+      setState(() {
+        sendingData = true;
+      });
+
+      try {
+        await _fireStore
+            .collection("Categories")
+            .doc(widget.initialCategoryName!)
+            .collection("الشركات")
+            .doc(widget.initialCompanyName!)
+            .collection("الاصناف")
+            .doc(widget.initialTypeName!)
+            .delete();
+
+        // Show success message
+        await   ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: Colors.green,
+            content: Text("تم حذف الصنف بنجاح"),
+          ),
+        );
+        Navigator.of(context).pushReplacement(MaterialPageRoute(
+          builder: (context) => ListOfProducts( categoryName: widget.categoryType!, companyName: widget.companyName!,),),);
         // Reset photo data
         context.read<TakePhotoByCameraCubit>().reset();
       } catch (e) {
@@ -364,7 +417,15 @@ class _EditItemScreenState extends State<EditItemScreen> {
         ),
         appBar: AppBar(
           backgroundColor: MyColors.mainColor,
-          title: Text("تعديل الصنف"),
+          title: Row(
+            children: [
+              Text("تعديل الصنف"),
+              TextButton(onPressed: (){
+                DeleteData(context);
+
+              }, child: Text("حذف الصنف"))
+            ],
+          ),
         ),
         body: SafeArea(
           child: Form(
