@@ -120,7 +120,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                 mPrice1: filterNames[i]["price1"],
                                 mPrice2: filterNames[i]["price2"],
                                 imageURL: filterNames[i]["image"],
-                                notValid: filterNames[i]["notValid"],
+                                Valid: filterNames[i]["Valid"],
                                 buyPrice: filterNames[i]["buyPrice"], company: filterNames[i]["companyName"], category: filterNames[i]["Category"],
                               );
                             },

@@ -1,11 +1,10 @@
 import 'package:alrawda_store/controller/add_items_function.dart';
 import 'package:alrawda_store/controller/take_photo_cubit/from_camera/take_photo_cubit.dart';
-import 'package:alrawda_store/view/companies_screen.dart';
 import 'package:alrawda_store/view/list_of_products.dart';
 import 'package:alrawda_store/view/oneProduct_screen.dart';
 import 'package:alrawda_store/widgets/no_internet.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:alrawda_store/my_color.dart';
@@ -24,6 +23,7 @@ class EditItemScreen extends StatefulWidget {
     required this.categoryType,
     required this.buyPrice,
     required this.companyName,
+    required this.Valid,
     Key? key,
   }) : super(key: key);
 
@@ -38,6 +38,7 @@ class EditItemScreen extends StatefulWidget {
   String? initialTypeName;
   String? initialCompanyName;
   String? initialCategoryName;
+  bool? Valid;
 
   @override
   State<EditItemScreen> createState() => _EditItemScreenState();
@@ -229,7 +230,7 @@ class _EditItemScreenState extends State<EditItemScreen> {
           "image": context.read<TakePhotoByCameraCubit>().imageUrl,
           "time": FieldValue.serverTimestamp(),
           "sender": signedInUser.email,
-          "notValid": "0",
+          "Valid": widget.Valid,
           "Category": widget.categoryType,
           "companyName": widget.companyName,
           // Add other fields as needed
@@ -254,7 +255,7 @@ class _EditItemScreenState extends State<EditItemScreen> {
                 price2: widget.price2!,
                 buyPrice: widget.buyPrice!,
                 image: widget.imageURL!,
-                notValid: "0",
+                Valid: widget.Valid!,
                 company: widget.companyName!,
                 category: widget.categoryType!),),);
         // Reset photo data
@@ -380,6 +381,10 @@ class _EditItemScreenState extends State<EditItemScreen> {
   final _fireStore = FirebaseFirestore.instance;
   bool sendingData = false;
   bool internet = true;
+
+ //  bool _switchValue = false;
+ // String LangOrArabic ;
+
   @override
   @override
   void dispose() {
@@ -423,7 +428,16 @@ class _EditItemScreenState extends State<EditItemScreen> {
               TextButton(onPressed: (){
                 DeleteData(context);
 
-              }, child: Text("حذف الصنف"))
+              }, child: Text("حذف الصنف") , ) ,
+              CupertinoSwitch(
+                value: widget.Valid!,
+                onChanged: (value) {
+                  setState(() {
+                    widget.Valid = value;
+                    //LangOrArabic = "لغات";
+                  });
+                },
+              ),
             ],
           ),
         ),

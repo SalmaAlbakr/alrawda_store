@@ -12,7 +12,7 @@ class OneProductPage extends StatefulWidget {
       required this.price2,
       required this.buyPrice,
       required this.image,
-      required this.notValid,
+      required this.Valid,
       required this.company,
       required this.category});
 
@@ -22,7 +22,7 @@ class OneProductPage extends StatefulWidget {
   final String price2;
   final String buyPrice;
   final String image;
-  final String notValid;
+  final bool Valid;
   final String company;
   final String category;
 
@@ -68,7 +68,7 @@ class _OneProductPageState extends State<OneProductPage> {
                                 imageURL: widget.image,
                                 categoryType: widget.category,
                                 buyPrice: widget.buyPrice,
-                                companyName: widget.company,
+                                companyName: widget.company, Valid: widget.Valid,
                               )),
                     );
                   },

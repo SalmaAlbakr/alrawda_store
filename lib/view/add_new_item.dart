@@ -417,7 +417,7 @@ class _AddNewItemState extends State<AddNewItem> {
         "image": context.read<TakePhotoByCameraCubit>().imageUrl,
         "time": FieldValue.serverTimestamp(),
         "sender": signedInUser.email,
-        "notValid": "0",
+        "Valid": true,
         "Category": widget.categoryType,
         "companyName": widget.companyName,
       });

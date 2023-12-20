@@ -11,7 +11,7 @@ class MessageW extends StatelessWidget {
     required this.isMe,
     required this.mPrice1,
     required this.mPrice2,
-    required this.notValid,
+    required this.Valid,
     required this.imageURL,
     required this.buyPrice,
     required this.company,
@@ -25,7 +25,7 @@ class MessageW extends StatelessWidget {
   final imageURL;
   final mSender;
   final bool isMe;
-  final notValid;
+  final bool Valid;
   final buyPrice;
   final company;
   final category;
@@ -46,7 +46,7 @@ class MessageW extends StatelessWidget {
                 price2: mPrice2,
                 image: imageURL,
                 buyPrice: buyPrice,
-                notValid: notValid, company: company, category: category,
+                Valid: Valid, company: company, category: category,
               ),
             ),
           );
@@ -77,7 +77,7 @@ class MessageW extends StatelessWidget {
             ),
             subtitle: Column(
               children: [
-                notValid == "0"
+                Valid == true
                     ? Text(
                         mPrice,
                         style: TextStyle(
