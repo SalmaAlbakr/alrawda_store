@@ -56,7 +56,7 @@ class _EditItemScreenState extends State<EditItemScreen> {
   @override
   void initState() {
     getCategories();
-
+    getCompanies();
     typeNameController.text = widget.initialTypeName!;
 
     priceController.text = widget.price!;
@@ -442,10 +442,9 @@ class _EditItemScreenState extends State<EditItemScreen> {
                         child: DropdownButton<String>(
                           onTap: () {
                             setState(() {
-                              widget.companyName = null;
+                             widget.companyName = null;
                             });
                           },
-                          //hint: Text(widget.initialCategoryName!),
                           underline: Container(),
                           borderRadius: BorderRadius.all(Radius.circular(15)),
                           value: widget.categoryType,
@@ -471,7 +470,6 @@ class _EditItemScreenState extends State<EditItemScreen> {
                       ),
                       Container(
                         child: DropdownButton<String>(
-                          hint: Text(widget.initialCompanyName!),
                           underline: Container(),
                           borderRadius: BorderRadius.all(Radius.circular(15)),
                           value: widget.companyName,
@@ -684,61 +682,4 @@ class _EditItemScreenState extends State<EditItemScreen> {
       ),
     );
   }
-
-  // Future<void> SendData(BuildContext context) async {
-  //   if (formKey.currentState!.validate() &&
-  //       context.read<TakePhotoByCameraCubit>().image != null &&
-  //       context.read<TakePhotoByCameraCubit>().imageUrl != null &&
-  //       widget.categoryType != null) {
-  //     setState(() {
-  //       sendingData = true;
-  //     });
-  //
-  //     await _fireStore
-  //         .collection("Categories")
-  //         .doc(widget.categoryType)
-  //         .collection("الشركات")
-  //         .doc(widget.companyName)
-  //         .collection("الاصناف")
-  //         .doc(widget.typeName)
-  //         .set({
-  //       "text": widget.typeName,
-  //       "price": widget.price,
-  //       "price1": widget.price1,
-  //       "price2": widget.price2,
-  //       "buyPrice": widget.buyPrice,
-  //       "image": context.read<TakePhotoByCameraCubit>().imageUrl,
-  //       "time": FieldValue.serverTimestamp(),
-  //       "sender": signedInUser.email,
-  //       "notValid": "0",
-  //       "Category": widget.categoryType,
-  //       "companyName": widget.companyName,
-  //     });
-  //     messageController.clear();
-  //     priceController.clear();
-  //     price1Controller.clear();
-  //     price2Controller.clear();
-  //     buyPriceController.clear();
-  //     CategoriesData.clear();
-  //     CompaniesData.clear();
-  //     setState(() {
-  //       sendingData = false;
-  //     });
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       SnackBar(
-  //         backgroundColor: Colors.green,
-  //         content: Text("تم اضافة الصنف بنجاح"),
-  //       ),
-  //     );
-  //
-  //     context.read<TakePhotoByCameraCubit>().reset();
-  //   } else {
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       SnackBar(
-  //         backgroundColor: Colors.red,
-  //         content: Text("يجب تسجيل الصنف"),
-  //       ),
-  //     );
-  //   }
-  // }
 }
