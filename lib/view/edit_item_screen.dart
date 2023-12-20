@@ -27,18 +27,18 @@ class EditItemScreen extends StatefulWidget {
     Key? key,
   }) : super(key: key);
 
-  String? typeName;
-  String? price;
-  String? price1;
-  String? price2;
-  String? imageURL;
-  String? categoryType;
-  String? buyPrice;
+  String typeName;
+  String price;
+  String price1;
+  String price2;
+  String imageURL;
+  String categoryType;
+  String buyPrice;
   String? companyName;
-  String? initialTypeName;
-  String? initialCompanyName;
-  String? initialCategoryName;
-  bool? Valid;
+  String initialTypeName;
+  String initialCompanyName;
+  String initialCategoryName;
+  bool Valid;
 
   @override
   State<EditItemScreen> createState() => _EditItemScreenState();
@@ -56,147 +56,19 @@ class _EditItemScreenState extends State<EditItemScreen> {
 
   @override
   void initState() {
+    super.initState();
     getCategories();
     getCompanies();
-    typeNameController.text = widget.initialTypeName!;
+    typeNameController.text = widget.initialTypeName;
 
-    priceController.text = widget.price!;
+    priceController.text = widget.price;
 
-    price1Controller.text = widget.price1!;
+    price1Controller.text = widget.price1;
 
-    price2Controller.text = widget.price2!;
-    buyPriceController.text = widget.buyPrice!;
+    price2Controller.text = widget.price2;
+    buyPriceController.text = widget.buyPrice;
     context.read<TakePhotoByCameraCubit>().imageUrl = widget.imageURL;
   }
-
-  // Add a new method to fetch existing data for editing
-  // void fetchDataForEditing() async {
-  //   try {
-  //
-  //
-  //
-  //     print(widget.typeName);
-  //     DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
-  //         .collection("Categories")
-  //         .doc(widget.categoryType)
-  //         .collection("الشركات")
-  //         .doc(widget.companyName)
-  //         .collection("الاصناف")
-  //         .doc(widget.typeName) // Use the provided document ID
-  //         .get();
-  //
-  //     if (documentSnapshot.exists) {
-  //       // Populate form fields with existing data
-  //       setState(() {
-  //         widget.initialTypeName = documentSnapshot.get("text");
-  //         widget.price = documentSnapshot.get("price");
-  //         widget.price1 = documentSnapshot.get("price1");
-  //         widget.price2 = documentSnapshot.get("price2");
-  //         widget.buyPrice = documentSnapshot.get("buyPrice");
-  //         widget.imageURL = documentSnapshot.get("image");
-  //        // widget.t = documentSnapshot.get("time");
-  //        // widget. = documentSnapshot.get("sender");
-  //         //widget. = documentSnapshot.get("notValid");
-  //         widget.initialCategoryName = documentSnapshot.get("Category");
-  //         widget.initialCompanyName = documentSnapshot.get("companyName");
-  //
-  //         widget.categoryType = documentSnapshot.get("Category");
-  //         widget.companyName = documentSnapshot.get("companyName");
-  //         widget.typeName = documentSnapshot.get("text");
-  //         // Populate other fields as needed
-  //       });
-  //     }
-  //   } catch (e) {
-  //     // Handle errors
-  //     print("Error fetching data for editing: $e");
-  //   }
-  // }
-
-  // ... (existing code)
-
-  // Modify the SendData method to handle updating data
-  // Future<void> SendData(BuildContext context) async {
-  //   if (formKey.currentState!.validate() &&
-  //       // ... (existing conditions)
-  //       widget.categoryName != null) {
-  //     setState(() {
-  //       sendingData = true;
-  //     });
-  //
-  //     try {
-  //       if (widget.typeName != null) {
-  //         // Update existing document
-  //         await _fireStore
-  //             .collection("Categories")
-  //             .doc(widget.categoryName)
-  //             .collection("الشركات")
-  //             .doc(widget.companyName)
-  //             .collection("الاصناف")
-  //             .doc(widget.typeName!)
-  //             .update({
-  //           "text": widget.typeName,
-  //           "price": widget.price,
-  //           "price1": widget.price1,
-  //           "price2": widget.price2,
-  //           "buyPrice": widget.buyPrice,
-  //          "image": context.read<TakePhotoByCameraCubit>().imageUrl,
-  //          // "time": FieldValue.serverTimestamp(),
-  //          // "sender": signedInUser.email,
-  //           "notValid": "0",
-  //           "Category": widget.categoryType,
-  //           "companyName": widget.companyName,
-  //           // Update other fields as needed
-  //         });
-  //       } else {
-  //         // Add new document (similar to your existing code)
-  //         // ...
-  //       }
-  //
-  //       // Clear form fields and update UI
-  //       messageController.clear();
-  //       priceController.clear();
-  //       price1Controller.clear();
-  //       price2Controller.clear();
-  //       buyPriceController.clear();
-  //       setState(() {
-  //         sendingData = false;
-  //       });
-  //
-  //       // Show success message
-  //       ScaffoldMessenger.of(context).showSnackBar(
-  //         SnackBar(
-  //           backgroundColor: Colors.green,
-  //           content: Text("تم تعديل الصنف بنجاح"),
-  //         ),
-  //       );
-  //
-  //       // Reset photo data
-  //       context.read<TakePhotoByCameraCubit>().reset();
-  //     } catch (e) {
-  //       // Handle errors
-  //       print("Error updating data: $e");
-  //       setState(() {
-  //         sendingData = false;
-  //       });
-  //
-  //       // Show error message
-  //       ScaffoldMessenger.of(context).showSnackBar(
-  //         SnackBar(
-  //           backgroundColor: Colors.red,
-  //           content: Text("حدث خطأ أثناء تعديل الصنف"),
-  //         ),
-  //       );
-  //     }
-  //   } else {
-  //     // Show validation error message
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       SnackBar(
-  //         backgroundColor: Colors.red,
-  //         content: Text("يجب تسجيل الصنف"),
-  //       ),
-  //     );
-  //   }
-  // }
 
   Future<void> SendData(BuildContext context) async {
     if (true) {
@@ -207,18 +79,18 @@ class _EditItemScreenState extends State<EditItemScreen> {
       try {
         await _fireStore
             .collection("Categories")
-            .doc(widget.initialCategoryName!)
+            .doc(widget.initialCategoryName)
             .collection("الشركات")
-            .doc(widget.initialCompanyName!)
+            .doc(widget.initialCompanyName)
             .collection("الاصناف")
-            .doc(widget.initialTypeName!)
+            .doc(widget.initialTypeName)
             .delete();
 
         await _fireStore
             .collection("Categories")
-            .doc(widget.categoryType!)
+            .doc(widget.categoryType)
             .collection("الشركات")
-            .doc(widget.companyName!)
+            .doc(widget.companyName)
             .collection("الاصناف")
             .doc(widget.typeName)
             .set({
@@ -233,41 +105,42 @@ class _EditItemScreenState extends State<EditItemScreen> {
           "Valid": widget.Valid,
           "Category": widget.categoryType,
           "companyName": widget.companyName,
-          // Add other fields as needed
+
         });
 
         setState(() {
           sendingData = false;
         });
 
-        // Show success message
-     await   ScaffoldMessenger.of(context).showSnackBar(
+        await ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             backgroundColor: Colors.green,
-            content: Text("تم اضافة الصنف بنجاح"),
+            content: Text("تم تعديل الصنف بنجاح"),
           ),
         );
-        Navigator.of(context).pushReplacement(MaterialPageRoute(
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
             builder: (context) => OneProductPage(
-                productName: widget.typeName!,
-                onePiecePrice: widget.price!,
-                price1: widget.price1!,
-                price2: widget.price2!,
-                buyPrice: widget.buyPrice!,
-                image: widget.imageURL!,
-                Valid: widget.Valid!,
-                company: widget.companyName!,
-                category: widget.categoryType!),),);
-        // Reset photo data
+              productName: widget.typeName,
+              onePiecePrice: widget.price,
+              price1: widget.price1,
+              price2: widget.price2,
+              buyPrice: widget.buyPrice,
+              image: widget.imageURL,
+              Valid: widget.Valid,
+              company: widget.companyName!,
+              category: widget.categoryType,
+            ),
+          ),
+        );
+
         context.read<TakePhotoByCameraCubit>().reset();
       } catch (e) {
-        // Handle errors
         print("Error updating data: $e");
         setState(() {
           sendingData = false;
         });
 
-        // Show error message
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             backgroundColor: Colors.red,
@@ -275,16 +148,9 @@ class _EditItemScreenState extends State<EditItemScreen> {
           ),
         );
       }
-    } else {
-      // Show validation error message
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          backgroundColor: Colors.red,
-          content: Text("يجب تسجيل الصنف"),
-        ),
-      );
     }
   }
+
   Future<void> DeleteData(BuildContext context) async {
     if (true) {
       setState(() {
@@ -294,32 +160,35 @@ class _EditItemScreenState extends State<EditItemScreen> {
       try {
         await _fireStore
             .collection("Categories")
-            .doc(widget.initialCategoryName!)
+            .doc(widget.initialCategoryName)
             .collection("الشركات")
-            .doc(widget.initialCompanyName!)
+            .doc(widget.initialCompanyName)
             .collection("الاصناف")
-            .doc(widget.initialTypeName!)
+            .doc(widget.initialTypeName)
             .delete();
 
-        // Show success message
-        await   ScaffoldMessenger.of(context).showSnackBar(
+        await ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             backgroundColor: Colors.green,
             content: Text("تم حذف الصنف بنجاح"),
           ),
         );
-        Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => ListOfProducts( categoryName: widget.categoryType!, companyName: widget.companyName!,),),);
-        // Reset photo data
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => ListOfProducts(
+              categoryName: widget.categoryType,
+              companyName: widget.companyName!,
+            ),
+          ),
+        );
+
         context.read<TakePhotoByCameraCubit>().reset();
       } catch (e) {
-        // Handle errors
         print("Error updating data: $e");
         setState(() {
           sendingData = false;
         });
 
-        // Show error message
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             backgroundColor: Colors.red,
@@ -327,14 +196,6 @@ class _EditItemScreenState extends State<EditItemScreen> {
           ),
         );
       }
-    } else {
-      // Show validation error message
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          backgroundColor: Colors.red,
-          content: Text("يجب تسجيل الصنف"),
-        ),
-      );
     }
   }
 
@@ -382,9 +243,6 @@ class _EditItemScreenState extends State<EditItemScreen> {
   bool sendingData = false;
   bool internet = true;
 
- //  bool _switchValue = false;
- // String LangOrArabic ;
-
   @override
   @override
   void dispose() {
@@ -425,16 +283,17 @@ class _EditItemScreenState extends State<EditItemScreen> {
           title: Row(
             children: [
               Text("تعديل الصنف"),
-              TextButton(onPressed: (){
-                DeleteData(context);
-
-              }, child: Text("حذف الصنف") , ) ,
+              TextButton(
+                onPressed: () {
+                  DeleteData(context);
+                },
+                child: Text("حذف الصنف"),
+              ),
               CupertinoSwitch(
-                value: widget.Valid!,
+                value: widget.Valid,
                 onChanged: (value) {
                   setState(() {
                     widget.Valid = value;
-                    //LangOrArabic = "لغات";
                   });
                 },
               ),
@@ -456,7 +315,7 @@ class _EditItemScreenState extends State<EditItemScreen> {
                         child: DropdownButton<String>(
                           onTap: () {
                             setState(() {
-                             widget.companyName = null;
+                              widget.companyName = null;
                             });
                           },
                           underline: Container(),
@@ -684,7 +543,8 @@ class _EditItemScreenState extends State<EditItemScreen> {
                       else
                         Expanded(
                           child: Image.network(
-                              context.read<TakePhotoByCameraCubit>().imageUrl!),
+                            context.read<TakePhotoByCameraCubit>().imageUrl!,
+                          ),
                         ),
                     ],
                   ),
