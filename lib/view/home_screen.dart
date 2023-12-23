@@ -20,6 +20,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List Categories = [];
+  List sliderImage = [];
   getCategories() async {
     CollectionReference dataOfProduct =
         FirebaseFirestore.instance.collection("Categories");
@@ -33,11 +34,24 @@ class _HomeScreenState extends State<HomeScreen> {
       });
     });
   }
+  ImageSlider() async {
+    CollectionReference dataOfProduct =
+        FirebaseFirestore.instance.collection("slidableImage");
+    QuerySnapshot snapOfData = await dataOfProduct.get();
+    List<QueryDocumentSnapshot> list = snapOfData.docs;
+    list.forEach((element) {
+      setState(() {
+        sliderImage.add(element.data());
+      });
+    });
+
+  }
 
   @override
   void initState() {
     getCategories();
     getCurrentUser();
+    ImageSlider();
     super.initState();
   }
 
@@ -49,105 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
       textDirection: TextDirection.rtl,
       child: Scaffold(
         backgroundColor: Colors.blue[900],
-        endDrawer: Drawer(
-          shadowColor: Colors.deepOrangeAccent,
-          child: ListView(
-            children: [
-              DrawerHeader(
-                decoration: BoxDecoration(
-                  color: MyColors.mainColor,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "شركة الروضه",
-                      style: GoogleFonts.alexandria(
-                        color: Colors.white,
-                        fontSize: 40,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              signedInUser.isAnonymous
-                  ? SizedBox()
-                  : signedInUser.email! == "elrawda123@gmail.com"
-                      ? TextButton(
-                          onPressed: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => AddNewItem(),
-                              ),
-                            );
-                          },
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(Icons.add),
-                              SizedBox(
-                                width: 5,
-                              ),
-                              Text(
-                                "اضافة صنف جديد",
-                                style: TextStyle(color: MyColors.mainColor),
-                              ),
-                            ],
-                          ),
-                        )
-                      : SizedBox(),
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => AboutScreen(),
-                    ),
-                  );
-                },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.contact_phone_rounded),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      "للتواصل معنا",
-                      style: TextStyle(
-                        color: MyColors.mainColor,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              TextButton(
-                onPressed: () async {
-                  await _auth.signOut();
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => StartScreen(),
-                    ),
-                  );
-                },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.login_outlined),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    Text(
-                      "تسجيل الخروج",
-                      style: TextStyle(
-                        color: MyColors.mainColor,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
+        endDrawer: home_drawer(auth: _auth),
         appBar: AppBar(
           iconTheme: IconThemeData(color: Colors.deepOrange),
           automaticallyImplyLeading: false,
@@ -179,18 +95,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     enlargeCenterPage: true,
                     autoPlay: true,
                   ),
-                  items: [
-                    "image/slide01.PNG",
-                    "image/slide3.PNG",
-                    "image/0000.PNG",
-                    "image/Screenshot from 2023-07-25 17-40-37.png"
-                  ].map((i) {
+                  items: sliderImage.map((i) {
                     return Builder(
                       builder: (BuildContext context) {
                         return Container(
                           width: MediaQuery.of(context).size.width,
                           margin: EdgeInsets.symmetric(horizontal: 5.0),
-                          child: Image.asset(i),
+                          child: Image.network(i["1"]),
                         );
                       },
                     );
@@ -225,6 +136,118 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class home_drawer extends StatelessWidget {
+  const home_drawer({
+    super.key,
+    required FirebaseAuth auth,
+  }) : _auth = auth;
+
+  final FirebaseAuth _auth;
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      shadowColor: Colors.deepOrangeAccent,
+      child: ListView(
+        children: [
+          DrawerHeader(
+            decoration: BoxDecoration(
+              color: MyColors.mainColor,
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "شركة الروضه",
+                  style: GoogleFonts.alexandria(
+                    color: Colors.white,
+                    fontSize: 40,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          signedInUser.isAnonymous
+              ? SizedBox()
+              : signedInUser.email! == "elrawda123@gmail.com"
+                  ? TextButton(
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => AddNewItem(),
+                          ),
+                        );
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.add),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            "اضافة صنف جديد",
+                            style: TextStyle(color: MyColors.mainColor),
+                          ),
+                        ],
+                      ),
+                    )
+                  : SizedBox(),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => AboutScreen(),
+                ),
+              );
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.contact_phone_rounded),
+                SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  "للتواصل معنا",
+                  style: TextStyle(
+                    color: MyColors.mainColor,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          TextButton(
+            onPressed: () async {
+              await _auth.signOut();
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => StartScreen(),
+                ),
+              );
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.login_outlined),
+                SizedBox(
+                  width: 5,
+                ),
+                Text(
+                  "تسجيل الخروج",
+                  style: TextStyle(
+                    color: MyColors.mainColor,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
