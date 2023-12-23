@@ -285,7 +285,28 @@ class _EditItemScreenState extends State<EditItemScreen> {
               Text("تعديل الصنف"),
               TextButton(
                 onPressed: () {
-                  DeleteData(context);
+
+                  showDialog<void>(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        actions: <Widget>[
+                          TextButton(
+                            onPressed: () => Navigator.pop(context, 'Cancel'),
+                            child: const Text('الغاء'),
+                          ),
+                          TextButton(
+                            onPressed: () => DeleteData(context),
+                            child: const Text('حذف'),
+                          ),
+                        ],
+                        content: Text(
+                          "هل تريد حذف الصنف",
+                        ),
+                      );
+                    },
+                  );
+                 // DeleteData(context);
                 },
                 child: Text("حذف الصنف"),
               ),
