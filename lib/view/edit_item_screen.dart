@@ -279,48 +279,61 @@ class _EditItemScreenState extends State<EditItemScreen> {
           ),
         ),
         appBar: AppBar(
+          toolbarHeight: 80, // Adjust the height as needed
           backgroundColor: MyColors.mainColor,
           title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("تعديل الصنف"),
-              TextButton(
-                onPressed: () {
-
-                  showDialog<void>(
-                    context: context,
-                    builder: (context) {
-                      return AlertDialog(
-                        actions: <Widget>[
-                          TextButton(
-                            onPressed: () => Navigator.pop(context, 'Cancel'),
-                            child: const Text('الغاء'),
-                          ),
-                          TextButton(
-                            onPressed: () => DeleteData(context),
-                            child: const Text('حذف'),
-                          ),
-                        ],
-                        content: Text(
-                          "هل تريد حذف الصنف",
-                        ),
-                      );
-                    },
-                  );
-                 // DeleteData(context);
-                },
-                child: Text("حذف الصنف"),
+              Text(
+                "تعديل الصنف",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
-              CupertinoSwitch(
-                value: widget.Valid,
-                onChanged: (value) {
-                  setState(() {
-                    widget.Valid = value;
-                  });
-                },
+              Row(
+                children: [
+                  TextButton(
+                            onPressed: () {
+
+                              showDialog<void>(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    actions: <Widget>[
+                                      TextButton(
+                                        onPressed: () => Navigator.pop(context, 'Cancel'),
+                                        child: const Text('الغاء'),
+                                      ),
+                                      TextButton(
+                                        onPressed: () => DeleteData(context),
+                                        child: const Text('حذف'),
+                                      ),
+                                    ],
+                                    content: Text(
+                                      "هل تريد حذف الصنف",
+                                    ),
+                                  );
+                                },
+                              );
+                             // DeleteData(context);
+                            },
+                    child: Text(
+                      "حذف الصنف",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                  CupertinoSwitch(
+                    value: widget.Valid,
+                    onChanged: (value) {
+                      setState(() {
+                        widget.Valid = value;
+                      });
+                    },
+                  ),
+                ],
               ),
             ],
           ),
         ),
+
         body: SafeArea(
           child: Form(
             key: formKey,
