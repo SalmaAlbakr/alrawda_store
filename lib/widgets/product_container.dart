@@ -53,10 +53,21 @@ class MessageW extends StatelessWidget {
         },
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.white,
+            boxShadow: [
+              BoxShadow(color: Colors.black ,
+                  blurRadius: 5
+                  , blurStyle: BlurStyle.outer
+              )
+            ],
+             color: Colors.white,
             borderRadius: BorderRadius.circular(15),
             border: Border.all(),
           ),
+          // decoration: BoxDecoration(
+          //   color: Colors.white,
+          //   borderRadius: BorderRadius.circular(15),
+          //   border: Border.all(),
+          // ),
           child: ListTile(
             leading: Container(
               width: MediaQuery.of(context).size.width * 0.2,

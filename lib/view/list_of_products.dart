@@ -89,6 +89,7 @@ class _ListOfProductsState extends State<ListOfProducts> {
                 child: SizedBox(),
               ),
               Container(
+
                 width: 35,
                 height: 35,
                 color: Colors.deepOrange,

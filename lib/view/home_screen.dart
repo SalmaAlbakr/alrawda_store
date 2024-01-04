@@ -99,9 +99,25 @@ class _HomeScreenState extends State<HomeScreen> {
                     return Builder(
                       builder: (BuildContext context) {
                         return Container(
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: NetworkImage(i["1"]),
+
+                              fit: BoxFit.cover,
+                            ),
+                            boxShadow: [
+                              BoxShadow(color: Colors.black ,
+                                  blurRadius: 5
+                                  , blurStyle: BlurStyle.outer
+                              )
+                            ],
+                            color: Colors.transparent,
+                            borderRadius: BorderRadius.circular(15),
+                            border: Border.all(),
+                          ),
                           width: MediaQuery.of(context).size.width,
                           margin: EdgeInsets.symmetric(horizontal: 5.0),
-                          child: Image.network(i["1"]),
+                          //child: Image.network(i["1"]),
                         );
                       },
                     );

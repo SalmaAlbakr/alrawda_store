@@ -105,7 +105,6 @@ class _EditItemScreenState extends State<EditItemScreen> {
           "Valid": widget.Valid,
           "Category": widget.categoryType,
           "companyName": widget.companyName,
-
         });
 
         setState(() {
@@ -265,74 +264,74 @@ class _EditItemScreenState extends State<EditItemScreen> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        floatingActionButton: SizedBox(
-          height: 80,
-          width: 80,
-          child: FloatingActionButton(
-            child: Icon(
-              Icons.add,
-              size: 50,
-            ),
-            onPressed: () async {
-              await SendData(context);
-            },
-          ),
-        ),
-        appBar: AppBar(
-          toolbarHeight: 80, // Adjust the height as needed
-          backgroundColor: MyColors.mainColor,
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "تعديل الصنف",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-              Row(
-                children: [
-                  TextButton(
-                            onPressed: () {
-
-                              showDialog<void>(
-                                context: context,
-                                builder: (context) {
-                                  return AlertDialog(
-                                    actions: <Widget>[
-                                      TextButton(
-                                        onPressed: () => Navigator.pop(context, 'Cancel'),
-                                        child: const Text('الغاء'),
-                                      ),
-                                      TextButton(
-                                        onPressed: () => DeleteData(context),
-                                        child: const Text('حذف'),
-                                      ),
-                                    ],
-                                    content: Text(
-                                      "هل تريد حذف الصنف",
-                                    ),
-                                  );
-                                },
-                              );
-                             // DeleteData(context);
-                            },
-                    child: Text(
-                      "حذف الصنف",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                  CupertinoSwitch(
-                    value: widget.Valid,
-                    onChanged: (value) {
-                      setState(() {
-                        widget.Valid = value;
-                      });
-                    },
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
+        // floatingActionButton: SizedBox(
+        //   height: 80,
+        //   width: 80,
+        //   child: FloatingActionButton(
+        //     child: Icon(
+        //       Icons.add,
+        //       size: 50,
+        //     ),
+        //     onPressed: () async {
+        //       await SendData(context);
+        //     },
+        //   ),
+        // ),
+        // appBar: AppBar(
+        //   toolbarHeight: 80, // Adjust the height as needed
+        //   backgroundColor: MyColors.mainColor,
+        //   title: Row(
+        //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //     children: [
+        //       Text(
+        //         "تعديل الصنف",
+        //         style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        //       ),
+        //       Row(
+        //         children: [
+        //           TextButton(
+        //                     onPressed: () {
+        //
+        //                       showDialog<void>(
+        //                         context: context,
+        //                         builder: (context) {
+        //                           return AlertDialog(
+        //                             actions: <Widget>[
+        //                               TextButton(
+        //                                 onPressed: () => Navigator.pop(context, 'Cancel'),
+        //                                 child: const Text('الغاء'),
+        //                               ),
+        //                               TextButton(
+        //                                 onPressed: () => DeleteData(context),
+        //                                 child: const Text('حذف'),
+        //                               ),
+        //                             ],
+        //                             content: Text(
+        //                               "هل تريد حذف الصنف",
+        //                             ),
+        //                           );
+        //                         },
+        //                       );
+        //                      // DeleteData(context);
+        //                     },
+        //             child: Text(
+        //               "حذف الصنف",
+        //               style: TextStyle(color: Colors.white),
+        //             ),
+        //           ),
+        //           CupertinoSwitch(
+        //             value: widget.Valid,
+        //             onChanged: (value) {
+        //               setState(() {
+        //                 widget.Valid = value;
+        //               });
+        //             },
+        //           ),
+        //         ],
+        //       ),
+        //     ],
+        //   ),
+        // ),
 
         body: SafeArea(
           child: Form(
@@ -340,247 +339,382 @@ class _EditItemScreenState extends State<EditItemScreen> {
             child: BlocBuilder<TakePhotoByCameraCubit, TakePhotoByCameraState>(
                 builder: (context, state) {
               return Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(
+                        'image/white-color-background-w5cnsm83mhhhex71.jpg'), // replace with your image file
+                    fit: BoxFit.cover,
+                  ),
+                ),
                 height: MediaQuery.of(context).size.height,
                 child: ModalProgressHUD(
                   inAsyncCall: sendingData,
-                  child: Column(
-                    children: [
-                      Container(
-                        child: DropdownButton<String>(
-                          onTap: () {
-                            setState(() {
-                              widget.companyName = null;
-                            });
-                          },
-                          underline: Container(),
-                          borderRadius: BorderRadius.all(Radius.circular(15)),
-                          value: widget.categoryType,
-                          onChanged: (String? newValue) {
-                            setState(() {
-                              CompaniesName.clear();
-                              widget.categoryType = newValue!;
-                              getCompanies();
-                            });
-                          },
-                          isExpanded: true,
-                          items: CategoriesName.map((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Center(
-                                child: Text(
-                                  value,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        if (state is ChoosePhoto)
+
+                          //تحميل الصوره
+                          Expanded(
+                            child: ModalProgressHUD(
+                              inAsyncCall: true,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(
+                                      50.0), // Adjust the value as needed
+                                  border: Border.all(),
+                                  image: DecorationImage(
+                                    image: FileImage(state.image!),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                //    child: Image.file(state.image!)
+                              ),
+                            ),
+                          )
+                        else if (state is ImageURLDone)
+                          Expanded(
+                            child: ModalProgressHUD(
+                              inAsyncCall: false,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(
+                                      50.0), // Adjust the value as needed
+                                  border: Border.all(// Border width
+                                      ),
+                                  image: DecorationImage(
+                                    image: FileImage(context
+                                        .read<TakePhotoByCameraCubit>()
+                                        .image!),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                // child: Image.file(
+                                //   context.read<TakePhotoByCameraCubit>().image!,
+                                // ),
+                              ),
+                            ),
+                          )
+                        else
+                          Expanded(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(
+                                    50.0),
+                                border: Border.all(
+                                    ),
+                                image: DecorationImage(
+                                  image: NetworkImage(context
+                                      .read<TakePhotoByCameraCubit>()
+                                      .imageUrl!),
                                 ),
                               ),
-                            );
-                          }).toList(),
+                              // child: Image.network(
+                              //   context.read<TakePhotoByCameraCubit>().imageUrl!,
+                              // ),
+                            ),
+                          ),
+                        // الاسم و زرار حذف الصنف و زرار موجود او لا
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+
+                            Text(
+                              widget.Valid == true ?
+                              "الصنف متاح" : "الصنف غير متاح" ,
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            ),
+                            CupertinoSwitch(
+                              value: widget.Valid,
+                              onChanged: (value) {
+                                setState(() {
+                                  widget.Valid = value;
+                                });
+                              },
+                            ),
+                          ],
                         ),
-                      ),
-                      Container(
-                        child: DropdownButton<String>(
-                          underline: Container(),
-                          borderRadius: BorderRadius.all(Radius.circular(15)),
-                          value: widget.companyName,
-                          onChanged: (String? newValue) {
-                            setState(() {
-                              widget.companyName = newValue!;
-                            });
-                          },
-                          isExpanded: true,
-                          items: CompaniesName.map((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Center(
-                                child: Text(
-                                  value,
-                                ),
-                              ),
-                            );
-                          }).toList(),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: TextFormField(
-                          validator: (String? value) {
-                            if (value == "") {
-                              return "يجب تسجيل اسم الصنف";
-                            }
-                            return null;
-                          },
-                          controller: typeNameController,
-                          onChanged: (value) {
-                            widget.typeName = value;
-                          },
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: MyColors.mainColor,
-                              ),
-                            ),
-                            labelText: widget.typeName,
-                          ),
-                        ),
-                      ),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: TextFormField(
-                                validator: (String? value) {
-                                  if (value == "") {
-                                    return "يجب تسجيل سعر الشراء ";
-                                  }
-                                  return null;
-                                },
-                                keyboardType: TextInputType.number,
-                                controller: buyPriceController,
-                                onChanged: (value) {
-                                  widget.buyPrice = "سعر الشراء  : " + value;
-                                },
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: MyColors.mainColor,
-                                    ),
-                                  ),
-                                  labelText: "سعر الشراء",
-                                ),
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: TextFormField(
-                                validator: (String? value) {
-                                  if (value == "") {
-                                    return "يجب تسجيل سعر القطاعي";
-                                  }
-                                  return null;
-                                },
-                                keyboardType: TextInputType.number,
-                                controller: priceController,
-                                onChanged: (value) {
-                                  widget.price = "سعر القطاعي : " + value;
-                                },
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: MyColors.mainColor,
-                                    ),
-                                  ),
-                                  labelText: "سعر القطاعي",
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: TextFormField(
-                                validator: (String? value) {
-                                  if (value == "") {
-                                    return "يجب تسجيل سعر الجمله 1";
-                                  }
-                                  return null;
-                                },
-                                keyboardType: TextInputType.number,
-                                controller: price1Controller,
-                                onChanged: (value) {
-                                  widget.price1 = "سعر الجمله1  : " + value;
-                                },
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: MyColors.mainColor,
-                                    ),
-                                  ),
-                                  labelText: "سعر الجمله1",
-                                ),
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: TextFormField(
-                                validator: (String? value) {
-                                  if (value == "") {
-                                    return "يجب تسجيل سعر الجمله 2";
-                                  }
-                                  return null;
-                                },
-                                keyboardType: TextInputType.number,
-                                controller: price2Controller,
-                                onChanged: (value) {
-                                  widget.price2 = "سعر الجمله2  : " + value;
-                                },
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: MyColors.mainColor,
-                                    ),
-                                  ),
-                                  labelText: "سعر الجمله2",
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          ElevatedButton(
-                            onPressed: () {
-                              context
-                                  .read<TakePhotoByCameraCubit>()
-                                  .takePhoto();
+
+                        // الكاتيجوري
+                        Container(
+                          child: DropdownButton<String>(
+                            onTap: () {
+                              setState(() {
+                                widget.companyName = null;
+                              });
                             },
-                            child: Icon(
-                              Icons.camera_enhance,
-                            ),
-                          ),
-                          ElevatedButton(
-                            onPressed: () {
-                              context
-                                  .read<TakePhotoByCameraCubit>()
-                                  .choosePhoto();
+                            underline: Container(),
+                            borderRadius: BorderRadius.all(Radius.circular(15)),
+                            value: widget.categoryType,
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                CompaniesName.clear();
+                                widget.categoryType = newValue!;
+                                getCompanies();
+                              });
                             },
-                            child: Icon(
-                              Icons.filter,
-                            ),
-                          ),
-                        ],
-                      ),
-                      if (state is ChoosePhoto)
-                        Expanded(
-                          child: ModalProgressHUD(
-                            inAsyncCall: true,
-                            child: Image.file(state.image!),
-                          ),
-                        )
-                      else if (state is ImageURLDone)
-                        Expanded(
-                          child: ModalProgressHUD(
-                            inAsyncCall: false,
-                            child: Image.file(
-                              context.read<TakePhotoByCameraCubit>().image!,
-                            ),
-                          ),
-                        )
-                      else
-                        Expanded(
-                          child: Image.network(
-                            context.read<TakePhotoByCameraCubit>().imageUrl!,
+                            isExpanded: true,
+                            items: CategoriesName.map((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Center(
+                                  child: Text(
+                                    value,
+                                  ),
+                                ),
+                              );
+                            }).toList(),
                           ),
                         ),
-                    ],
+
+                        // الشركات
+                        Container(
+                          child: DropdownButton<String>(
+                            underline: Container(),
+                            borderRadius: BorderRadius.all(Radius.circular(15)),
+                            value: widget.companyName,
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                widget.companyName = newValue!;
+                              });
+                            },
+                            isExpanded: true,
+                            items: CompaniesName.map((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Center(
+                                  child: Text(
+                                    value,
+                                  ),
+                                ),
+                              );
+                            }).toList(),
+                          ),
+                        ),
+
+                        // اسم الصنف
+                        Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: TextFormField(
+                            validator: (String? value) {
+                              if (value == "") {
+                                return "يجب تسجيل اسم الصنف";
+                              }
+                              return null;
+                            },
+                            controller: typeNameController,
+                            onChanged: (value) {
+                              widget.typeName = value;
+                            },
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: MyColors.mainColor,
+                                ),
+                              ),
+                              labelText: widget.typeName,
+                            ),
+                          ),
+                        ),
+
+                        // اسعار الصنف
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: TextFormField(
+                                  validator: (String? value) {
+                                    if (value == "") {
+                                      return "يجب تسجيل سعر الشراء ";
+                                    }
+                                    return null;
+                                  },
+                                  keyboardType: TextInputType.number,
+                                  controller: buyPriceController,
+                                  onChanged: (value) {
+                                    widget.buyPrice = "سعر الشراء  : " + value;
+                                  },
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: MyColors.mainColor,
+                                      ),
+                                    ),
+                                    labelText: "سعر الشراء",
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: TextFormField(
+                                  validator: (String? value) {
+                                    if (value == "") {
+                                      return "يجب تسجيل سعر القطاعي";
+                                    }
+                                    return null;
+                                  },
+                                  keyboardType: TextInputType.number,
+                                  controller: priceController,
+                                  onChanged: (value) {
+                                    widget.price = "سعر القطاعي : " + value;
+                                  },
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: MyColors.mainColor,
+                                      ),
+                                    ),
+                                    labelText: "سعر القطاعي",
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        // اسعار الصنف الجمله
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: TextFormField(
+                                  validator: (String? value) {
+                                    if (value == "") {
+                                      return "يجب تسجيل سعر الجمله 1";
+                                    }
+                                    return null;
+                                  },
+                                  keyboardType: TextInputType.number,
+                                  controller: price1Controller,
+                                  onChanged: (value) {
+                                    widget.price1 = "سعر الجمله1  : " + value;
+                                  },
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: MyColors.mainColor,
+                                      ),
+                                    ),
+                                    labelText: "سعر الجمله1",
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: TextFormField(
+                                  validator: (String? value) {
+                                    if (value == "") {
+                                      return "يجب تسجيل سعر الجمله 2";
+                                    }
+                                    return null;
+                                  },
+                                  keyboardType: TextInputType.number,
+                                  controller: price2Controller,
+                                  onChanged: (value) {
+                                    widget.price2 = "سعر الجمله2  : " + value;
+                                  },
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: MyColors.mainColor,
+                                      ),
+                                    ),
+                                    labelText: "سعر الجمله2",
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        // اختيار تحميل صوره من الكاميرا او المعرض
+                        // Row(
+                        //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        //   children: [
+                        //     // صوره من الكاميرا
+                        //     ElevatedButton(
+                        //       onPressed: () {
+                        //         context
+                        //             .read<TakePhotoByCameraCubit>()
+                        //             .takePhoto();
+                        //       },
+                        //       child: Icon(
+                        //         Icons.camera_enhance,
+                        //       ),
+                        //     ),
+                        //
+                        //     // صوره من المعرض
+                        //     ElevatedButton(
+                        //       onPressed: () {
+                        //         context
+                        //             .read<TakePhotoByCameraCubit>()
+                        //             .choosePhoto();
+                        //       },
+                        //       child: Icon(
+                        //         Icons.filter,
+                        //       ),
+                        //     ),
+                        //   ],
+                        // ), 
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            // صوره من الكاميرا
+                            ElevatedButton(
+                              onPressed: () {
+                                showDialog<void>(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      actions: <Widget>[
+                                        TextButton(
+                                          onPressed: () => Navigator.pop(
+                                              context, 'Cancel'),
+                                          child: const Text('الغاء'),
+                                        ),
+                                        TextButton(
+                                          onPressed: () =>
+                                              DeleteData(context),
+                                          child: const Text('حذف'),
+                                        ),
+                                      ],
+                                      content: Text(
+                                        "هل تريد حذف الصنف",
+                                      ),
+                                    );
+                                  },
+                                );
+                                // DeleteData(context);
+                              },
+                              child: Text ("حذف الصنف") ,
+                              style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all(Colors.red)
+                              ),
+                            ),
+
+                            // صوره من المعرض
+                            ElevatedButton(
+                              onPressed: () async {
+                                await SendData(context);
+                              },
+                              child: Text ("تعديل الصنف") ,
+                              style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all(Colors.green)
+                              ),
+                            ),
+                          ],
+                        ),
+                        
+                      ],
+                    ),
                   ),
                 ),
               );
@@ -591,3 +725,4 @@ class _EditItemScreenState extends State<EditItemScreen> {
     );
   }
 }
+/// مكان زرار تحميل صوره جديده TODO: 
