@@ -15,6 +15,7 @@ class NewWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
+
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(color: Colors.black ,

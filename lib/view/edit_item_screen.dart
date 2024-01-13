@@ -535,7 +535,7 @@ class _EditItemScreenState extends State<EditItemScreen> {
                                   keyboardType: TextInputType.number,
                                   controller: buyPriceController,
                                   onChanged: (value) {
-                                    widget.buyPrice = "سعر الشراء  : " + value;
+                                    widget.buyPrice = value;
                                   },
                                   decoration: InputDecoration(
                                     border: OutlineInputBorder(
@@ -561,7 +561,7 @@ class _EditItemScreenState extends State<EditItemScreen> {
                                   keyboardType: TextInputType.number,
                                   controller: priceController,
                                   onChanged: (value) {
-                                    widget.price = "سعر القطاعي : " + value;
+                                    widget.price = value;
                                   },
                                   decoration: InputDecoration(
                                     border: OutlineInputBorder(
@@ -593,7 +593,7 @@ class _EditItemScreenState extends State<EditItemScreen> {
                                   keyboardType: TextInputType.number,
                                   controller: price1Controller,
                                   onChanged: (value) {
-                                    widget.price1 = "سعر الجمله1  : " + value;
+                                    widget.price1 = value;
                                   },
                                   decoration: InputDecoration(
                                     border: OutlineInputBorder(
@@ -619,7 +619,7 @@ class _EditItemScreenState extends State<EditItemScreen> {
                                   keyboardType: TextInputType.number,
                                   controller: price2Controller,
                                   onChanged: (value) {
-                                    widget.price2 = "سعر الجمله2  : " + value;
+                                    widget.price2 = value;
                                   },
                                   decoration: InputDecoration(
                                     border: OutlineInputBorder(
