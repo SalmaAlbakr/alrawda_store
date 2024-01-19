@@ -353,76 +353,132 @@ class _EditItemScreenState extends State<EditItemScreen> {
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
                       children: [
-                        if (state is ChoosePhoto)
-
-                          //تحميل الصوره
-                          Expanded(
-                            child: ModalProgressHUD(
-                              inAsyncCall: true,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(
-                                      50.0), // Adjust the value as needed
-                                  border: Border.all(),
-                                  image: DecorationImage(
-                                    image: FileImage(state.image!),
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                //    child: Image.file(state.image!)
-                              ),
+                        Expanded(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50.0),
+                              border: Border.all(),
                             ),
-                          )
-                        else if (state is ImageURLDone)
-                          Expanded(
-                            child: ModalProgressHUD(
-                              inAsyncCall: false,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(
-                                      50.0), // Adjust the value as needed
-                                  border: Border.all(// Border width
+                            child: Column(
+                              children: [
+                                if (state is ChoosePhoto)
+                                  Expanded(
+                                    child: ModalProgressHUD(
+                                      inAsyncCall: true,
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(50.0),
+                                          //border: Border.all(),
+                                          image: DecorationImage(
+                                            image: FileImage(state.image!),
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
                                       ),
-                                  image: DecorationImage(
-                                    image: FileImage(context
-                                        .read<TakePhotoByCameraCubit>()
-                                        .image!),
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                // child: Image.file(
-                                //   context.read<TakePhotoByCameraCubit>().image!,
-                                // ),
-                              ),
-                            ),
-                          )
-                        else
-                          Expanded(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(
-                                    50.0),
-                                border: Border.all(
                                     ),
-                                image: DecorationImage(
-                                  image: NetworkImage(context
-                                      .read<TakePhotoByCameraCubit>()
-                                      .imageUrl!),
+                                  )
+                                else if (state is ImageURLDone)
+                                  Expanded(
+                                    child: ModalProgressHUD(
+                                      inAsyncCall: false,
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(50.0),
+                                          //  border: Border.all(),
+                                          image: DecorationImage(
+                                            image: FileImage(context
+                                                .read<TakePhotoByCameraCubit>()
+                                                .image!),
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                else
+                                  Expanded(
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(50.0),
+                                        // border: Border.all(),
+                                        image: DecorationImage(
+                                          image: NetworkImage(context
+                                              .read<TakePhotoByCameraCubit>()
+                                              .imageUrl!),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    CircleAvatar(
+                                      backgroundColor: Color(0xffE3E3E3),
+                                      child: IconButton(
+                                        onPressed: () {
+                                          showDialog<void>(
+                                            context: context,
+                                            builder: (context) {
+                                              return AlertDialog(
+                                                actions: <Widget>[
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      ElevatedButton(
+                                                        onPressed: () {
+                                                          context
+                                                              .read<
+                                                                  TakePhotoByCameraCubit>()
+                                                              .takePhoto();
+                                                        },
+                                                        child: Icon(
+                                                          Icons.camera_enhance,
+                                                        ),
+                                                      ),
+
+                                                      // صوره من المعرض
+                                                      ElevatedButton(
+                                                        onPressed: () {
+                                                          context
+                                                              .read<
+                                                                  TakePhotoByCameraCubit>()
+                                                              .choosePhoto();
+                                                        },
+                                                        child: Icon(
+                                                          Icons.filter,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          );
+                                        },
+                                        icon: Icon(
+                                          Icons.edit,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ),
-                              // child: Image.network(
-                              //   context.read<TakePhotoByCameraCubit>().imageUrl!,
-                              // ),
+                              ],
                             ),
                           ),
-                        // الاسم و زرار حذف الصنف و زرار موجود او لا
+                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-
                             Text(
-                              widget.Valid == true ?
-                              "الصنف متاح" : "الصنف غير متاح" ,
+                              widget.Valid == true
+                                  ? "الصنف متاح"
+                                  : "الصنف غير متاح",
                               style: TextStyle(
                                   fontSize: 20, fontWeight: FontWeight.bold),
                             ),
@@ -663,7 +719,7 @@ class _EditItemScreenState extends State<EditItemScreen> {
                         //       ),
                         //     ),
                         //   ],
-                        // ), 
+                        // ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
@@ -676,13 +732,12 @@ class _EditItemScreenState extends State<EditItemScreen> {
                                     return AlertDialog(
                                       actions: <Widget>[
                                         TextButton(
-                                          onPressed: () => Navigator.pop(
-                                              context, 'Cancel'),
+                                          onPressed: () =>
+                                              Navigator.pop(context, 'Cancel'),
                                           child: const Text('الغاء'),
                                         ),
                                         TextButton(
-                                          onPressed: () =>
-                                              DeleteData(context),
+                                          onPressed: () => DeleteData(context),
                                           child: const Text('حذف'),
                                         ),
                                       ],
@@ -694,10 +749,10 @@ class _EditItemScreenState extends State<EditItemScreen> {
                                 );
                                 // DeleteData(context);
                               },
-                              child: Text ("حذف الصنف") ,
+                              child: Text("حذف الصنف"),
                               style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(Colors.red)
-                              ),
+                                  backgroundColor:
+                                      MaterialStateProperty.all(Colors.red)),
                             ),
 
                             // صوره من المعرض
@@ -705,14 +760,13 @@ class _EditItemScreenState extends State<EditItemScreen> {
                               onPressed: () async {
                                 await SendData(context);
                               },
-                              child: Text ("تعديل الصنف") ,
+                              child: Text("تعديل الصنف"),
                               style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all(Colors.green)
-                              ),
+                                  backgroundColor:
+                                      MaterialStateProperty.all(Colors.green)),
                             ),
                           ],
                         ),
-                        
                       ],
                     ),
                   ),
@@ -725,4 +779,5 @@ class _EditItemScreenState extends State<EditItemScreen> {
     );
   }
 }
-/// مكان زرار تحميل صوره جديده TODO: 
+
+/// مكان زرار تحميل صوره جديده TODO:
