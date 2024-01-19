@@ -263,6 +263,60 @@ class home_drawer extends StatelessWidget {
               ],
             ),
           ),
+          TextButton(
+            onPressed: () async {
+              showDialog<void>(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    actions: <Widget>[
+                      TextButton(
+                        onPressed: () => Navigator.pop(
+                            context, 'Cancel'),
+                        child: const Text('الغاء'),
+                      ),
+                      _auth == null ? SizedBox() :
+                      TextButton(
+                        onPressed: () async {
+                          await _auth.currentUser!.delete();
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => StartScreen(),
+                            ),
+                          );
+
+                        } ,
+                        child: const Text('حذف'),
+                      ),
+                    ],
+                    content: Text(
+                      "هل تريد حذف الحساب",
+                    ),
+                  );
+                },
+              );
+
+
+
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.cancel_outlined ,
+                color:Colors.red ,
+                ),
+                SizedBox(
+                  width: 5,
+                ),
+                Text(
+                  "حذف الحساب",
+                  style: TextStyle(
+                    color: Colors.red,
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
