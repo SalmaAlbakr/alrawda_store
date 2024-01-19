@@ -153,6 +153,7 @@ class _AddNewItemState extends State<AddNewItem> {
                           onTap: () {
                             setState(() {
                               widget.companyName = null;
+                              getCompanies();
                             });
                           },
                           hint: Text(" نوع الصنف"),
