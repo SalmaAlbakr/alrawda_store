@@ -28,7 +28,7 @@ class _ListOfProductsState extends State<ListOfProducts> {
         .collection("الشركات")
         .doc(widget.companyName)
         .collection("الاصناف");
-    QuerySnapshot snapOfData = await dataOfProduct.get();
+    QuerySnapshot snapOfData = await dataOfProduct.orderBy("text").get();
 
     List<QueryDocumentSnapshot> list = snapOfData.docs;
 
